@@ -916,6 +916,16 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	droning_sound_night = 'sound/music/area/desert/Iberia2.ogg'
 	first_time_text = "Al-Ashur Palace"
 	keep_area = TRUE
+
+/area/rogue/outdoors/deserttown/manor/roofs
+	name = "Palace roofs"
+	icon_state = "roofs"
+	ambientsounds = AMB_MOUNTAIN
+	ambientnight = AMB_MOUNTAIN
+	spookysounds = SPOOKY_GEN
+	spookynight = SPOOKY_GEN
+	soundenv = 17
+	first_time_text = null
 ///
 
 /area/rogue/indoors/deserttown
