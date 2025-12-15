@@ -292,6 +292,12 @@
 				/obj/item/natural/cloth = 2)
 	craftdiff = 2
 
+/datum/crafting_recipe/roguetown/sewing/bandage
+	name = "bandages (sewing)"
+	result = list(/obj/item/natural/cloth/bandage)
+	reqs = list(/obj/item/natural/silk = 2,
+				/obj/item/natural/cloth = 1)
+
 /datum/crafting_recipe/roguetown/sewing/gweightedbandages
 	name = "weighted bandages, gloved"
 	result = list(/obj/item/clothing/gloves/roguetown/bandages/weighted)

@@ -117,6 +117,9 @@
 
 	var/coven_protected = FALSE
 
+	/// If true, speech generated in this area will propagate to other z-levels.
+	var/propagate_sound_z = TRUE
+
 
 /**
   * A list of teleport locations

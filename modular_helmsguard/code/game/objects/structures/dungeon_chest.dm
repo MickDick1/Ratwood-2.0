@@ -95,8 +95,8 @@
 
 		//medical
 		/obj/item/needle = 40,
-		/obj/item/natural/cloth = 50,
-		/obj/item/natural/bundle/cloth = 30,
+		/obj/item/natural/cloth/bandage = 50,
+		/obj/item/natural/bundle/cloth/bandage/full = 30,
 
 		//weapons
 		/obj/item/rogueweapon/mace = 20,
@@ -369,7 +369,7 @@
 	..()
 	var/list/loot = list(//ingot
 		/obj/item/needle = 30,
-		/obj/item/natural/bundle/cloth = 10,
+		/obj/item/natural/bundle/cloth/bandage/full = 10,
 		/obj/item/reagent_containers/glass/bottle/rogue/healthpot = 50,
 		/datum/reagent/medicine/antidote = 30,
 		/datum/reagent/medicine/diseasecure = 10,

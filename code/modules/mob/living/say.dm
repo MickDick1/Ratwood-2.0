@@ -405,6 +405,8 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 			speaker_has_ceiling = FALSE
 	if(eavesdropping_modes[message_mode])
 		eavesdrop_range = EAVESDROP_EXTRA_RANGE
+
+
 	if(message_mode != MODE_WHISPER)
 		Zs_too = TRUE
 		if(say_test(message) == "2")	//CIT CHANGE - ditto
@@ -412,6 +414,13 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 			Zs_yell = TRUE
 		if(say_test(message) == "3")	//Big "!!" shout
 			Zs_all = TRUE
+
+	var/area/speaker_area = get_area(src)
+	if(speaker_area && speaker_area.propagate_sound_z == FALSE)
+		Zs_too = FALSE
+		Zs_yell = FALSE
+		Zs_all = FALSE
+	
 	// AZURE EDIT: thaumaturgical loudness (from orisons)
 	if (has_status_effect(/datum/status_effect/thaumaturgy))
 		spans |= SPAN_REALLYBIG
