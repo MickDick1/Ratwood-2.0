@@ -8409,6 +8409,10 @@
 "gsH" = (
 /obj/structure/roguewindow/harem3,
 /obj/structure/curtain/red,
+/obj/structure/drape/desert{
+	plane = -3;
+	layer = 4.2
+	},
 /turf/open/floor/rogue/woodturned,
 /area/rogue/indoors/deserttown/tavern)
 "gsK" = (
@@ -13407,6 +13411,15 @@
 /obj/item/cushion/desert2,
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town/church)
+"kpw" = (
+/obj/structure/roguewindow/harem3,
+/obj/structure/curtain/drab,
+/obj/structure/drape/desert{
+	plane = -3;
+	layer = 4.2
+	},
+/turf/open/floor/rogue/wood,
+/area/rogue/indoors/deserttown)
 "kqb" = (
 /turf/open/floor/rogue/woodturned,
 /area/rogue/indoors/deserttown/manor)
@@ -17730,6 +17743,7 @@
 	pixel_x = 14;
 	pixel_y = -16
 	},
+/obj/machinery/light/rogue/torchholder/l,
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/deserttown/tavern)
 "nUQ" = (
@@ -19549,6 +19563,7 @@
 /obj/structure/table/wood{
 	icon_state = "tablewood1"
 	},
+/obj/item/millstone,
 /turf/open/floor/rogue/tile,
 /area/rogue/indoors/deserttown/warden)
 "ppV" = (
@@ -20176,6 +20191,10 @@
 "pJR" = (
 /obj/structure/roguewindow/harem3,
 /obj/structure/curtain/red,
+/obj/structure/drape/desert{
+	plane = -3;
+	layer = 4.2
+	},
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/deserttown/tavern)
 "pKI" = (
@@ -23361,6 +23380,10 @@
 /area/rogue/outdoors/town/roofs{
 	tavern_area = 1
 	})
+"sav" = (
+/obj/machinery/light/rogue/torchholder/c,
+/turf/open/floor/rogue/wood,
+/area/rogue/indoors/deserttown/tavern)
 "saK" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
@@ -26945,7 +26968,6 @@
 /obj/structure/drape/zybantine,
 /obj/structure/mineral_door/wood/donjon{
 	dir = 0;
-	locked = 1;
 	lockid = "nightman";
 	name = "Whitevein Lounge"
 	},
@@ -340825,7 +340847,7 @@ bCr
 vgv
 bCr
 hYi
-jbh
+sav
 jbh
 jbh
 eRQ
@@ -342948,7 +342970,7 @@ jbh
 jbh
 vif
 hYi
-jbh
+aeP
 lhA
 gLu
 hYi
@@ -350496,7 +350518,7 @@ ato
 wgb
 ato
 ato
-uoe
+kpw
 ato
 ato
 ato
