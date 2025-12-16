@@ -15,7 +15,7 @@
 	whitelist_req = TRUE
 
 	outfit = /datum/outfit/job/roguetown/mamluk
-	advclass_cat_rolls = list(CTAG_MENATARMS = 20)
+	advclass_cat_rolls = list(CTAG_MAMLUK = 20)
 
 	give_bank_account = 22
 	min_pq = 3

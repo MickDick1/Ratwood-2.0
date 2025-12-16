@@ -52,16 +52,8 @@
 					H.mind.person_knows_me(MF)
 
 /datum/outfit/job/roguetown/cataphract
-	neck = /obj/item/clothing/neck/roguetown/chaincoif/chainmantle
-	wrists = /obj/item/clothing/wrists/roguetown/bracers
 	belt = /obj/item/storage/belt/rogue/leather/steel
-	backr = /obj/item/storage/backpack/rogue/satchel/black
-	head = /obj/item/clothing/head/roguetown/helmet/heavy/cataphract
-	armor = /obj/item/clothing/suit/roguetown/armor/plate/cataphract
-	gloves = /obj/item/clothing/gloves/roguetown/plate
-	cloak = /obj/item/clothing/cloak/catcloak
-	pants = /obj/item/clothing/under/roguetown/platelegs
-	shoes = /obj/item/clothing/shoes/roguetown/shalal
+	backr = /obj/item/storage/backpack/rogue/satchel
 	id = /obj/item/scomstone/bad/garrison
 
 	backpack_contents = list(
@@ -89,6 +81,7 @@
 		/datum/skill/combat/swords = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/axes = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/maces = SKILL_LEVEL_EXPERT,
+		/datum/skill/combat/whipsflails = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/riding = SKILL_LEVEL_NOVICE,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
@@ -116,6 +109,7 @@
 				H.adjust_skillrank_up_to(/datum/skill/combat/swords, SKILL_LEVEL_MASTER, TRUE)
 			if("Great Mace")
 				r_hand = /obj/item/rogueweapon/mace/goden/steel
+				backl = /obj/item/rogueweapon/scabbard/gwstrap
 				H.adjust_skillrank_up_to(/datum/skill/combat/maces, SKILL_LEVEL_MASTER, TRUE)
 			if("Battle Axe")
 				r_hand = /obj/item/rogueweapon/stoneaxe/battle
@@ -139,6 +133,14 @@
 
 	shirt = /obj/item/clothing/suit/roguetown/armor/chainmail
 	pants = /obj/item/clothing/under/roguetown/chainlegs/kilt
+	head = /obj/item/clothing/head/roguetown/helmet/heavy/cataphract
+	armor = /obj/item/clothing/suit/roguetown/armor/plate/cataphract
+	neck = /obj/item/clothing/neck/roguetown/chaincoif/chainmantle
+	wrists = /obj/item/clothing/wrists/roguetown/bracers
+	gloves = /obj/item/clothing/gloves/roguetown/plate
+	cloak = /obj/item/clothing/cloak/catcloak
+	pants = /obj/item/clothing/under/roguetown/platelegs
+	shoes = /obj/item/clothing/shoes/roguetown/boots/armor/shalal
 
 	backpack_contents = list(
 		/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1,
@@ -182,7 +184,7 @@
 
 	H.adjust_blindness(-3)
 	if(H.mind)
-		var/weapons = list("Longsword","Flail","Warhammer","Sabre")
+		var/weapons = list("Shamshir","Whip","Warhammer","Sabre")
 		var/weapon_choice = input(H, "Choose your weapon.", "TAKE UP ARMS") as anything in weapons
 		H.set_blindness(0)
 		switch(weapon_choice)
@@ -191,10 +193,10 @@
 				l_hand = /obj/item/rogueweapon/sword/sabre/shamshir
 				H.adjust_skillrank_up_to(/datum/skill/combat/swords, SKILL_LEVEL_MASTER, TRUE)
 			if("Whip")
-				l_hand = /obj/item/rogueweapon/whip
+				l_hand = /obj/item/rogueweapon/whip/antique
 				H.adjust_skillrank_up_to(/datum/skill/combat/whipsflails, SKILL_LEVEL_MASTER, TRUE)
 			if ("Warhammer")
-				beltr = /obj/item/rogueweapon/mace/warhammer
+				l_hand = /obj/item/rogueweapon/mace/warhammer
 				H.adjust_skillrank_up_to(/datum/skill/combat/maces, SKILL_LEVEL_MASTER, TRUE)
 			if("Sabre")
 				beltl = /obj/item/rogueweapon/scabbard/sword
@@ -204,6 +206,14 @@
 	shirt = /obj/item/clothing/suit/roguetown/armor/chainmail
 	pants = /obj/item/clothing/under/roguetown/chainlegs/kilt
 	backl = /obj/item/rogueweapon/shield/iron/zybantine
+	head = /obj/item/clothing/head/roguetown/helmet/heavy/cataphract
+	armor = /obj/item/clothing/suit/roguetown/armor/plate/cataphract
+	neck = /obj/item/clothing/neck/roguetown/chaincoif/chainmantle
+	wrists = /obj/item/clothing/wrists/roguetown/bracers
+	gloves = /obj/item/clothing/gloves/roguetown/plate
+	cloak = /obj/item/clothing/cloak/catcloak
+	pants = /obj/item/clothing/under/roguetown/platelegs
+	shoes = /obj/item/clothing/shoes/roguetown/boots/armor/shalal
 
 	backpack_contents = list(
 		/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1,

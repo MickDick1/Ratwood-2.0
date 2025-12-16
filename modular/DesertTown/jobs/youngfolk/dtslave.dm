@@ -30,10 +30,10 @@
 		/datum/advclass/slave/worker
 	)
 
-/datum/advclass/servant
+/datum/advclass/slave/servant
 	traits_applied = list(TRAIT_CICERONE, TRAIT_ROYALSERVANT)
 
-/datum/advclass/servant
+/datum/advclass/slave/servant
 	traits_applied = list(TRAIT_CICERONE)
 
 /datum/advclass/slave/servant
@@ -83,9 +83,9 @@
 		H.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 
 /datum/advclass/slave/pleasure
-	name = "Maid"
+	name = "Exotic Slave"
 	tutorial = "Not one really mentions how hard it is to do yardwork in a dress and stockings, but at least you still look really good."
-	outfit = /datum/outfit/job/roguetown/servant/maid
+	outfit = /datum/outfit/job/roguetown/slave/pleasure
 	category_tags = list(CTAG_SERVANT)
 	subclass_stats = list(
 		STATKEY_PER = 2,
@@ -105,9 +105,8 @@
 		/datum/skill/misc/climbing = SKILL_LEVEL_APPRENTICE,
 	)
 
-/datum/outfit/job/roguetown/servant/maid/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/job/roguetown/slave/pleasure/pre_equip(mob/living/carbon/human/H)
 	..()
-	beltl = /obj/item/roguekey/nightmaiden
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/poor
 	backl = /obj/item/storage/backpack/rogue/satchel
 	backpack_contents = list(
@@ -162,8 +161,8 @@
 		H.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 
 /datum/advclass/slave/worker
-	name = "Butler"
-	tutorial = "An impeccable appearance is your core being. You still dig through the mud, though, you just do the laundry more."
+	name = "Slave Laborer"
+	tutorial = "CHANGE THIS. You do HARD WORK!."
 	outfit = /datum/outfit/job/roguetown/slave/worker
 	category_tags = list(CTAG_SERVANT)
 	subclass_stats = list(

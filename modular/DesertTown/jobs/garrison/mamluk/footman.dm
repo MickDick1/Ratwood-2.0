@@ -42,24 +42,27 @@
 	head = /obj/item/clothing/head/roguetown/helmet/mamalukehelm
 	neck = /obj/item/clothing/neck/roguetown/chaincoif
 	gloves = /obj/item/clothing/gloves/roguetown/chain
+	wrists = /obj/item/clothing/wrists/roguetown/bracers
+	pants = /obj/item/clothing/under/roguetown/chainlegs/kilt
 
 	H.adjust_blindness(-3)
 	if(H.mind)
-		var/weapons = list("Scimitar & Shield","Warhammer & Shield","Halberd","Greataxe")
+		var/weapons = list("Scimitar & Shield","Warhammer & Shield","Bardiche","Spear")
 		var/weapon_choice = input(H, "Choose your weapon.", "TAKE UP ARMS") as anything in weapons
 		H.set_blindness(0)
 		switch(weapon_choice)
 			if("Scimitar & Shield")
-				beltr = /obj/item/rogueweapon/sword/short/falchion
-				backl = /obj/item/rogueweapon/shield/iron
-			if("Whip & Shield")
-				beltr = /obj/item/rogueweapon/whip
+				r_hand = /obj/item/rogueweapon/sword/short/falchion
+				beltr = /obj/item/rogueweapon/scabbard/sheath
 				backl = /obj/item/rogueweapon/shield/iron
 			if("Warhammer & Shield")
-				beltr = /obj/item/rogueweapon/mace/warhammer
+				r_hand = /obj/item/rogueweapon/mace/warhammer
 				backl = /obj/item/rogueweapon/shield/iron
-			if("bardiche")
+			if("Bardiche")
 				r_hand = /obj/item/rogueweapon/halberd/bardiche
+				backl = /obj/item/rogueweapon/scabbard/gwstrap
+			if("Spear")
+				r_hand = /obj/item/rogueweapon/spear
 				backl = /obj/item/rogueweapon/scabbard/gwstrap
 	backpack_contents = list(
 		/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1,
@@ -69,16 +72,3 @@
 		/obj/item/reagent_containers/glass/bottle/rogue/healthpot = 1,
 		)
 	H.verbs |= /mob/proc/haltyell
-
-	if(H.mind)
-		var/armor_options = list("Brigandine Set", "Maille Set")
-		var/armor_choice = input(H, "Choose your armor.", "TAKE UP ARMS") as anything in armor_options
-
-		switch(armor_choice)
-			if("Brigandine Extras")
-				wrists = /obj/item/clothing/wrists/roguetown/splintarms
-				pants = /obj/item/clothing/under/roguetown/splintlegs
-
-			if("Maille Extras")
-				wrists = /obj/item/clothing/wrists/roguetown/bracers
-				pants = /obj/item/clothing/under/roguetown/chainlegs/kilt

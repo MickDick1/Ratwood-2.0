@@ -294,8 +294,10 @@ GLOBAL_LIST_EMPTY(round_join_times)
 #define CTAG_LICKER_WRETCH  "CAT_LICKER_WRETCH" // Licker wretch. Nuff said.
 
 #define CTAG_WARDEN			"CAT_WARDEN"		// Warden class - Handles warden class selector.
+#define CTAG_JANISSARY		"CTAG_JANISSARY"	// Alt for desert town
 #define CTAG_WATCH			"CAT_WATCH"			// Watch class - Handles Town Watch class selector
 #define CTAG_MENATARMS		"CAT_MENATARMS"		// Men-at-Arms class - Handles Men-at-Arms class selector
+#define CTAG_MAMLUK			"CTAG_MAMLUK"		// Alt for desert town
 #define CTAG_SERGEANT		"CAT_SERGEANT"		// Sergeant class - Handles Sergeant class selector (weapons selection)
 #define CTAG_ROYALGUARD		"CAT_ROYALGUARD"	// Royal Guard class - Handles Royal Guard class selector
 #define CTAG_CONSORT		"CAT_CONSORT"		// Consort/Suitor subclasses

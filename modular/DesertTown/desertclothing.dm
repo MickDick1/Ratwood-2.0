@@ -27,7 +27,7 @@
 	allowed_sex = list(MALE, FEMALE)
 	icon = 'modular/DesertTown/icons/clothing/armor.dmi'
 	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/armor.dmi'
-	icon_state = "mamaluke"
+	icon_state = "cataphract"
 	icon_state = "cataphract"
 	max_integrity = ARMOR_INT_CHEST_MEDIUM_STEEL
 	anvilrepair = /datum/skill/craft/armorsmithing
@@ -69,7 +69,7 @@
 	name = "Mamalukes Helm"
 	desc = "A helmet with too much style."
 	icon = 'modular/DesertTown/icons/clothing/head.dmi'
-	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/head32x48.dmi'
+	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/head.dmi'
 	icon_state = "mamhelm"
 	max_integrity = 250
 	body_parts_covered = HEAD|HAIR|EARS

@@ -79,10 +79,6 @@
 		H.change_stat(STATKEY_PER, 1)
 		H.mind?.adjust_spellpoints(6)
 		if(ishumannorthern(H))
-			belt = /obj/item/storage/belt/rogue/leather/jafar
-			cloak = null
-			head = /obj/item/clothing/head/roguetown/jafar
-			armor = /obj/item/clothing/suit/roguetown/shirt/jafar
 			H.dna.species.soundpack_m = new /datum/voicepack/male/wizard()
 	switch(H.patron?.type)
 		if(/datum/patron/inhumen/zizo)
@@ -101,9 +97,13 @@
 /datum/outfit/job/roguetown/dtmagician/basic/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.adjust_blindness(-3)
+	
+	cloak = null
+	head = /obj/item/clothing/head/roguetown/jafar
+	armor = /obj/item/clothing/suit/roguetown/shirt/jafar
 	neck = /obj/item/clothing/neck/roguetown/talkstone
 	belt = /obj/item/storage/belt/rogue/leather/jafar
-	pants = /obj/item/clothing/under/roguetown/tights/random
+	pants = /obj/item/clothing/under/roguetown/sirwal
 	shoes = /obj/item/clothing/shoes/roguetown/shalal
 	beltr = /obj/item/storage/keyring/mage
 	beltl = /obj/item/storage/magebag/associate

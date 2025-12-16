@@ -1,5 +1,5 @@
 /datum/job/roguetown/slavemaster
-	title = "Slavermaster"
+	title = "Slave master"
 	flag = DUNGEONEER
 	department_flag = GARRISON
 	faction = "Station"
@@ -51,7 +51,7 @@
 
 /datum/advclass/slavemaster
 	name = "Slavemaster"
-	tutorial = "Penance, filthy sense of sadism or a queer outlook on justice, something has led you to don the shunned mask and fulfill the whims of the Nobility. Their whims are your guidance, as you've no 'moral quandaries' to care for."
+	tutorial = "CHANGE THIS!! something something WHIPS something something keeping the rabble in line something something sterin guiding hand"
 	outfit = /datum/outfit/job/roguetown/slavemaster/base
 
 	category_tags = list(CTAG_DUNGEONEER)
@@ -59,7 +59,7 @@
 		STATKEY_STR = 2,
 		STATKEY_CON = 2,
 		STATKEY_WIL = 1,
-		STATKEY_SPE = 1,
+		STATKEY_SPD = 1,
 	)
 	subclass_skills = list(
 		/datum/skill/combat/whipsflails = SKILL_LEVEL_EXPERT,//slave whippin
@@ -76,7 +76,7 @@
 		/datum/skill/misc/tracking = SKILL_LEVEL_JOURNEYMAN, //slave detection
 		/datum/skill/misc/riding = SKILL_LEVEL_JOURNEYMAN
 	)
-	adv_stat_ceiling = list(STAT_STRENGTH = 16, STAT_CONSTITUTION = 16, STAT_WILLPOWER = 16)
+	// adv_stat_ceiling = list(STAT_STRENGTH = 16, STAT_CONSTITUTION = 16, STAT_WILLPOWER = 16)
 
 /datum/outfit/job/roguetown/slavemaster/base/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -91,7 +91,7 @@
 	pants = /obj/item/clothing/under/roguetown/chainlegs/kilt
 	wrists = /obj/item/clothing/wrists/roguetown/bracers
 	gloves = /obj/item/clothing/gloves/roguetown/angle
-	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/lord
+	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson
 	belt = /obj/item/storage/belt/rogue/leather/shalal/purple
 	armor = /obj/item/clothing/suit/roguetown/armor/plate/scale
 	cloak = /obj/item/clothing/cloak/cape/purple
