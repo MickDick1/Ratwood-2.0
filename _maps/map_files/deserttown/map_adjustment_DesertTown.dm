@@ -12,7 +12,7 @@
 	// 	/datum/job/roguetown/adventurer = 69
 	)
 	title_adjust = list(
-		/datum/job/roguetown/marshal = list(display_title = "Mayor")
+		/datum/job/roguetown/marshal = list(display_title = "Mayor"),
 		/datum/job/roguetown/priest =  list(display_title = "High Priest", f_title = "High Priestess")
 	)
 	tutorial_adjust = list(
