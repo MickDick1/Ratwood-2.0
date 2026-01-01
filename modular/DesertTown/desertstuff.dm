@@ -290,6 +290,7 @@
 	icon_state = "palm1"
 	stump_type = /obj/structure/flora/roguetree/stump/palm
 	pixel_x = -32
+	opacity = 0 //palm trees are skinny
 
 /obj/structure/flora/roguetree/palm/Initialize()
 	. = ..()
