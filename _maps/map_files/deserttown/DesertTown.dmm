@@ -1457,6 +1457,10 @@
 "aYe" = (
 /turf/closed/wall/mineral/rogue/sandbrick,
 /area/rogue/indoors/deserttown/garrison/cell/outdoor)
+"aYu" = (
+/obj/machinery/light/rogue/wallfire/candle/blue,
+/turf/open/floor/rogue/tile/harem2,
+/area/rogue/indoors/deserttown/bath)
 "aYw" = (
 /obj/structure/fluff/clock,
 /obj/effect/decal/cobbleedge{
@@ -3900,9 +3904,13 @@
 /turf/open/floor/rogue/grass,
 /area/rogue/indoors/town/grove)
 "cvs" = (
-/obj/structure/stairs,
-/obj/structure/drape/zybantine,
-/turf/open/floor/rogue/blocks/stonered,
+/obj/structure/mineral_door/wood/donjon{
+	locked = 1;
+	lockid = "nightmaiden";
+	dir = 1;
+	name = "PRIVATE"
+	},
+/turf/open/floor/rogue/blocks/stonered/tiny,
 /area/rogue/indoors/deserttown/bath)
 "cvx" = (
 /obj/structure/rack/rogue,
@@ -10749,6 +10757,15 @@
 /obj/structure/roguewindow/harem3,
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/deserttown/garrison)
+"gyw" = (
+/obj/structure/mineral_door/wood/donjon{
+	locked = 1;
+	lockid = "nightmaiden";
+	dir = 1;
+	name = "PRIVATE"
+	},
+/turf/open/floor/rogue/herringbone,
+/area/rogue/indoors/deserttown/bath)
 "gyx" = (
 /obj/structure/mineral_door/wood/donjon/stone{
 	locked = 1;
@@ -11678,7 +11695,7 @@
 	pixel_y = 2;
 	redstone_id = "gambleaccess"
 	},
-/turf/open/floor/rogue/blocks/stonered,
+/turf/open/floor/rogue/blocks/stonered/tiny,
 /area/rogue/indoors/deserttown/bath)
 "hfq" = (
 /obj/machinery/light/rogue/firebowl/standing,
@@ -12859,6 +12876,10 @@
 /obj/structure/fluff/walldeco/customflag/deserttown,
 /turf/closed/wall/mineral/rogue/sandstone,
 /area/rogue/indoors/deserttown)
+"hVp" = (
+/obj/effect/landmark/start/dt/courtslave,
+/turf/open/floor/rogue/citybrick/citybrick1,
+/area/rogue/indoors/deserttown/garrison/cell/outdoor)
 "hVy" = (
 /obj/structure/table/wood/long_table/mid/alt,
 /obj/item/scrying,
@@ -16824,10 +16845,6 @@
 /mob/living/carbon/human/species/npc/deadite,
 /turf/open/floor/rogue/dunes,
 /area/rogue/outdoors/desertdeep)
-"ksi" = (
-/obj/effect/landmark/start/dt/courtslave,
-/turf/open/floor/rogue/deserttile,
-/area/rogue/indoors/deserttown/garrison/cell)
 "ksx" = (
 /obj/structure/table/wood{
 	icon_state = "longtable"
@@ -17868,7 +17885,7 @@
 /obj/item/paper/scroll,
 /obj/item/paper/scroll,
 /obj/item/natural/feather,
-/turf/open/floor/rogue/churchrough,
+/turf/open/floor/rogue/blocks/stonered/tiny,
 /area/rogue/indoors/deserttown/bath)
 "kYW" = (
 /obj/structure/table/wood{
@@ -19870,6 +19887,9 @@
 /area/rogue/indoors/deserttown)
 "mtI" = (
 /obj/item/clothing/suit/roguetown/armor/hcorset,
+/obj/structure/fluff/walldeco/maidensigil{
+	pixel_y = -32
+	},
 /obj/structure/closet/crate/roguecloset/dark{
 	keylock = 1;
 	locked = 1;
@@ -19878,6 +19898,9 @@
 	pixel_x = -4
 	},
 /obj/item/clothing/shoes/roguetown/armor/hlegs,
+/obj/machinery/light/rogue/wallfire/candle/blue{
+	pixel_y = -32
+	},
 /obj/item/clothing/gloves/roguetown/harms,
 /obj/item/clothing/mask/rogue/hblinders,
 /obj/item/clothing/head/roguetown/hbit,
@@ -19988,6 +20011,13 @@
 /obj/machinery/light/rogue/wallfire/candle/l,
 /turf/open/floor/rogue/ruinedwood,
 /area/rogue/indoors/deserttown/magician)
+"myy" = (
+/obj/structure/table/wood/large_table,
+/obj/item/perfume/random{
+	pixel_x = 5
+	},
+/turf/open/floor/rogue/blocks/stonered,
+/area/rogue/indoors/deserttown/bath)
 "myF" = (
 /obj/item/legwears/silk/black,
 /obj/structure/closet/crate/roguecloset,
@@ -24424,6 +24454,10 @@
 /obj/item/clothing/cloak/apron/blacksmith,
 /turf/open/floor/rogue/hexstone,
 /area/rogue/indoors/deserttown/smithguild)
+"pit" = (
+/obj/effect/landmark/start/dt/courtslave,
+/turf/open/floor/rogue/deserttile,
+/area/rogue/indoors/deserttown/garrison/cell)
 "piV" = (
 /obj/structure/roguemachine/withdraw,
 /turf/open/floor/rogue/tile/brownbrick{
@@ -26228,7 +26262,8 @@
 	},
 /area/rogue/outdoors/desert)
 "qlC" = (
-/turf/open/transparent/openspace,
+/obj/structure/stairs,
+/turf/open/floor/rogue/blocks/stonered/tiny,
 /area/rogue/indoors/deserttown/bath)
 "qlD" = (
 /obj/machinery/light/rogue/wallfire/candle,
@@ -26269,13 +26304,8 @@
 /turf/open/floor/rogue/tile/harem,
 /area/rogue/indoors/deserttown)
 "qmf" = (
-/obj/structure/table/wood/large_table,
-/obj/machinery/light/rogue/wallfire/candle/blue,
-/obj/item/perfume/random{
-	pixel_x = 5
-	},
-/turf/open/floor/rogue/blocks/stonered,
-/area/rogue/indoors/deserttown/bath)
+/turf/closed,
+/area/rogue/under/cave)
 "qml" = (
 /obj/machinery/light/rogue/wallfire/candle/r,
 /turf/open/floor/rogue/wood/herringbone,
@@ -31447,10 +31477,6 @@
 	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
 	},
 /area/rogue/under/deserttown/basement/keep)
-"tjr" = (
-/obj/effect/landmark/start/dt/courtslave,
-/turf/open/floor/rogue/citybrick/citybrick1,
-/area/rogue/indoors/deserttown/garrison/cell/outdoor)
 "tjy" = (
 /obj/structure/chair/zybantine_sofa/right,
 /turf/open/floor/carpet/red,
@@ -112579,7 +112605,7 @@ mxD
 mxD
 mxD
 mxD
-mxD
+smf
 smf
 smf
 smf
@@ -112880,9 +112906,9 @@ mxD
 mxD
 mxD
 mxD
-mxD
 smf
 smf
+iDI
 iDI
 iDI
 iDI
@@ -113182,7 +113208,6 @@ mxD
 mxD
 mxD
 mxD
-mxD
 smf
 iDI
 iDI
@@ -113196,6 +113221,7 @@ iDI
 wtb
 saX
 saX
+jAJ
 jAJ
 saX
 saX
@@ -113484,7 +113510,6 @@ mxD
 mxD
 mxD
 mxD
-mxD
 smf
 iDI
 inm
@@ -113498,7 +113523,8 @@ iDI
 jAJ
 saX
 saX
-saX
+xyf
+jAJ
 jAJ
 saX
 xyf
@@ -113506,7 +113532,7 @@ dHi
 uHZ
 iDI
 smf
-smf
+mxD
 mxD
 mxD
 mxD
@@ -113786,7 +113812,6 @@ mxD
 mxD
 mxD
 mxD
-mxD
 smf
 iDI
 cCP
@@ -113810,6 +113835,7 @@ iDI
 iDI
 smf
 smf
+mxD
 mxD
 mxD
 mxD
@@ -114088,7 +114114,6 @@ mxD
 mxD
 mxD
 mxD
-mxD
 smf
 iDI
 qxe
@@ -114112,6 +114137,7 @@ cHj
 iDI
 iDI
 smf
+mxD
 mxD
 mxD
 mxD
@@ -114390,7 +114416,6 @@ mxD
 mxD
 mxD
 mxD
-mxD
 smf
 iDI
 qAF
@@ -114414,6 +114439,7 @@ cHj
 inm
 iDI
 smf
+mxD
 mxD
 mxD
 mxD
@@ -114614,7 +114640,6 @@ smf
 (249,1,1) = {"
 smf
 smf
-mxD
 mxD
 mxD
 mxD
@@ -114910,13 +114935,13 @@ mxD
 mxD
 mxD
 mxD
+mxD
 smf
 smf
 "}
 (250,1,1) = {"
 smf
 smf
-mxD
 mxD
 mxD
 mxD
@@ -115212,13 +115237,13 @@ mxD
 mxD
 mxD
 mxD
+mxD
 smf
 smf
 "}
 (251,1,1) = {"
 smf
 smf
-mxD
 mxD
 mxD
 mxD
@@ -115514,13 +115539,13 @@ mxD
 mxD
 mxD
 mxD
+mxD
 smf
 smf
 "}
 (252,1,1) = {"
 smf
 smf
-mxD
 mxD
 mxD
 mxD
@@ -115816,13 +115841,13 @@ mxD
 mxD
 mxD
 mxD
+mxD
 smf
 smf
 "}
 (253,1,1) = {"
 smf
 smf
-mxD
 mxD
 mxD
 mxD
@@ -116118,13 +116143,13 @@ mxD
 mxD
 mxD
 mxD
+mxD
 smf
 smf
 "}
 (254,1,1) = {"
 smf
 smf
-mxD
 mxD
 mxD
 mxD
@@ -116420,13 +116445,13 @@ mxD
 mxD
 mxD
 mxD
+mxD
 smf
 smf
 "}
 (255,1,1) = {"
 smf
 smf
-mxD
 mxD
 mxD
 mxD
@@ -116722,13 +116747,13 @@ mxD
 mxD
 mxD
 mxD
+mxD
 smf
 smf
 "}
 (256,1,1) = {"
 smf
 smf
-mxD
 mxD
 mxD
 mxD
@@ -117024,13 +117049,13 @@ mxD
 mxD
 mxD
 mxD
+mxD
 smf
 smf
 "}
 (257,1,1) = {"
 smf
 smf
-mxD
 mxD
 mxD
 mxD
@@ -117326,13 +117351,13 @@ mxD
 mxD
 mxD
 mxD
+mxD
 smf
 smf
 "}
 (258,1,1) = {"
 smf
 smf
-mxD
 mxD
 mxD
 mxD
@@ -117628,13 +117653,13 @@ mxD
 mxD
 mxD
 mxD
+mxD
 smf
 smf
 "}
 (259,1,1) = {"
 smf
 smf
-mxD
 mxD
 mxD
 mxD
@@ -117930,13 +117955,13 @@ mxD
 mxD
 mxD
 mxD
+mxD
 smf
 smf
 "}
 (260,1,1) = {"
 smf
 smf
-mxD
 mxD
 mxD
 mxD
@@ -118232,13 +118257,13 @@ mxD
 mxD
 mxD
 mxD
+mxD
 smf
 smf
 "}
 (261,1,1) = {"
 smf
 smf
-mxD
 mxD
 mxD
 mxD
@@ -118534,13 +118559,13 @@ mxD
 mxD
 mxD
 mxD
+mxD
 smf
 smf
 "}
 (262,1,1) = {"
 smf
 smf
-mxD
 mxD
 mxD
 mxD
@@ -118836,13 +118861,13 @@ mxD
 mxD
 mxD
 mxD
+mxD
 smf
 smf
 "}
 (263,1,1) = {"
 smf
 smf
-mxD
 mxD
 mxD
 mxD
@@ -119138,13 +119163,13 @@ mxD
 mxD
 mxD
 mxD
+mxD
 smf
 smf
 "}
 (264,1,1) = {"
 smf
 smf
-mxD
 mxD
 mxD
 mxD
@@ -119440,13 +119465,13 @@ mxD
 mxD
 mxD
 mxD
+mxD
 smf
 smf
 "}
 (265,1,1) = {"
 smf
 smf
-mxD
 mxD
 mxD
 mxD
@@ -119742,13 +119767,13 @@ mxD
 mxD
 mxD
 mxD
+mxD
 smf
 smf
 "}
 (266,1,1) = {"
 smf
 smf
-mxD
 mxD
 mxD
 mxD
@@ -120044,13 +120069,13 @@ mxD
 mxD
 mxD
 mxD
+mxD
 smf
 smf
 "}
 (267,1,1) = {"
 smf
 smf
-mxD
 mxD
 mxD
 mxD
@@ -120346,13 +120371,13 @@ mxD
 mxD
 mxD
 mxD
+mxD
 smf
 smf
 "}
 (268,1,1) = {"
 smf
 smf
-mxD
 mxD
 mxD
 mxD
@@ -120648,6 +120673,7 @@ mxD
 mxD
 mxD
 mxD
+mxD
 smf
 smf
 "}
@@ -120732,16 +120758,16 @@ mxD
 mxD
 mxD
 mxD
+smf
+smf
+iDI
+iDI
+iDI
+iDI
+iDI
+iDI
+smf
 mxD
-smf
-smf
-iDI
-iDI
-iDI
-iDI
-iDI
-iDI
-smf
 mxD
 mxD
 mxD
@@ -121043,7 +121069,7 @@ smf
 smf
 smf
 smf
-smf
+mxD
 mxD
 mxD
 mxD
@@ -234598,7 +234624,7 @@ vAR
 fWN
 mwC
 mwC
-iwI
+iDI
 iDI
 iDI
 iDI
@@ -234607,7 +234633,7 @@ mtI
 iDI
 iDI
 iDI
-geu
+vTW
 geu
 geu
 wzj
@@ -234900,12 +234926,12 @@ vAR
 fWN
 mwC
 mwC
-iwI
 iDI
+pfM
 qlC
 cvs
 geu
-geu
+nYZ
 hfa
 kYG
 rPH
@@ -235202,12 +235228,12 @@ vAR
 fWN
 mwC
 mwC
-iwI
 iDI
+pfM
 qlC
 cvs
 geu
-geu
+nYZ
 dVu
 jrL
 cFB
@@ -235504,14 +235530,14 @@ vAR
 fWN
 mwC
 mwC
-iwI
 iDI
 iDI
 iDI
-miC
-geu
+iDI
+vTW
+nYZ
 dVu
-tFu
+dVu
 xnt
 geu
 geu
@@ -235810,10 +235836,10 @@ iwI
 mxD
 mxD
 iDI
-qmf
-geu
+miC
+nYZ
 dVu
-dVu
+tFu
 iDI
 rEY
 geu
@@ -236112,11 +236138,11 @@ iwI
 mxD
 mxD
 iDI
-iDI
-ntV
-esd
-rJh
-iDI
+myy
+nYZ
+nYZ
+nYZ
+gyw
 uCB
 uCB
 iDI
@@ -236413,13 +236439,13 @@ mwC
 iwI
 mxD
 mxD
-mxD
+iwI
 iDI
+ntV
+esd
+rJh
 iDI
-iDI
-iDI
-iDI
-ugf
+aYu
 ugf
 ugf
 ugf
@@ -236716,10 +236742,10 @@ iwI
 mxD
 mxD
 mxD
-mxD
-mxD
-mxD
-mxD
+iwI
+iwI
+iwI
+iwI
 iDI
 nwX
 rFL
@@ -237319,7 +237345,7 @@ mwC
 iwI
 mxD
 mxD
-mxD
+qmf
 mxD
 mxD
 mxD
@@ -352050,7 +352076,7 @@ bGz
 ttE
 xiy
 wAb
-tjr
+hVp
 veP
 iLv
 qzQ
@@ -352649,7 +352675,7 @@ wgb
 wgb
 hzD
 vev
-ksi
+pit
 sYI
 vev
 xiy
@@ -353258,7 +353284,7 @@ vev
 vev
 xiy
 veP
-tjr
+hVp
 veP
 xpE
 qzQ
