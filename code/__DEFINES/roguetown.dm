@@ -301,13 +301,10 @@ GLOBAL_LIST_EMPTY(round_join_times)
 #define CTAG_LICKER_WRETCH  "CAT_LICKER_WRETCH" // Licker wretch. Nuff said.
 
 #define CTAG_WARDEN			"CAT_WARDEN"		// Warden class - Handles warden class selector.
-#define CTAG_JANISSARY		"CTAG_JANISSARY"	// Alt for desert town
 #define CTAG_WATCH			"CAT_WATCH"			// Watch class - Handles Town Watch class selector
 #define CTAG_MENATARMS		"CAT_MENATARMS"		// Men-at-Arms class - Handles Men-at-Arms class selector
-#define CTAG_MAMLUK			"CTAG_MAMLUK"		// Alt for desert town
 #define CTAG_SERGEANT		"CAT_SERGEANT"		// Sergeant class - Handles Sergeant class selector (weapons selection)
 #define CTAG_ROYALGUARD		"CAT_ROYALGUARD"	// Royal Guard class - Handles Royal Guard class selector
-#define CTAG_CATAPHRACT		"CAT_CATAPHRACT"	// Desert alt
 #define CTAG_CONSORT		"CAT_CONSORT"		// Consort/Suitor subclasses
 #define CTAG_MERCENARY		"CAT_MERCENARY"		// Mercenary class - Handles Mercenary class selector
 #define CTAG_HAND			"CAT_HAND"			// Hand class - Handles Hand class selector
@@ -327,9 +324,16 @@ GLOBAL_LIST_EMPTY(round_join_times)
 #define CTAG_PRISONER 		"CAT_PRISONER"
 
 
+#define CTAG_VIZIER			"CTAG_VIZIER"		// Hand class alt
+#define CTAG_SULTAN			"CAT_SULTAN"		// Lord alt
+#define CTAG_DTHEIR			"CAT_DTHEIR"		// Heir alt
+#define CTAG_CATAPHRACT		"CAT_CATAPHRACT"	// Knight alt
+#define CTAG_JANISSARY		"CTAG_JANISSARY"	// Warden (?) alt
+#define CTAG_MAMLUK			"CTAG_MAMLUK"		// Menatarms alt
+#define CTAG_SLAVEMASTER	"CAT_SLAVEMASTER"
+
 // List of mono-class categories. Only here for standardisation sake, but can be added on if desired.
 #define CTAG_DUNGEONEER		"CAT_DUNGEONEER"
-#define CTAG_SLAVEMASTER	"CAT_SLAVEMASTER"
 
 #define CTAG_BISHOP			"CAT_BISHOP"
 #define CTAG_MARTYR			"CAT_MARTYR"

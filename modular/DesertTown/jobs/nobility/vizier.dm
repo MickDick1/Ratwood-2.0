@@ -10,9 +10,9 @@
 	allowed_races = RACES_NO_CONSTRUCT	//No noble constructs.
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/job/roguetown/vizier
-	advclass_cat_rolls = list(CTAG_HAND = 20)
+	advclass_cat_rolls = list(CTAG_VIZIER = 20)
 	display_order = JDO_HAND
-	tutorial = "You owe everything to your liege. Once, you were just a humble friend- now you are one of the most important men within the realm itself. \
+	tutorial = "You are one of the most important men within the realm itself. \
 	You have played spymaster and confidant to the Noble-Family for so long that you are a vault of intrigue, something you exploit with potent conviction.\
 	 Let no man ever forget whose ear you whisper into. You've killed more men with those lips than any blademaster could ever claim to.\
 	 ALSO (rewrite this) YOU MANAGE FINANCES TOO!!"

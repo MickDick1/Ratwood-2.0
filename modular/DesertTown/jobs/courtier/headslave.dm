@@ -14,7 +14,7 @@
 	  and, to a certain degree, respected member of the court, trained far beyond need of the whip. Indeed, you are entrusted to take the whip to those slaves beneath you.\
 	  You love your masters."
 	outfit = /datum/outfit/job/roguetown/headslave
-	advclass_cat_rolls = list(CTAG_SENESCHAL = 20)
+	// advclass_cat_rolls = list(CTAG_SENESCHAL = 20)//will this just unfuck it
 	display_order = JDO_BUTLER
 	give_bank_account = 30
 	min_pq = 3

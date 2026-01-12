@@ -9,7 +9,7 @@
 	selection_color = JCOLOR_NOBLE
 	allowed_races = RACES_TOLERATED_UP
 	allowed_sexes = list(MALE, FEMALE)
-	advclass_cat_rolls = list(CTAG_LORD = 20)
+	advclass_cat_rolls = list(CTAG_SULTAN = 20)
 	allowed_maps = list("Desert Town")
 
 	spells = list(
@@ -68,7 +68,7 @@
 /datum/outfit/job/roguetown/sultan
 	neck = /obj/item/storage/belt/rogue/pouch/coins/rich
 	beltl = /obj/item/storage/keyring/lord
-	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1)
+	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1, /obj/item/storage/keyring/royal = 1)
 	id = /obj/item/scomstone/garrison
 
 /datum/outfit/job/roguetown/sultan/pre_equip(mob/living/carbon/human/H)
@@ -110,7 +110,7 @@
 	Warrior Lord subclass. An evolution from the Daring Twit. This is the original Lord Class.
 */
 /datum/advclass/sultan/warrior
-	name = "Valiant Warrior"
+	name = "Iron-fisted Sultan"
 	tutorial = "You're a noble warrior. You rose to your rank through your own strength and skill, whether by leading your men or by fighting alongside them. Or perhaps you are none of that, but simply a well-trained heir elevated to the position of Lord. You're trained in the usage of heavy armor, and knows swordsmanship well."
 	outfit = /datum/outfit/job/roguetown/sultan/warrior
 	category_tags = list(CTAG_LORD)
@@ -218,7 +218,7 @@
 /datum/outfit/job/roguetown/sultan/wizard/pre_equip(mob/living/carbon/human/H)
 	..()
 	backr = /obj/item/storage/backpack/rogue/satchel
-	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1, /obj/item/roguegem/amethyst = 1, /obj/item/spellbook_unfinished/pre_arcyne = 1)
+	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1, /obj/item/roguegem/amethyst = 1, /obj/item/spellbook_unfinished/pre_arcyne = 1, /obj/item/storage/keyring/royal = 1)
 
 /**
 	Inbred Lord subclass. A joke class, evolution of the Inbred Wastrel.
@@ -228,8 +228,8 @@
 	can get into heavy armor and try to fight is hilarious.
 */
 /datum/advclass/sultan/inbred
-	name = "Inbred Lord"
-	tutorial = "Psydon and Astrata smiles upon you. For despite your inbred and weak body, and your family's conspiracies to remove you from succession, you have somehow become the Lord of Rotwood Vale. May your reign lasts a hundred years."
+	name = "Inbred Sultan"
+	tutorial = "Psydon and Astrata smiles upon you. For despite your inbred and weak body, and your family's conspiracies to remove you from succession, you have somehow become the Sultan of Al Ashur. May your reign lasts a hundred years."
 	outfit = /datum/outfit/job/roguetown/sultan/inbred
 	category_tags = list(CTAG_LORD)
 	traits_applied = list(TRAIT_NOBLE, TRAIT_CRITICAL_WEAKNESS, TRAIT_NORUN, TRAIT_HEAVYARMOR, TRAIT_GOODLOVER)
