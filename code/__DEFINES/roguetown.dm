@@ -328,7 +328,7 @@ GLOBAL_LIST_EMPTY(round_join_times)
 #define CTAG_SULTAN			"CAT_SULTAN"		// Lord alt
 #define CTAG_DTHEIR			"CAT_DTHEIR"		// Heir alt
 #define CTAG_CATAPHRACT		"CAT_CATAPHRACT"	// Knight alt
-#define CTAG_JANISSARY		"CAT_JANISSARY"		// Warden (?) alt
+#define CTAG_JANISSARY		"CAT_JANISSARY"	// Warden (?) alt
 #define CTAG_MAMLUK			"CAT_MAMLUK"		// Menatarms alt
 #define CTAG_SLAVEMASTER	"CAT_SLAVEMASTER"
 #define CTAG_DTTOWNER		"CAT_DTTOWNER"

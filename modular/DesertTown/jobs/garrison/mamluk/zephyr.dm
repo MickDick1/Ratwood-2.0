@@ -1,6 +1,6 @@
 // In exchange for martial skills beyond ranged, they can now set traps, too.
 /datum/advclass/mamluk/zephyr
-	name = "Mamluk Zephyr"
+	name = "zephyr"
 	tutorial = "You are a professional soldier of the realm, specializing in ranged implements. You sport a keen eye, looking for your enemies weaknesses."
 	//allowed_maps = list("Desert Town")
 	outfit = /datum/outfit/job/roguetown/mamluk/zephyr
