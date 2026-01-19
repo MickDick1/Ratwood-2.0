@@ -11857,6 +11857,7 @@
 /obj/machinery/light/roguestreet/orange/walllamp{
 	pixel_x = 13
 	},
+/obj/structure/roguemachine/titan,
 /turf/open/floor/rogue/carpet/lord/center,
 /area/rogue/indoors/deserttown/manor)
 "hlS" = (
