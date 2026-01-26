@@ -19,6 +19,7 @@
 
 /particles/weather/sand/gentle
 	wind        = 5
+	count                  = 150 // 15 particles
 /datum/particle_weather/sand_gentle
 	name = "Sandstorm"
 	desc = "A dry wind kicks sand through the air."
@@ -39,32 +40,18 @@
 /datum/particle_weather/sand_gentle/weather_act(mob/living/L)
 	if(HAS_TRAIT(L, TRAIT_SANDSTORM_IMMUNE))
 		return
-	var/obj/item/I = L.get_item_by_slot(ITEM_SLOT_MASK)
 
-	if(I && istype(I, /obj/item/clothing/mask/rogue/spectacles/goggles))
+//	if(!HAS_TRAIT(L, TRAIT_SANDSTORMED))
+//		ADD_TRAIT(L, TRAIT_SANDSTORMED, TRAIT_GENERIC)
 
-	if(!HAS_TRAIT(L, TRAIT_SANDSTORMED))
-		ADD_TRAIT(L, TRAIT_SANDSTORMED, TRAIT_GENERIC)
+	if(!HAS_TRAIT(L, TRAIT_SANDSTORM_GOGGLES) && prob(5))
+		L.adjust_blurriness(rand(1,3))
 
-	if(prob(5))
-		L.adjust_blurriness(1)
+/datum/particle_weather/sand_gentle/stop_weather_sound_effect(mob/living/L)
+	..() // stop sounds normally
 
-
-/datum/particle_weather/sand_gentle/try_weather_act(mob/living/L)
-	if(!L.mind)
-		return
-
-	if(can_weather(L))
-		weather_sound_effect(L)
-		if(can_weather_effect(L))
-			weather_act(L)
-			if(!messagedMobs[L] || world.time > messagedMobs[L])
-				weather_message(L)
-	else
-		stop_weather_sound_effect(L)
-		messagedMobs[L] = 0
-		if(HAS_TRAIT(L, TRAIT_SANDSTORMED))
-			REMOVE_TRAIT(L, TRAIT_SANDSTORMED, TRAIT_GENERIC)
+	if(HAS_TRAIT(L, TRAIT_SANDSTORMED))
+		REMOVE_TRAIT(L, TRAIT_SANDSTORMED, TRAIT_GENERIC)
 
 /datum/particle_weather/sand_gentle/end()
 	running = FALSE
@@ -98,28 +85,18 @@
 	if(!HAS_TRAIT(L, TRAIT_SANDSTORMED))
 		ADD_TRAIT(L, TRAIT_SANDSTORMED, TRAIT_GENERIC)
 	// Heat + abrasion
+	if(!HAS_TRAIT(L, TRAIT_SANDSTORM_GOGGLES) && prob(25))
+		L.adjust_blurriness(rand(1,3))
 
-//	L.adjust_blurriness(rand(1,3))
+	if(!L.has_sandstorm_hood())
+		if(prob(33))
+			L.energy_add(-10)
 
-	if(prob(10))
-		L.adjustStaminaLoss(2)
+/datum/particle_weather/sand_storm/stop_weather_sound_effect(mob/living/L)
+	..() // stop sounds normally
 
-
-/datum/particle_weather/sand_storm/try_weather_act(mob/living/L)
-	if(!L.mind)
-		return
-
-	if(can_weather(L))
-		weather_sound_effect(L)
-		if(can_weather_effect(L))
-			weather_act(L)
-			if(!messagedMobs[L] || world.time > messagedMobs[L])
-				weather_message(L)
-	else
-		stop_weather_sound_effect(L)
-		messagedMobs[L] = 0
-		if(HAS_TRAIT(L, TRAIT_SANDSTORMED))
-			REMOVE_TRAIT(L, TRAIT_SANDSTORMED, TRAIT_GENERIC)
+	if(HAS_TRAIT(L, TRAIT_SANDSTORMED))
+		REMOVE_TRAIT(L, TRAIT_SANDSTORMED, TRAIT_GENERIC)
 
 /datum/particle_weather/sand_storm/end()
 	running = FALSE
@@ -129,3 +106,26 @@
 		if(HAS_TRAIT(M, TRAIT_SANDSTORMED))
 			REMOVE_TRAIT(M, TRAIT_SANDSTORMED, TRAIT_GENERIC)
 	SSParticleWeather.stopWeather()
+
+
+/mob/living/proc/has_sandstorm_hood()
+	var/obj/item/clothing/head/H = get_item_by_slot(ITEM_SLOT_HEAD)
+	if(!H)
+		return FALSE
+
+	// Generic hood subtype
+	if(istype(H, /obj/item/clothing/head/roguetown/roguehood))
+		return TRUE
+
+	// Specific exceptions
+	switch(H.type)
+		if(
+			/obj/item/clothing/head/roguetown/menacing,
+			/obj/item/clothing/head/roguetown/necromhood,
+			/obj/item/clothing/head/roguetown/nochood,
+			/obj/item/clothing/head/roguetown/necrahood,
+
+		)
+			return TRUE
+
+	return FALSE

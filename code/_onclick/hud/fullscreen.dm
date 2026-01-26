@@ -177,11 +177,19 @@
 	plane = FULLSCREEN_PLANE
 
 /atom/movable/screen/fullscreen/dustoverlay
-	icon_state = "sandstorm"
+	icon_state = "smok"
 	layer = CRIT_LAYER
 	plane = FULLSCREEN_PLANE
 	color = "#C3b091"
 	alpha = 125
+
+/atom/movable/screen/fullscreen/dustoverlay_light
+	icon_state = "smok"
+	layer = CRIT_LAYER
+	plane = FULLSCREEN_PLANE
+	color = "#C3b091"
+	alpha = 90
+
 /atom/movable/screen/fullscreen/blackimageoverlay
 	icon_state = "blackimageoverlay"
 	layer = BLIND_LAYER

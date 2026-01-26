@@ -40,7 +40,7 @@ SUBSYSTEM_DEF(ParticleWeather)
 			elligble_weather[W] = probability
 	switch(SSmapping.config.map_name)
 		if("Rosewood")
-			selected_forecast = new /datum/forecast/rosewood()
+			selected_forecast = new /datum/forecast/rockhill()
 		else
 			selected_forecast = new /datum/forecast/vanderlin()
 	return ..()
