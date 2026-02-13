@@ -9933,8 +9933,8 @@
 /area/rogue/indoors/deserttown)
 "fvh" = (
 /obj/structure/fluff/traveltile/bandit{
-	aportalgoesto = "banditin2";
-	aportalid = "banditexit2"
+	aportalgoesto = "banditdesertin2";
+	aportalid = "banditdesertexit2"
 	},
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/outdoors/desertdeep)
@@ -24617,8 +24617,8 @@
 /area/rogue/outdoors/town/grove)
 "ojX" = (
 /obj/structure/fluff/traveltile/bandit{
-	aportalgoesto = "banditin";
-	aportalid = "banditexit"
+	aportalgoesto = "banditdesertin";
+	aportalid = "banditdesertexit"
 	},
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/outdoors/desertdeep)
