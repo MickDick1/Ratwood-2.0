@@ -115,3 +115,8 @@
 		// /datum/job/roguetown/dtslave,
 		// /datum/job/roguetown/dtprince,
 		// /datum/job/roguetown/dtshophand,
+
+	threat_regions = list(
+		THREAT_REGION_DESERT_NEAR,
+		THREAT_REGION_DESERT_DEEP,
+	)
