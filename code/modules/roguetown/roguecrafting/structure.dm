@@ -1009,48 +1009,63 @@
 	result = /obj/structure/curtain
 	reqs = list(/obj/item/natural/cloth = 2)
 	craftdiff = 0
+	ignoredensity = TRUE
+
+/datum/crafting_recipe/roguetown/structure/curtaindirectional
+	name = "curtain (directional)"
+	result = /obj/structure/curtain/directional/crafted
+	reqs = list(/obj/item/natural/cloth = 2)
+	craftdiff = 1
+	ignoredensity = TRUE
 
 /datum/crafting_recipe/roguetown/structure/curtainblack
 	name = "curtain(black)"
 	result = /obj/structure/curtain/black
 	reqs = list(/obj/item/natural/cloth = 2, /obj/item/natural/silk= 1 )
 	craftdiff = 3
+	ignoredensity = TRUE
 
 /datum/crafting_recipe/roguetown/structure/curtainblue
 	name = "curtain(blue)"
 	result = /obj/structure/curtain/blue
 	reqs = list(/obj/item/natural/cloth = 2, /obj/item/natural/silk= 1 )
 	craftdiff = 3
+	ignoredensity = TRUE
 
 /datum/crafting_recipe/roguetown/structure/curtainbrown
 	name = "curtain(brown)"
 	result = /obj/structure/curtain/brown
 	reqs = list(/obj/item/natural/cloth = 2, /obj/item/natural/silk= 1 )
 	craftdiff = 3
+	ignoredensity = TRUE
 
 /datum/crafting_recipe/roguetown/structure/curtaingreen
 	name = "curtain(green)"
 	result = /obj/structure/curtain/green
 	reqs = list(/obj/item/natural/cloth = 2, /obj/item/natural/silk= 1 )
 	craftdiff = 3
+	ignoredensity = TRUE
 
 /datum/crafting_recipe/roguetown/structure/curtainmagenta
 	name = "curtain(magenta)"
 	result = /obj/structure/curtain/magenta
 	reqs = list(/obj/item/natural/cloth = 2, /obj/item/natural/silk= 1 )
 	craftdiff = 3
+	ignoredensity = TRUE
 
 /datum/crafting_recipe/roguetown/structure/curtainpurple
 	name = "curtain(purple)"
 	result = /obj/structure/curtain/purple
 	reqs = list(/obj/item/natural/cloth = 2, /obj/item/natural/silk= 1 )
 	craftdiff = 3
+	ignoredensity = TRUE
 
 /datum/crafting_recipe/roguetown/structure/curtainred
 	name = "curtain(red)"
 	result = /obj/structure/curtain/red
 	reqs = list(/obj/item/natural/cloth = 2, /obj/item/natural/silk= 1 )
 	craftdiff = 3
+	ignoredensity = TRUE
 
 /datum/crafting_recipe/roguetown/structure/apiary
 	name = "apiary"

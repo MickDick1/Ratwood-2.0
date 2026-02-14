@@ -3,22 +3,34 @@
 
 	if(notransform)
 		return
-
-	if(damageoverlaytemp)
-		damageoverlaytemp = 0
-		update_damage_hud()
-
-	//Reagent processing needs to come before breathing, to prevent edge cases.
-	handle_organs()
+	if(isnull(loc))
+		return
 
 	. = ..()
 
-	if (QDELETED(src))
-		return
+	if(times_fired % 2 == 0) // every 2nd (other) tick, update damage hud.
+		if(damageoverlaytemp)
+			damageoverlaytemp = 0
+			update_damage_hud()
+	if(!client) // Clientless? Handle organs and wounds every THIRD tick. (carbon AI as well, we'll see how this goes.)
+		if(times_fired % 3 == 0)
+			handle_organs()
+			handle_wounds()
+			handle_blood()
+	else
+		handle_organs()
+		handle_blood()
+		handle_wounds()
 
-	handle_wounds()
+	//Funny thing here, however. If they ARE skullcracked, we throw them a bone. In direct opposition to the above.
+	//Passive heals until they get out of skullcrack state. Just so they're not perma skullcracked without doctors.
+	//You can still break legs and the like without it passive healing. Do that instead.
+	if(HAS_TRAIT(src, TRAIT_PARALYSIS))
+		var/list/wounds = get_wounds()
+		if(wounds.len > 0)
+			heal_wounds(0.3, list(/datum/wound/fracture/head, /datum/wound/fracture/head/brain, /datum/wound/fracture/neck))
+
 	handle_embedded_objects()
-	handle_blood()
 	handle_roguebreath()
 	var/bprv = handle_bodyparts()
 	if(bprv & BODYPART_LIFE_UPDATE_HEALTH)
@@ -149,6 +161,7 @@
 
 /mob/living/carbon/proc/get_complex_pain()
 	. = 0
+	var/has_adrenaline = HAS_TRAIT(src, TRAIT_ADRENALINE_RUSH)
 	for(var/obj/item/bodypart/limb as anything in bodyparts)
 		if(limb.status == BODYPART_ROBOTIC || limb.skeletonized)
 			continue
@@ -156,10 +169,9 @@
 		for(var/datum/wound/wound in limb.wounds)
 			bodypart_pain += wound.woundpain
 		bodypart_pain = min(bodypart_pain, limb.max_pain_damage)
-		if(HAS_TRAIT(src, TRAIT_ADRENALINE_RUSH))
-			bodypart_pain = bodypart_pain * 0.5
+		if(has_adrenaline)
+			bodypart_pain *= 0.5
 		. += bodypart_pain
-	.
 
 /mob/living/carbon/human/get_complex_pain()
 	. = ..()
@@ -176,25 +188,21 @@
 	return FALSE
 
 /mob/living/carbon/proc/handle_bodyparts()
-	var/stam_regen = FALSE
-	if(stam_regen_start_time <= world.time)
-		stam_regen = TRUE
-		if(stam_paralyzed)
-			. |= BODYPART_LIFE_UPDATE_HEALTH //make sure we remove the stamcrit
-	for(var/I in bodyparts)
-		var/obj/item/bodypart/BP = I
-		if(BP.needs_processing)
-			. |= BP.on_life(stam_regen)
+	var/stam_regen = stam_regen_start_time <= world.time
+	if(stam_regen && stam_paralyzed)
+		. |= BODYPART_LIFE_UPDATE_HEALTH
+	for(var/obj/item/bodypart/BP as anything in bodyparts)
+		if(!BP.needs_processing)
+			continue
+		. |= BP.on_life(stam_regen)
 
 /mob/living/carbon/proc/handle_organs()
 	if(stat != DEAD)
-		for(var/V in internal_organs)
-			var/obj/item/organ/O = V
+		for(var/obj/item/organ/O as anything in internal_organs)
 			O.on_life()
 	else
-		for(var/V in internal_organs)
-			var/obj/item/organ/O = V
-			O.on_death() //Needed so organs decay while inside the body.
+		for(var/obj/item/organ/O as anything in internal_organs)
+			O.on_death()
 
 /mob/living/carbon/handle_embedded_objects()
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
@@ -607,8 +615,24 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 						armor_blocked = TRUE
 					if(H.wear_armor && (H.wear_armor.armor_class in list(ARMOR_CLASS_HEAVY, ARMOR_CLASS_MEDIUM)))
 						armor_blocked = TRUE
+					// Check nude sleeper trait
+					if(HAS_TRAIT(H, TRAIT_NUDE_SLEEPER))
+						var/list/worn_items = H.get_equipped_items()
+						for(var/obj/item/I in worn_items)
+							// Skip abstract items
+							if(HAS_TRAIT(I, ABSTRACT_ITEM_TRAIT))
+								continue
+							// Allow NODROP items (body modifications like skin_armor)
+							if(HAS_TRAIT(I, TRAIT_NODROP))
+								continue
+							// Found clothing that blocks sleeping
+							armor_blocked = TRUE
+							break
 					if(armor_blocked && !fallingas)
-						to_chat(src, span_warning("I can't sleep like this. My armor is burdening me."))
+						if(HAS_TRAIT(H, TRAIT_NUDE_SLEEPER))
+							to_chat(src, span_warning("I can't sleep while wearing clothes!"))
+						else
+							to_chat(src, span_warning("I can't sleep like this. My armor is burdening me."))
 						fallingas = TRUE
 				if(!armor_blocked)
 					if(!fallingas)
@@ -631,8 +655,24 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 						armor_blocked = TRUE
 					if(H.wear_armor && (H.wear_armor.armor_class in list(ARMOR_CLASS_HEAVY, ARMOR_CLASS_MEDIUM)))
 						armor_blocked = TRUE
+					// Check nude sleeper trait
+					if(HAS_TRAIT(H, TRAIT_NUDE_SLEEPER))
+						var/list/worn_items = H.get_equipped_items()
+						for(var/obj/item/I in worn_items)
+							// Skip abstract items
+							if(HAS_TRAIT(I, ABSTRACT_ITEM_TRAIT))
+								continue
+							// Allow NODROP items (body modifications like skin_armor)
+							if(HAS_TRAIT(I, TRAIT_NODROP))
+								continue
+							// Found clothing that blocks sleeping
+							armor_blocked = TRUE
+							break
 					if(armor_blocked && !fallingas)
-						to_chat(src, span_warning("I can't sleep like this. My armor is burdening me."))
+						if(HAS_TRAIT(H, TRAIT_NUDE_SLEEPER))
+							to_chat(src, span_warning("I can't sleep while wearing clothes!"))
+						else
+							to_chat(src, span_warning("I can't sleep like this. My armor is burdening me."))
 						fallingas = TRUE
 				if(!armor_blocked)
 					if(!fallingas)

@@ -69,6 +69,7 @@ GLOBAL_LIST_INIT(noble_positions, list(
 	"Marshal",
 	"Councillor",
 	"Steward",
+	"Clerk",
 	"Knight",
 	//Desert
 	"Sultan",
@@ -79,19 +80,23 @@ GLOBAL_LIST_INIT(noble_positions, list(
 
 GLOBAL_LIST_INIT(courtier_positions, list(
 	"Court Magician",
+	"Magicians Associate",
 	"Head Physician",
+	"Apothecary",
 	"Jester",
 	"Seneschal",
 	//Desert
 	"Palace Magician",
 	// "Head Physician",
 	"Head Slave",
+	"Servant",
 ))
 
 GLOBAL_LIST_INIT(garrison_positions, list(
 	"Watchman",
 	"Warden",
 	"Sergeant",
+	"Veteran",
 	"Man at Arms",
 	"Squire",
 	"Dungeoneer",
@@ -161,12 +166,7 @@ GLOBAL_LIST_INIT(mercenary_positions, list(
 ))
 
 GLOBAL_LIST_INIT(youngfolk_positions, list(
-	"Clerk",
-	"Apothecary",
-	"Smithy Apprentice",
-	"Magicians Associate",
 	"Churchling",
-	"Servant",
 	"Shophand",
 	"Vagabond",
 	//Desert
@@ -174,12 +174,11 @@ GLOBAL_LIST_INIT(youngfolk_positions, list(
 ))
 
 GLOBAL_LIST_INIT(wanderer_positions, list(
-	"Veteran",
-	"Adventurer",
 	"Mercenary",
-	"Bandit",
+	"Adventurer",
 	"Court Agent",
 	"Enslaved Adventurer",
+	"Bandit",
 	"Wretch",
 ))
 

@@ -294,6 +294,8 @@ GLOBAL_LIST_INIT(taur_types, subtypesof(/obj/item/bodypart/taur))
 
 	offset_x = -16
 	taur_icon_state = "spider_s"
+	taur_markings_state = "spider_markings"
+	taur_tertiary_state = "spider_markings_2"
 
 	has_taur_color = TRUE
 
@@ -331,5 +333,15 @@ GLOBAL_LIST_INIT(taur_types, subtypesof(/obj/item/bodypart/taur))
 	offset_x = -16
 	taur_icon_state = "wasp_s"
 	taur_markings_state = "wasp_markings"
+
+	has_taur_color = TRUE
+
+/obj/item/bodypart/taur/insect
+	name = "Insect Body"
+
+	offset_x = -16
+	taur_icon_state = "insect_s"
+	taur_markings_state = "insect_markings"
+	taur_tertiary_state = "insect_markings_2"
 
 	has_taur_color = TRUE

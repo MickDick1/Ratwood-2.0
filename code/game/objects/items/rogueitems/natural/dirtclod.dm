@@ -18,6 +18,8 @@
 	..()
 
 /obj/item/natural/dirtclod/Moved(oldLoc, dir)
+	if(QDELETED(src))
+		return
 	..()
 	if(isturf(loc))
 		var/turf/T = loc
