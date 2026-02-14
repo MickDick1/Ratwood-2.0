@@ -1,10 +1,11 @@
 {
     "map_name": "Desert Town",
     "map_path": "map_files/deserttown",
-    "map_file": "deserttown.dmm",
+    "map_file": ["deserttown.dmm"],
+	"traits": [{"Name": "Desert Town", "Up": true}, {"Up": true, "Down": true}, {"Up": true, "Down": true}, {"Down": true}],
     "other_z": [
-        "_maps/map_files/deserttown/DesertTownAlt.json"],
-	"traits": [{"Up": true}, {"Up": true, "Down": true}, {"Up": true, "Down": true}, {"Up": true, "Down": true}, {"Down": true}],
+        "_maps/map_files/deserttown/DesertTownAlt.json"
+	],
 	"minetype": null,
 	"space_empty_levels": 0,
 	"space_ruin_levels": 0,
