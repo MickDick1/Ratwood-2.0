@@ -92,19 +92,9 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 //Tickets statpanel
 /datum/admin_help_tickets/proc/stat_entry()
 	SHOULD_CALL_PARENT(TRUE)
-	var/num_disconnected = 0
-	stat("Active Tickets:", astatclick.update("[active_tickets.len]"))
-	astatclick.update("[active_tickets.len]")
-	for(var/I in active_tickets)
-		var/datum/admin_help/AH = I
-		if(AH.initiator)
-			stat("#[AH.id]. [AH.initiator_key_name]:", AH.statclick.update())
-		else
-			++num_disconnected
-	if(num_disconnected)
-		stat("Disconnected:", astatclick.update("[num_disconnected]"))
-	stat("Closed Tickets:", cstatclick.update("[closed_tickets.len]"))
-	stat("Resolved Tickets:", rstatclick.update("[resolved_tickets.len]"))
+	// Replace detailed ticket list with a simple entry that opens the TGUI ticket manager
+	var/label = "Open Ticket Manager ([active_tickets.len] active)"
+	stat(label, astatclick.update(label))
 
 //Reassociate still open ticket if one exists
 /datum/admin_help_tickets/proc/ClientLogin(client/C)
@@ -629,8 +619,8 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 /datum/admin_help/proc/MessageNoRecipient(msg)
 	msg = copytext_char(msg, 1, MAX_MESSAGE_LEN)
 	var/ref_src = "[REF(src)]"
-	//Simplified message to be sent to all admins
-	var/admin_msg = span_adminnotice("<span class='adminhelp'>Ticket #[id], [initiator_ckey], [TicketHref("Show Ticket", ref_src)]</span>")
+	// Simplified message to be sent to all admins, including title and a handle button
+	var/admin_msg = span_adminnotice("<span class='adminhelp'>Ticket #[id]: [name] ([initiator_ckey]) - [TicketHref(\"Show Ticket\", ref_src)] [TicketHref(\"Handle\", ref_src, \"handleissue\")]</span>")
 
 	AddInteraction("<font color='red'>[LinkedReplyName(ref_src)]: [msg]</font>")
 
