@@ -15,6 +15,7 @@ GLOBAL_LIST_EMPTY(overwatch_events) // List of lists, keyed by ckey
 	var/x_coord
 	var/y_coord
 	var/z_coord
+	var/location_text  // Cached location string matching LOGS output
 
 /datum/overwatch_event/New(mob/target)
 	timestamp = world.time
@@ -25,11 +26,16 @@ GLOBAL_LIST_EMPTY(overwatch_events) // List of lists, keyed by ckey
 			x_coord = location.x
 			y_coord = location.y
 			z_coord = location.z
+			// Mirror the LOGS location format so admins see the same
+			// area/coordinate text they would in attack logs.
+			location_text = loc_name(target)
 
 /datum/overwatch_event/proc/get_timestamp_text()
 	return time2text(timestamp, "hh:mm:ss")
 
 /datum/overwatch_event/proc/get_location_text()
+	if(location_text)
+		return location_text
 	if(x_coord && y_coord && z_coord)
 		return "\[[x_coord],[y_coord],[z_coord]\]"
 	return "Unknown"
@@ -51,6 +57,7 @@ GLOBAL_LIST_EMPTY(overwatch_events) // List of lists, keyed by ckey
 	var/damage_amount
 	var/damage_type
 	var/weapon_name
+	var/victim_new_hp  // Mirrors NEWHP from LOGS where available
 
 /datum/overwatch_event/attack/New(mob/living/attacker, mob/living/victim, damage, damagetype, obj/item/weapon)
 	..( victim)
@@ -75,6 +82,13 @@ GLOBAL_LIST_EMPTY(overwatch_events) // List of lists, keyed by ckey
 	
 	damage_amount = damage
 	damage_type = damagetype
+
+	// Capture the victim's new HP at the time of the attack, similar to
+	// how log_combat records NEWHP in the attack logs. This keeps
+	// Overwatch aligned with existing LOGS data without extra work in
+	// callers.
+	if(istype(victim))
+		victim_new_hp = victim.health
 	
 	if(weapon)
 		weapon_name = weapon.name
@@ -83,7 +97,19 @@ GLOBAL_LIST_EMPTY(overwatch_events) // List of lists, keyed by ckey
 
 /datum/overwatch_event/attack/get_summary()
 	. = "[..()]"
-	. += " [attacker_name] attacked [victim_name] ([damage_amount] [damage_type])"
+	var/damage_info = ""
+	if(!isnull(damage_amount))
+		damage_info = "[damage_amount]"
+	if(damage_type)
+		if(length(damage_info))
+			damage_info = "[damage_info] [damage_type]"
+		else
+			damage_info = "[damage_type]"
+	. += " [attacker_name] attacked [victim_name]"
+	if(length(damage_info))
+		. += " ([damage_info])"
+	if(!isnull(victim_new_hp))
+		. += " (NEWHP: [victim_new_hp])"
 	if(weapon_name)
 		. += " with [weapon_name]"
 
