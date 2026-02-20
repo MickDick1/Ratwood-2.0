@@ -62,6 +62,8 @@
 	if(current_devils >= max_devils)
 		return
 
+	if(!prob(30))	// average chance for dust devils
+		return
 	// Build viable player list
 	var/list/viable_players = list()
 	for(var/client/C in GLOB.clients)
@@ -181,6 +183,8 @@
 	if(current_devils >= max_devils)
 		return
 
+	if(!prob(50))	// high chance for dust devils
+		return
 	// Build viable player list
 	var/list/viable_players = list()
 	for(var/client/C in GLOB.clients)

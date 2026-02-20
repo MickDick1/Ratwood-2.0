@@ -183,20 +183,21 @@ GLOBAL_LIST_EMPTY(active_abyssors_rage)
 	drift_delay = 3
 	spin_strength = 3
 	lifetime = 360 SECONDS
+	sound_volume = 10
 
 /obj/effect/weather/tornado/dust_devil/loop_tornado_sound()
 	if(QDELETED(src))
 		return
 
 	for(var/mob/M in hearers(sound_range, src))
-		M.playsound_local(src, tornado_loop, 25, FALSE)
+		M.playsound_local(src, tornado_loop, 10, FALSE)
 
 	addtimer(CALLBACK(src, PROC_REF(loop_tornado_sound)), sound_loop_delay)
 
 /obj/effect/weather/tornado/dust_devil/Initialize()
 	. = ..()
 	GLOB.active_dust_devils += src
-	transform = transform.Scale(0.60, 0.60)
+	transform = transform.Scale(0.55, 0.55)
 
 /obj/effect/weather/tornado/dust_devil/Destroy()
 	GLOB.active_dust_devils -= src

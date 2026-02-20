@@ -67,4 +67,7 @@
 		return
 	if(ishuman(L))
 		var/mob/living/carbon/human/M = L
-		M.add_stress(/datum/stressevent/bloodrain)
+		if(M.patron && (istype(M.patron, /datum/patron/inhumen/graggar)||istype(M.patron, /datum/patron/inhumen/zizo)))
+			M.add_stress(/datum/stressevent/bloodrevel)
+		else
+			M.add_stress(/datum/stressevent/bloodrain)

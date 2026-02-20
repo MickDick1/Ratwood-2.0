@@ -2218,7 +2218,7 @@ GLOBAL_VAR_INIT(cold_breath_overlay, mutable_appearance(
 				H.emote(pick("shiver"))
 			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, cold_warn)),20 SECONDS,TIMER_UNIQUE)
 			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, apply_frostbite)),2 MINUTES, TIMER_UNIQUE | TIMER_STOPPABLE)
-			H.add_movespeed_modifier(MOVESPEED_ID_COLD, override = TRUE, multiplicative_slowdown = ((BODYTEMP_COLD_LEVEL_ONE_MAX - H.bodytemperature) / 25), blacklisted_movetypes = FLOATING)
+			H.add_movespeed_modifier(MOVESPEED_ID_COLD, override = TRUE, multiplicative_slowdown = ((BODYTEMP_COLD_LEVEL_ONE_MAX - H.bodytemperature) / 35), blacklisted_movetypes = FLOATING)
 			H.apply_status_effect(/datum/status_effect/debuff/freezing)
 		else	//level 1 cold
 			H.remove_movespeed_modifier(MOVESPEED_ID_COLD)
