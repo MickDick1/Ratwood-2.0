@@ -1156,7 +1156,7 @@
 	
 	if(ZMtop && !ZMbottom)
 		if(prob(infection_probability))
-			var/answer = tgui_alert(top, "Spread HER curse?", "Please answer in [DisplayTimeText(200)]!", list("Yae","Nae"),200)
+			var/answer = tgui_alert(top, "Spread HER gift?", "Please answer in [DisplayTimeText(200)]!", list("Yae","Nae"),200)
 			if(!answer || answer == "Nae")
 				return
 			if(answer == "Yae")
@@ -1165,7 +1165,7 @@
 
 	if(ZMbottom && !ZMtop)
 		if(prob(infection_probability))
-			var/answer = tgui_alert(bottom, "Spread HER curse?", "Please answer in [DisplayTimeText(200)]!", list("Yae","Nae"),200)
+			var/answer = tgui_alert(bottom, "Spread HER gift?", "Please answer in [DisplayTimeText(200)]!", list("Yae","Nae"),200)
 			if(!answer || answer == "Nae")
 				return
 			if(answer == "Yae")
