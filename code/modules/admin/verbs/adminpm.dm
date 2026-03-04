@@ -193,10 +193,11 @@
 			if(CONFIG_GET(flag/popup_admin_pm))
 				INVOKE_ASYNC(src, PROC_REF(popup_admin_pm), recipient, msg)
 
-			// Open the TGUI ticket chat for the admin as well, so
-			// admin-initiated PMs (bwoinks) always have a visible ticket.
+			// Open the admin ticket panel with this ticket pre-selected for the sender,
+			// so admins always see their own (admin-facing) view and not the player's chat.
 			if(created_ticket && usr)
-				created_ticket.ui_interact(usr)
+				GLOB.ahelp_tickets.selected_tickets[usr.ckey] = created_ticket.id
+				GLOB.ahelp_tickets.ui_interact(usr)
 
 		else		//neither are admins
 			to_chat(src, span_danger("Error: Admin-PM: Non-admin to non-admin PM communication is forbidden."))

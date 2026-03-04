@@ -92,9 +92,8 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 //Tickets statpanel
 /datum/admin_help_tickets/proc/stat_entry()
 	SHOULD_CALL_PARENT(TRUE)
-	// Replace detailed ticket list with a simple entry that opens the TGUI ticket manager
 	var/label = "Open Ticket Manager ([active_tickets.len] active)"
-	stat(label, astatclick.update(label))
+	stat(null, astatclick.update(label))
 
 //Reassociate still open ticket if one exists
 /datum/admin_help_tickets/proc/ClientLogin(client/C)
@@ -916,24 +915,26 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 			var/tag_end = findtext(clean_text, ">", tag_start)
 			if(!tag_end || tag_end == 0)
 				// Broken tag at end, just remove everything from < onwards
-				clean_text = copytext_char(clean_text, 1, tag_start)
+				// Use copytext (byte-based) to match findtext's byte positions
+				clean_text = copytext(clean_text, 1, tag_start)
 				break
 			
 			// Check if this is a link tag - extract the link text
-			var/tag_section = copytext_char(clean_text, tag_start, tag_end + 1)
+			// copytext uses byte positions, consistent with findtext
+			var/tag_section = copytext(clean_text, tag_start, tag_end + 1)
 			if(findtext(tag_section, "<A ") == 1 || findtext(tag_section, "<a ") == 1)
 				// Find the closing </A>
 				var/close_pos = findtext(clean_text, "</A>", tag_end)
 				if(!close_pos)
 					close_pos = findtext(clean_text, "</a>", tag_end)
 				if(close_pos && close_pos > 0)
-					// Extract text between tags
-					var/link_text = copytext_char(clean_text, tag_end + 1, close_pos)
-					clean_text = copytext_char(clean_text, 1, tag_start) + link_text + copytext_char(clean_text, close_pos + 4)
+					// Extract text between tags (all byte-based to match findtext)
+					var/link_text = copytext(clean_text, tag_end + 1, close_pos)
+					clean_text = copytext(clean_text, 1, tag_start) + link_text + copytext(clean_text, close_pos + 4)
 					continue
 			
-			// Remove this tag
-			clean_text = copytext_char(clean_text, 1, tag_start) + copytext_char(clean_text, tag_end + 1)
+			// Remove this tag (byte-based to match findtext)
+			clean_text = copytext(clean_text, 1, tag_start) + copytext(clean_text, tag_end + 1)
 
 		// Decode HTML entities so special characters like ', <, > display correctly
 		clean_text = html_decode(clean_text)
