@@ -729,6 +729,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	droning_sound_dawn = 'sound/music/area/forest.ogg'
 	converted_type = /area/rogue/indoors/town/grove
 	deathsight_message = "A sacred place of dendor, near the tree of Aeons.."
+	first_time_text = null
 	droning_sound_dusk = null
 	droning_sound_night = null
 	warden_area = TRUE
