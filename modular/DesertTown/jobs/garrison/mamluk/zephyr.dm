@@ -11,13 +11,14 @@
 		STATKEY_SPD = 2,// seems kinda lame but remember guardsman bonus!!
 		STATKEY_PER = 2,
 		STATKEY_WIL = 1,
-		traits_applied = list(TRAIT_MEDIUMARMOR))
+		// traits_applied = list(TRAIT_MEDIUMARMOR)
+		)
 
 	subclass_skills = list(
 		/datum/skill/combat/crossbows = SKILL_LEVEL_MASTER,
 		/datum/skill/combat/bows = SKILL_LEVEL_MASTER,
 		/datum/skill/combat/slings = SKILL_LEVEL_MASTER,//Your entire point is ranged.
-		/datum/skill/combat/wrestling = SKILL_LEVEL_EXPERT,
+		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/knives = SKILL_LEVEL_EXPERT,//You get a knife, just in case.
 		/datum/skill/combat/maces = SKILL_LEVEL_JOURNEYMAN,//And can double in maces and swords.
 		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,

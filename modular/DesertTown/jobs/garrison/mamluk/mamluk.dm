@@ -9,7 +9,7 @@
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = ACCEPTED_RACES
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
-	job_traits = list(TRAIT_GUARDSMAN, TRAIT_STEELHEARTED)
+	job_traits = list(TRAIT_GUARDSMAN, TRAIT_STEELHEARTED, TRAIT_MEDIUMARMOR)
 	tutorial = "You are a member of the Sultans Guard. Ensure the safety of the City and her subjects, defend the powers that be from the horrors of the outside world, and keep the Sultanate alive."
 	display_order = JDO_CASTLEGUARD
 	whitelist_req = TRUE
