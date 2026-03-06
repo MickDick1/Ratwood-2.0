@@ -340,6 +340,7 @@
 			if("Warcaster") //Wretch Spellblade that's not exclusive to racist elfs! T2 Arcyne, Magearmor, Apprentice Arcyne, 12 spell points, but worse stats -- weighted stat total of +5.
 				ADD_TRAIT(H, TRAIT_ARCYNE_T2, TRAIT_GENERIC)
 				ADD_TRAIT(H, TRAIT_MAGEARMOR, TRAIT_GENERIC)
+				H.adjust_skillrank_up_to(/datum/skill/magic/arcane, SKILL_LEVEL_APPRENTICE, TRUE)
 				H.change_stat(STATKEY_STR, -1)
 				H.change_stat(STATKEY_CON, -1)
 				H.change_stat(STATKEY_PER, -1)
