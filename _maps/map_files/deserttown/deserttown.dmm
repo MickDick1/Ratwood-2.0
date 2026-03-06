@@ -8902,10 +8902,6 @@
 	},
 /turf/open/floor/rogue/darkpath,
 /area/rogue/indoors/deserttown/shop)
-"eCI" = (
-/obj/structure/flora/roguegrass/herb,
-/turf/open/floor/rogue/desert_grass,
-/area/rogue/outdoors/desertdeep)
 "eCK" = (
 /turf/open/floor/rogue/concrete{
 	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
@@ -179290,7 +179286,7 @@ bke
 bke
 hel
 bke
-eCI
+gDE
 bke
 bke
 bke
@@ -179884,7 +179880,7 @@ mxD
 mxD
 mxD
 mxD
-eCI
+gDE
 mfq
 mfq
 mfq
@@ -180489,7 +180485,7 @@ pGL
 pGL
 mfq
 bke
-eCI
+gDE
 mfq
 mfq
 pGL
@@ -183524,7 +183520,7 @@ gYN
 hel
 bke
 qJG
-eCI
+gDE
 bke
 mfq
 mfq
@@ -184714,7 +184710,7 @@ mfq
 mfq
 mfq
 mfq
-eCI
+gDE
 bke
 qJG
 bke
@@ -185027,7 +185023,7 @@ mfq
 qJG
 bke
 bke
-eCI
+gDE
 bke
 bke
 bke
@@ -185330,7 +185326,7 @@ bke
 cZe
 qJG
 bke
-eCI
+gDE
 bke
 bke
 bke
