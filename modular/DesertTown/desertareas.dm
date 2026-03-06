@@ -19,7 +19,7 @@
 				/mob/living/carbon/human/species/skeleton/npc/supereasy = 30)
 	first_time_text = "Al-Ashur Dunes"
 	droning_sound = 'sound/music/area/desert/Iberia1.ogg'
-	droning_sound_dusk = 'sound/music/area/NightPrayer.ogg'
+	droning_sound_dusk = 'sound/music/area/desert/NightPrayer.ogg'
 	droning_sound_night = 'sound/music/area/desert/Moonrise.ogg'
 	deathsight_message = "somewhere in the dunes, next to towering walls"
 	warden_area = TRUE
@@ -43,7 +43,7 @@
 	spookynight = SPOOKY_GEN
 	first_time_text = "Deep Dunes"
 	droning_sound = 'sound/music/area/desert/Iberia1.ogg'
-	droning_sound_dusk = 'sound/music/area/NightPrayer.ogg'
+	droning_sound_dusk = 'sound/music/area/desert/NightPrayer.ogg'
 	droning_sound_night = 'sound/music/area/desert/Moonrise.ogg'
 	ambush_times = list("night","dawn","dusk","day")	
 	ambush_mobs = list(
@@ -64,8 +64,8 @@
 	name = "Deep Desert (shelter)"
 	icon_state = "desertdeep"
 	droning_sound = 'sound/music/area/desert/Iberia1.ogg'
-	droning_sound_dusk = 'sound/music/area/NightPrayer.ogg'
-	droning_sound_night = 'sound/music/area/desert/Midvale Moonrise.ogg'
+	droning_sound_dusk = 'sound/music/area/desert/NightPrayer.ogg'
+	droning_sound_night = 'sound/music/area/desert/Moonrise.ogg'
 
 /area/rogue/outdoors/desertdeep/safe
 	name = "Desert Pass"
