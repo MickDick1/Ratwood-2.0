@@ -2888,6 +2888,7 @@
 #include "modular\code\modules\maturity-prompt\code\maturity_subsystem.dm"
 #include "modular\Creechers\code\trufflepig.dm"
 #include "modular\DesertTown\camel.dm"
+#include "modular\DesertTown\desertareas.dm"
 #include "modular\DesertTown\desertclothing.dm"
 #include "modular\DesertTown\desertfloor.dm"
 #include "modular\DesertTown\desertmapgen.dm"
