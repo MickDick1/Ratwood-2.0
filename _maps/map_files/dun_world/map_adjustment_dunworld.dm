@@ -16,7 +16,7 @@
 
 		/datum/job/roguetown/headslave,
 		/datum/job/roguetown/sheikh,
-		/datum/job/roguetown/magician,
+		/datum/job/roguetown/dtmagician,
 
 		/datum/job/roguetown/mamluk,
 		/datum/job/roguetown/janissary,
@@ -25,7 +25,11 @@
 		
 		/datum/job/roguetown/slave,
 		/datum/job/roguetown/dtprince,
-		/datum/job/roguetown/dtshophand,)
+		/datum/job/roguetown/dtshophand,
+		/datum/job/roguetown/dtvillager,
+		/datum/job/roguetown/dtshophand,
+		
+		/datum/job/roguetown/adventurer/courtslave,)
 	// slot_adjust = list(
 	// 	/datum/job/roguetown/villager = 42,
 	// // 	/datum/job/roguetown/adventurer = 69
