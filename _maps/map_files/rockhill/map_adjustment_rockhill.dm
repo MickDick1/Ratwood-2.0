@@ -8,10 +8,10 @@
 	map_file_name = "rockhill.dmm"
 	realm_name = "Rockhill"
 	// blacklist = list()
-	// slot_adjust = list(
-	// 	/datum/job/roguetown/villager = 42,
-	// // 	/datum/job/roguetown/adventurer = 69
-	// )
+	slot_adjust = list(
+		/datum/job/roguetown/manorguard = 4,
+	// 	/datum/job/roguetown/adventurer = 69
+	)
 	title_adjust = list(
 		/datum/job/roguetown/physician = list(display_title = "Court Physician"),
 		/datum/job/roguetown/niteman = list(display_title = "Nightmaster", f_title = "Nightmistress"),
