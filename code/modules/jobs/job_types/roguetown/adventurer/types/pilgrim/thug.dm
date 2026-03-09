@@ -206,8 +206,8 @@
 			mask = /obj/item/clothing/mask/rogue/ragmask/red
 		if("Gang Blortz Volves")
 			to_chat(H, span_warning("I'm a member of street gang Blortz Volves, a lot of time has passed and now we have to build up our power again,\
-			those bastards from Rontz Ratz will answer for this.\
-			Blortz Wolves howl - enemies cower!"))
+			 those bastards from Rontz Ratz will answer for this.\
+			 Blortz Wolves howl - enemies cower!"))
 			ADD_TRAIT(H, TRAIT_GANG_B, TRAIT_GENERIC)
 			mask = /obj/item/clothing/mask/rogue/ragmask/azure
 		if("Neverminde")
