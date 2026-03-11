@@ -714,6 +714,7 @@
 		return
 	if(!istype(T, /turf/open/floor/rogue))
 		return
+	var/area/center_area = get_area(T) // get the area before we fill with rock wall
 	var/turf/X = T.PlaceOnTop(respawn_rock)
 	playsound(src, 'sound/misc/meteorimpact.ogg', 200, TRUE)
 	if(!X)
@@ -742,7 +743,6 @@
 			L.apply_damage(90, BRUTE, def_zone)
 			L.Paralyze(80)
 
-	var/area/center_area = get_area(T)
 	var/trigger_sfx = TRUE
 	for(var/obj/structure/trap/mine_collapse/other_mineshafts in range(2, src))
 		if(src == other_mineshafts)
@@ -755,7 +755,7 @@
 			continue
 		if(other_mineshafts.trigger_collapse(TRUE, trigger_sfx))
 			trigger_sfx = FALSE
-		if(prob(33))
+		if(prob(75))
 			break
 
 /obj/effect/temp_visual/trap/mine_collapse
