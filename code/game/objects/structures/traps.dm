@@ -693,11 +693,11 @@
 
 /obj/structure/trap/mine_collapse/proc/trigger_collapse(triggered_by_neighbor = FALSE, do_sfx = TRUE)
 	var/turf/T = get_turf(src)
-	if(!T || isclosedturf(T))
-		return FALSE
-	if(!istype(T, /turf/open/floor/rogue))
+	if(!T || !istype(T, /turf/open/floor/rogue))
 		return FALSE
 	rolling_rocks = TRUE
+	last_trigger = world.time
+
 	var/time_delay
 	if(triggered_by_neighbor) // add between 1 second to 3 second of ticks
 		time_delay = rand(2 SECONDS,4 SECONDS)
@@ -716,23 +716,15 @@
 
 /obj/structure/trap/mine_collapse/proc/collapse(triggered_by_neighbor = FALSE)
 	rolling_rocks = FALSE
-	last_trigger = world.time
 	var/turf/T = get_turf(src)
-	if(!T || isclosedturf(T) || !respawn_rock)
+	if(!T || !istype(T, /turf/open/floor/rogue))
 		return
-	if(!istype(T, /turf/open/floor/rogue))
-		return
+
+	var/area/center_area = get_area(T) // get the area before we fill with rock wall
 	for(var/obj/structure/closet/I in T) // dump chests/closets
 		I.dump_contents()
 	for(var/obj/structure/handcart/I in T) // dump handcarts
 		I.dump_contents()
-	var/area/center_area = get_area(T) // get the area before we fill with rock wall
-	var/turf/X = T.PlaceOnTop(respawn_rock)
-	if(!X)
-		return
-	playsound(src, 'sound/misc/meteorimpact.ogg', 200, TRUE)
-	if(!triggered_by_neighbor)
-		X.loud_message("Loud rocks falling can be heard")
 	for(var/obj/item/natural/I in T) // absorb smaller stones
 		if(is_type_in_typecache(I, absorb_rocks_typecache))
 			qdel(I)
@@ -754,6 +746,12 @@
 			L.apply_damage(90, BRUTE, def_zone)
 			L.Paralyze(80)
 
+	var/turf/X = T.PlaceOnTop(respawn_rock)
+	if(!X)
+		return
+	playsound(src, 'sound/misc/meteorimpact.ogg', 200, TRUE)
+	if(!triggered_by_neighbor)
+		X.loud_message("Loud rocks falling can be heard")
 	var/trigger_sfx = TRUE
 	for(var/obj/structure/trap/mine_collapse/other_mineshafts in range(2, src))
 		if(src == other_mineshafts)
