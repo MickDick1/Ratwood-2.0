@@ -761,8 +761,9 @@
 /obj/effect/temp_visual/trap/mine_collapse
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "trap"
-	light_outer_range = 2
-	duration = 4 SECONDS
+	light_outer_range = 0 // don't spam SSlighting
+	duration = 3 SECONDS
+	fade_time = 1 SECONDS
 
 /obj/effect/temp_visual/trap/mine_collapse/left
 	pixel_x = -8
