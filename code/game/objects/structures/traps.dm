@@ -663,7 +663,6 @@
 
 	var/list/static/whitelist_typecache
 	var/list/static/absorb_rocks_typecache
-	var/list/static/empty_and_destroy_typecache
 
 /obj/structure/trap/mine_collapse/salt
 	respawn_rock = /turf/closed/mineral/rogue/salt
@@ -674,8 +673,6 @@
 		whitelist_typecache = typecacheof(/mob/living/carbon/human)
 	if(!absorb_rocks_typecache)
 		absorb_rocks_typecache = typecacheof(list(/obj/item/natural/rock, /obj/item/natural/stone))
-	if(!empty_and_destroy_typecache)
-		empty_and_destroy_typecache = typecacheof(list(/obj/structure/closet, /obj/structure/handcart))
 
 /obj/structure/trap/mine_collapse/Crossed(atom/movable/AM)
 	if(!is_type_in_typecache(AM, whitelist_typecache))
@@ -719,11 +716,16 @@
 
 /obj/structure/trap/mine_collapse/proc/collapse(triggered_by_neighbor = FALSE)
 	rolling_rocks = FALSE
+	last_trigger = world.time
 	var/turf/T = get_turf(src)
 	if(!T || isclosedturf(T) || !respawn_rock)
 		return
 	if(!istype(T, /turf/open/floor/rogue))
 		return
+	for(var/obj/structure/closet/I in T) // dump chests/closets
+		I.dump_contents()
+	for(var/obj/structure/handcart/I in T) // dump handcarts
+		I.dump_contents()
 	var/area/center_area = get_area(T) // get the area before we fill with rock wall
 	var/turf/X = T.PlaceOnTop(respawn_rock)
 	if(!X)
@@ -731,10 +733,6 @@
 	playsound(src, 'sound/misc/meteorimpact.ogg', 200, TRUE)
 	if(!triggered_by_neighbor)
 		X.loud_message("Loud rocks falling can be heard")
-	last_trigger = world.time
-	for(var/obj/structure/I in T) // destroy handcarts and chest
-		if(is_type_in_typecache(I, empty_and_destroy_typecache))
-			I.Destroy()
 	for(var/obj/item/natural/I in T) // absorb smaller stones
 		if(is_type_in_typecache(I, absorb_rocks_typecache))
 			qdel(I)
