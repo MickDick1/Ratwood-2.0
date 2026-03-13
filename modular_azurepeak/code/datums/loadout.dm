@@ -1480,7 +1480,7 @@ GLOBAL_LIST_EMPTY(loadout_items)
 // CLOTHING - ARMOR (Alphabetically Ordered)
 /datum/loadout_item/tri_desert_coat
 	name = "Desert Coat"
-	path = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/raneshen
+	path = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/zyb
 	triumph_cost = 3
 
 /datum/loadout_item/tri_duelist_coat
@@ -1617,14 +1617,14 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	path = /obj/item/clothing/suit/roguetown/armor/leather/studded/psyaltrist
 	triumph_cost = 3
 
-/datum/loadout_item/tri_raneshen_coat
-	name = "Raneshen Coat"
-	path = /obj/item/clothing/suit/roguetown/armor/leather/heavy/coat/raneshen
+/datum/loadout_item/tri_zyb_coat
+	name = "Desert Coat"
+	path = /obj/item/clothing/suit/roguetown/armor/leather/heavy/coat/zyb
 	triumph_cost = 3
 
-/datum/loadout_item/tri_raneshen_gambeson
-	name = "Raneshen Gambeson"
-	path = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/raneshen
+/datum/loadout_item/tri_zyb_gambeson
+	name = "Desert Gambeson"
+	path = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/zyb
 	triumph_cost = 3
 
 /datum/loadout_item/tri_shamanic_coat
@@ -1658,9 +1658,9 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	path = /obj/item/clothing/head/roguetown/roguehood/pontifex
 	triumph_cost = 2
 
-/datum/loadout_item/tri_raneshen_hijab
-	name = "Raneshen Hijab"
-	path = /obj/item/clothing/head/roguetown/roguehood/shalal/hijab/raneshen
+/datum/loadout_item/tri_zyb_hijab
+	name = "Desert Hijab"
+	path = /obj/item/clothing/head/roguetown/roguehood/shalal/hijab/zyb
 	triumph_cost = 2
 
 
@@ -1767,9 +1767,9 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	path = /obj/item/clothing/under/roguetown/trou/leather/pontifex
 	triumph_cost = 2
 
-/datum/loadout_item/tri_raneshen_pants
-	name = "Raneshen Pants"
-	path = /obj/item/clothing/under/roguetown/trou/leather/pontifex/raneshen
+/datum/loadout_item/tri_zyb_pants
+	name = "Zybantine Pants"
+	path = /obj/item/clothing/under/roguetown/trou/leather/pontifex/zyb
 	triumph_cost = 2
 
 
@@ -2152,3 +2152,12 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	name = "Vocal Talisman"
 	path = /obj/item/rogue/instrument/vocals
 	triumph_cost = 1
+
+
+// Unique stuff that doesn't quite fit anywhere else.
+
+/datum/loadout_item/kazengunite_smithing_manual
+	name = "Kajutsu no Densho"
+	desc = "A Kazengunite smithing manual. Unlocks kazengunite armor and weapon recipes at the anvil when read — requires knowledge of Kazengunese. "
+	path = /obj/item/book/granter/trait/kazengunite_smith
+	triumph_cost = 3
