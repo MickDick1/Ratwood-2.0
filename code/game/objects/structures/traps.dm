@@ -720,7 +720,6 @@
 	if(!T || !istype(T, /turf/open/floor/rogue))
 		return
 
-	var/area/center_area = get_area(T) // get the area before we fill with rock wall
 	for(var/obj/structure/closet/I in T) // dump chests/closets
 		I.dump_contents()
 	for(var/obj/structure/handcart/I in T) // dump handcarts
@@ -746,12 +745,13 @@
 			L.apply_damage(90, BRUTE, def_zone)
 			L.Paralyze(80)
 
+	var/area/center_area = get_area(T) // get the area before we fill with rock wall
 	var/turf/X = T.PlaceOnTop(respawn_rock)
 	if(!X)
 		return
 	playsound(src, 'sound/misc/meteorimpact.ogg', 200, TRUE)
 	if(!triggered_by_neighbor)
-		X.loud_message("Loud rocks falling can be heard")
+		X.loud_message("The ground shakes, and falling rocks echo", hearing_distance = 14)
 	var/trigger_sfx = TRUE
 	for(var/obj/structure/trap/mine_collapse/other_mineshafts in range(2, src))
 		if(src == other_mineshafts)
