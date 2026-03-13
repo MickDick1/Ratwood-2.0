@@ -699,12 +699,12 @@
 	last_trigger = world.time
 
 	var/time_delay
-	if(triggered_by_neighbor) // add between 1 second to 3 second of ticks
-		time_delay = rand(2 SECONDS,4 SECONDS)
+	if(triggered_by_neighbor) // these trigger shorter
+		time_delay = rand(2 SECONDS, 4 SECONDS)
 		var/obj/effect/temp_visual/trap/mine_collapse/right/short/left = new /obj/effect/temp_visual/trap/mine_collapse/left/short(T)
 		var/obj/effect/temp_visual/trap/mine_collapse/right/short/right = new /obj/effect/temp_visual/trap/mine_collapse/right/short(T)
-		if(time_delay > 2 SECONDS && left && right)
-			left.fade_time = right.fade_time = time_delay - 2 SECONDS
+		if(left && right && time_delay > left.duration) // set fade out to disappear when collapse() is called
+			left.fade_time = right.fade_time = time_delay - left.duration
 	else
 		time_delay = 4 SECONDS
 		new /obj/effect/temp_visual/trap/mine_collapse/left(T)
