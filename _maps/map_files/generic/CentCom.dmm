@@ -2494,7 +2494,7 @@
 /turf/open/floor/rogue/cobble/mossy,
 /area/rogue/indoors)
 "kH" = (
-/obj/structure/trap/mine_collapse/salt,
+/obj/structure/mine_collapse/salt,
 /turf/closed/mineral/rogue/salt,
 /area/rogue/dietroyt)
 "kI" = (
@@ -3412,7 +3412,7 @@
 /area/rogue/indoors)
 "pi" = (
 /obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/trap/mine_collapse/salt,
+/obj/structure/mine_collapse/salt,
 /turf/closed/mineral/rogue/salt,
 /area/rogue/dietroyt)
 "pk" = (
@@ -3541,7 +3541,7 @@
 /area/rogue/under/cave/inhumen/wretch/camp)
 "pY" = (
 /obj/effect/decal/cleanable/blood/splatter/walls,
-/obj/structure/trap/mine_collapse/salt,
+/obj/structure/mine_collapse/salt,
 /turf/closed/mineral/rogue/salt,
 /area/rogue/dietroyt)
 "pZ" = (
@@ -4761,8 +4761,8 @@
 /turf/open/floor/rogue/blocks,
 /area/rogue/indoors/banditcamp)
 "wR" = (
-/obj/structure/trap/mine_collapse/salt,
-/obj/structure/trap/mine_collapse/salt,
+/obj/structure/mine_collapse/salt,
+/obj/structure/mine_collapse/salt,
 /turf/closed/mineral/rogue/salt,
 /area/rogue/dietroyt)
 "wS" = (
