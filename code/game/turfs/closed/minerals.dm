@@ -102,40 +102,40 @@
 	..()
 
 /turf/closed/mineral/turf_destruction(damage_flag)
-    if(!(istype(src, /turf/closed)))
-        return
-    if(damage_flag == "stab" || damage_flag == "blunt")
-        if(istype(src, /turf/closed/mineral/rogue))
-            var/turf/T = get_turf(src)
-            if(!locate(/obj/structure/mine_collapse) in T)
-                var/obj/structure/mine_collapse/new_trap = new /obj/structure/mine_collapse(T)
-                new_trap.respawn_rock = src.type
-    if(damage_flag == "blunt")
-        var/obj/item/explo_mineral = mineralType
-        var/explo_mineral_amount = mineralAmt
-        var/obj/item/natural/rock/explo_rock = rockType
-        ScrapeAway()
-        GLOB.mined_resource_loc |= get_turf(src)
-        queue_smooth_neighbors(src)
-        new /obj/item/natural/stone(src)
-        if(prob(30))
-            new /obj/item/natural/stone(src)
-        if (explo_mineral && (explo_mineral_amount > 0))
-            if(prob(33)) //chance to spawn ore directly
-                new explo_mineral(src)
-            if(explo_rock)
-                if(prob(23))
-                    new explo_rock(src)
-            SSblackbox.record_feedback("tally", "ore_mined", explo_mineral_amount, explo_mineral)
-        else
-            return
-    else
-        if(lastminer.goodluck(2) && mineralType)
-    //        to_chat(lastminer, span_notice("Bonus ducks!"))
-            new mineralType(src)
-        gets_drilled(lastminer)
-        queue_smooth_neighbors(src)
-    ..()
+	if(!(istype(src, /turf/closed)))
+		return
+	if(damage_flag == "stab" || damage_flag == "blunt")
+		if(istype(src, /turf/closed/mineral/rogue) || istype(src, /turf/closed/mineral/random/rogue))
+			var/turf/T = get_turf(src)
+			if(!locate(/obj/structure/mine_collapse) in T)
+				var/obj/structure/mine_collapse/new_trap = new /obj/structure/mine_collapse(T)
+				new_trap.respawn_rock = src.type
+	if(damage_flag == "blunt")
+		var/obj/item/explo_mineral = mineralType
+		var/explo_mineral_amount = mineralAmt
+		var/obj/item/natural/rock/explo_rock = rockType
+		ScrapeAway()
+		GLOB.mined_resource_loc |= get_turf(src)
+		queue_smooth_neighbors(src)
+		new /obj/item/natural/stone(src)
+		if(prob(30))
+			new /obj/item/natural/stone(src)
+		if (explo_mineral && (explo_mineral_amount > 0))
+			if(prob(33)) //chance to spawn ore directly
+				new explo_mineral(src)
+			if(explo_rock)
+				if(prob(23))
+					new explo_rock(src)
+			SSblackbox.record_feedback("tally", "ore_mined", explo_mineral_amount, explo_mineral)
+		else
+			return
+	else
+		if(lastminer.goodluck(2) && mineralType)
+	//		to_chat(lastminer, span_notice("Bonus ducks!"))
+			new mineralType(src)
+		gets_drilled(lastminer)
+		queue_smooth_neighbors(src)
+	..()
 
 /turf/closed/mineral/proc/gets_drilled(mob/living/user, triggered_by_explosion = FALSE, give_exp = TRUE)
 	new /obj/item/natural/stone(src)
