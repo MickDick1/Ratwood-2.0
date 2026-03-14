@@ -1,9 +1,11 @@
+#define SUPPORT_BEAM_DISTANCE_CHECK 7 // passive check for any surrounding support beams
+#define SUPPORT_BEAM_ACTIVE_COLLAPSE_CHECK 3 // when there is a active collapse, lower the distance check for support beams
+
 GLOBAL_VAR_INIT(mine_collapse_active, 0)
 
 /obj/structure/mine_collapse
 	name = "mineshaft collapse trigger"
-	icon_state = "nothing"
-	desc = ""
+	desc = "You shouldn't be seeing this, however if you are a mapper, placing this down will respawn a random natural wall rockwall (override via respawn_rock var)"
 	icon = 'icons/obj/hand_of_god_structures.dmi'
 	icon_state = "trap"
 	density = FALSE
@@ -12,19 +14,16 @@ GLOBAL_VAR_INIT(mine_collapse_active, 0)
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	appearance_flags = 0
 	max_integrity = 0
-	bound_width = 128
 	obj_flags = INDESTRUCTIBLE
 	var/last_trigger = 0
 	var/time_between_triggers = 1 MINUTES //takes a minute to recharge
+	var/obj/structure/barricade/support_beam_near = null
 
 	var/turf/closed/respawn_rock = /turf/closed/mineral/random/rogue
 	var/rolling_rocks = FALSE
 
 	var/list/static/whitelist_typecache
 	var/list/static/absorb_rocks_typecache
-
-/obj/structure/mine_collapse/salt
-	respawn_rock = /turf/closed/mineral/rogue/salt
 
 /obj/structure/mine_collapse/Initialize(mapload)
 	. = ..()
@@ -36,27 +35,46 @@ GLOBAL_VAR_INIT(mine_collapse_active, 0)
 	last_trigger = world.time
 
 /obj/structure/mine_collapse/Crossed(atom/movable/AM)
+	. = ..()
 	if(last_trigger + time_between_triggers > world.time)
 		return
 	// only trigger traps with these types
 	if(!is_type_in_typecache(AM, whitelist_typecache))
 		return
 	last_trigger = world.time
-	if(ishuman(AM))
-		var/mob/living/carbon/human/steve = AM
-		if(!prob(4))
-			return
-		var/turf/T = get_turf(src)
-		if(!T || isclosedturf(T))
-			return
-		if(!istype(T, /turf/open/floor/rogue))
-			return
-		to_chat(steve, span_danger("You feel rocks fall from the ceiling!"))
-		trigger_collapse()
+	var/mob/living/carbon/human/steve = AM
+	if(!prob(4))
+		return
+	var/turf/T = get_turf(src)
+	if(!T || isclosedturf(T))
+		return
+	if(!istype(T, /turf/open/floor/rogue/naturalstone))
+		return
+	if(found_near_support_beam(SUPPORT_BEAM_DISTANCE_CHECK))
+		return
+	to_chat(steve, span_danger("You feel rocks fall from the ceiling!"))
+	trigger_collapse()
+
+/obj/structure/mine_collapse/proc/found_near_support_beam(radius)
+	var/turf/center_turf = get_turf(src)
+
+	if(support_beam_near) // check last found support beam
+		if(!QDELETED(support_beam_near) && istype(support_beam_near)) // support beam still exists
+			return TRUE
+		support_beam_near = null
+	if(radius <= 0)
+		support_beam_near = locate(/obj/structure/barricade/mineshaft) in center_turf
+		return support_beam_near && istype(support_beam_near)
+	for(var/turf/checked_turf as anything in RANGE_TURFS(radius, center_turf))
+		var/obj/structure/barricade/mineshaft/support_beam = locate() in checked_turf
+		if(support_beam && istype(support_beam))
+			support_beam_near = support_beam
+			return TRUE
+	return FALSE
 
 /obj/structure/mine_collapse/proc/trigger_collapse(triggered_by_neighbor = FALSE, do_sfx = TRUE)
 	var/turf/T = get_turf(src)
-	if(!T || !istype(T, /turf/open/floor/rogue))
+	if(!T || !istype(T, /turf/open/floor/rogue/naturalstone))
 		return FALSE
 	rolling_rocks = TRUE
 	last_trigger = world.time
@@ -82,9 +100,12 @@ GLOBAL_VAR_INIT(mine_collapse_active, 0)
 	rolling_rocks = FALSE
 	GLOB.mine_collapse_active--
 	var/turf/T = get_turf(src)
-	if(!T || !istype(T, /turf/open/floor/rogue))
+	if(!T || !istype(T, /turf/open/floor/rogue/naturalstone))
 		return
 
+	if(found_near_support_beam(0)) // they managed to put up a support beam in time, abort
+		playsound(src, pick('sound/combat/hits/onwood/fence_hit1.ogg', 'sound/combat/hits/onwood/fence_hit2.ogg', 'sound/combat/hits/onwood/fence_hit3.ogg'), 100, FALSE)
+		return
 	for(var/obj/structure/closet/I in T) // dump chests/closets
 		I.dump_contents()
 	for(var/obj/structure/handcart/I in T) // dump handcarts
@@ -117,7 +138,7 @@ GLOBAL_VAR_INIT(mine_collapse_active, 0)
 	playsound(src, 'sound/misc/meteorimpact.ogg', 200, TRUE)
 	if(!triggered_by_neighbor)
 		X.loud_message("The ground shakes, and falling rocks echo", hearing_distance = 14)
-	if(GLOB.mine_collapse_active > 5)
+	if(GLOB.mine_collapse_active > 7)
 		return
 	var/trigger_sfx = TRUE
 	for(var/obj/structure/mine_collapse/other_mineshafts in range(2, src))
@@ -128,6 +149,8 @@ GLOBAL_VAR_INIT(mine_collapse_active, 0)
 		if(isclosedturf(other_mineshafts))
 			continue
 		if(center_area != get_area(other_mineshafts))
+			continue
+		if(other_mineshafts.found_near_support_beam(SUPPORT_BEAM_ACTIVE_COLLAPSE_CHECK))
 			continue
 		if(other_mineshafts.trigger_collapse(TRUE, trigger_sfx))
 			trigger_sfx = FALSE
@@ -154,3 +177,6 @@ GLOBAL_VAR_INIT(mine_collapse_active, 0)
 /obj/effect/temp_visual/trap/mine_collapse/right/short
 	duration = 2 SECONDS
 	fade_time = 0 SECONDS
+
+#undef SUPPORT_BEAM_DISTANCE_CHECK
+#undef SUPPORT_BEAM_ACTIVE_COLLAPSE_CHECK
