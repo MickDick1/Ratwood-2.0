@@ -42,16 +42,14 @@ GLOBAL_VAR_INIT(mine_collapse_active, 0)
 	if(!is_type_in_typecache(AM, whitelist_typecache))
 		return
 	last_trigger = world.time
-	var/mob/living/carbon/human/steve = AM
 	if(!prob(4))
 		return
 	var/turf/T = get_turf(src)
-	if(!T || isclosedturf(T))
-		return
-	if(!istype(T, /turf/open/floor/rogue/naturalstone))
+	if(!T || !istype(T, /turf/open/floor/rogue/naturalstone))
 		return
 	if(found_near_support_beam(SUPPORT_BEAM_DISTANCE_CHECK))
 		return
+	var/mob/living/carbon/human/steve = AM
 	to_chat(steve, span_danger("You feel rocks fall from the ceiling!"))
 	trigger_collapse()
 
@@ -62,6 +60,7 @@ GLOBAL_VAR_INIT(mine_collapse_active, 0)
 		if(!QDELETED(support_beam_near) && istype(support_beam_near)) // support beam still exists
 			return TRUE
 		support_beam_near = null
+
 	if(radius <= 0)
 		support_beam_near = locate(/obj/structure/barricade/mineshaft) in center_turf
 		return support_beam_near && istype(support_beam_near)
