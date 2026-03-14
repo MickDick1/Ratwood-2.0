@@ -108,6 +108,11 @@
 		var/obj/item/explo_mineral = mineralType
 		var/explo_mineral_amount = mineralAmt
 		var/obj/item/natural/rock/explo_rock = rockType
+		if(istype(src, /turf/closed/mineral/rogue))
+			var/turf/T = get_turf(src)
+			if(!locate(/obj/structure/mine_collapse) in T)
+				var/obj/structure/mine_collapse/new_trap = new /obj/structure/mine_collapse(T)
+				new_trap.respawn_rock = src.type
 		ScrapeAway()
 		GLOB.mined_resource_loc |= get_turf(src)
 		queue_smooth_neighbors(src)
