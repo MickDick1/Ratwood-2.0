@@ -642,3 +642,22 @@
 /obj/item/clothing/suit/roguetown/armor/plate/scale/inqcoat/armored/ComponentInitialize()
 	AddComponent(/datum/component/item_equipped_movement_rustle, SFX_PLATE_STEP)
 	return
+
+
+//----------------- INFAREDBARON SPRITEWORK/ARMOR.DM ---------------------
+/obj/item/clothing/suit/roguetown/armor/plate/citywatch
+	slot_flags = ITEM_SLOT_ARMOR
+	name = "citywatch armor"
+	desc = "Heavy, well worn armour. Incredibly resilient to all forms of damage. Issued to the Citywatch."
+	icon = 'icons/roguetown/clothing/licensed-infraredbaron/armor.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/licensed-infraredbaron/onmob/armor.dmi'
+	icon_state = "citywatch"
+	item_state = "citywatch"
+	blocksound = PLATEHIT
+	body_parts_covered = CHEST|GROIN|VITALS
+	max_integrity = ARMOR_INT_CHEST_PLATE_STEEL
+	armor_class = ARMOR_CLASS_MEDIUM
+	smelt_bar_num = 2
+	sewrepair = FALSE
+	allowed_sex = list(MALE, FEMALE)
+	equip_delay_self = 4 SECONDS

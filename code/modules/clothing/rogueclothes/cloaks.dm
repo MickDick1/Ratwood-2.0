@@ -2063,3 +2063,24 @@
 	icon_state = "duelistcape"
 	item_state = "duelistcape"
 	color = null
+
+/obj/item/clothing/cloak/citywatch
+	name = "citywatch cape"
+	desc = "A handsome cloak, denoting a certain cosmipolitan authority"
+	icon = 'icons/roguetown/clothing/licensed-infraredbaron/cloaks.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/licensed-infraredbaron/onmob/cloaks.dmi'
+	icon_state = "citywatch_cape"
+	item_state = "citywatch_cape"
+	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
+
+/obj/item/clothing/cloak/citywatch/ComponentInitialize()
+	. = ..()
+	AddComponent(/datum/component/storage/concrete/roguetown/cloak)
+
+/obj/item/clothing/cloak/citywatch/dropped(mob/living/carbon/human/user)
+	..()
+	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
+	if(STR)
+		var/list/things = STR.contents()
+		for(var/obj/item/I in things)
+			STR.remove_from_storage(I, get_turf(src))

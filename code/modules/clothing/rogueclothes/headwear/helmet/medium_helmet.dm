@@ -610,3 +610,18 @@
 	max_integrity = 250
 	anvilrepair = TRUE
 	smeltresult = /obj/item/ingot/iron
+
+
+	//----------------- INFAREDBARON/HATS.DM ---------------------
+/obj/item/clothing/head/roguetown/helmet/citywatch
+	name = "city watch helmet"
+	desc = "A heavy helmet. Notably resilient. Issued to the Citywatch."
+	icon = 'icons/roguetown/clothing/licensed-infraredbaron/head.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/licensed-infraredbaron/onmob/armor.dmi'
+	icon_state = "citywatch_helmet"
+	item_state = "citywatch_helmet"
+	armor_class = ARMOR_CLASS_MEDIUM
+	body_parts_covered = HEAD|HAIR|EARS
+	flags_inv = HIDEHAIR
+	smeltresult = /obj/item/ingot/steel
+	emote_environment = 3
