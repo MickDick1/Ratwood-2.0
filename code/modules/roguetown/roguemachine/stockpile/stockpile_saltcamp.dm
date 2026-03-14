@@ -1,6 +1,8 @@
 #define SALT_CHANCE_MAX 200
 #define SALT_CHANCE_PERCENT (100/SALT_CHANCE_MAX)
 
+GLOBAL_LIST_EMPTY(saltmineticketmachines)
+
 /obj/structure/roguemachine/stockpile_saltcamp
 	name = "XYLIX'S PENANCE"
 	desc = "Xylix determines if we shall be granted freedom, or ignored for eternity."
@@ -9,6 +11,7 @@
 	density = FALSE
 	blade_dulling = DULLING_BASH
 	pixel_y = 32
+	obj_flags = INDESTRUCTIBLE
 
 	var/list/salt_accounts = list()
 	var/salt_spent_on_gambling = 0
@@ -197,6 +200,65 @@
 			say("Salt has been deposited. Your chances are now [get_odds_of_winning(user)]% of winnings.")
 		playsound(loc, 'sound/misc/hiss.ogg', 100, FALSE, -1)
 		playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
+
+/obj/structure/roguemachine/ticket_master
+	name = "Ticket Slide"
+	desc = "Only ticket winners may get to ride the sorrid slide."
+	icon = 'icons/roguetown/misc/machines.dmi'
+	icon_state = "headeater"
+	density = FALSE
+	blade_dulling = DULLING_BASH
+	pixel_y = 32
+	obj_flags = INDESTRUCTIBLE
+	var/out_of_service = FALSE
+	var/obj/structure/roguemachine/ticket_master/slide_other_end = null
+	var/gid
+
+/obj/structure/roguemachine/ticket_master/Initialize(mapload)
+	. = ..()
+	GLOB.saltmineticketmachines += src
+
+/obj/structure/roguemachine/ticket_master/Destroy()
+	GLOB.saltmineticketmachines -= src
+	if(!out_of_service && slide_other_end)
+		slide_other_end.slide_other_end = null
+		slide_other_end.out_of_service = TRUE
+	..()
+
+/obj/structure/roguemachine/ticket_master/attack_hand(mob/living/user, menu_name)
+	. = ..()
+	if(.)
+		return
+	if(out_of_service) // aka the mapper forgot to link the other machine
+		say("Sorry, slide out of service!")
+	else
+		say("You must first earn your freedom with the ticket.")
+
+/obj/structure/roguemachine/ticket_master/attackby(obj/item/P, mob/user, params)
+	if(!out_of_service && !slide_other_end)
+		for(var/obj/structure/roguemachine/ticket_master/O in GLOB.saltmineticketmachines)
+			if(O.gid == gid && src != O)
+				slide_other_end = O
+				O.slide_other_end = src
+		if(!slide_other_end)
+			out_of_service = TRUE
+	if(out_of_service) // aka the mapper forgot to link the other machine
+		say("Sorry, slide out of service!")
+		return ..()
+	if(ishuman(user))
+		if(istype(P, /obj/item/detroyt_toll))
+			if(user.buckled) // don't stay remote-buckled
+				user.buckled.unbuckle_mob(user, TRUE)
+			var/turf/T = get_turf(slide_other_end)
+			if(T)
+				playsound(src, 'sound/misc/disposalflush.ogg', 50, FALSE, -1)
+				playsound(slide_other_end, 'sound/misc/disposalflush.ogg', 50, FALSE, -1)
+				do_teleport(user, T, channel = TELEPORT_CHANNEL_FREE)
+				to_chat(user, span_danger("You are instantly sucked into the slide!"))
+		else
+			say("You must first earn your freedom with the ticket.")
+		return FALSE
+	. = ..()
 
 #undef SALT_CHANCE_MAX
 #undef SALT_CHANCE_PERCENT
