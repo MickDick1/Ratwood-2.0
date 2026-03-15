@@ -82,14 +82,12 @@ GLOBAL_VAR_INIT(mine_collapse_active, 0)
 	var/time_delay
 	if(triggered_by_neighbor) // these trigger shorter
 		time_delay = rand(2 SECONDS, 4 SECONDS)
-		var/obj/effect/temp_visual/trap/mine_collapse/right/short/left = new /obj/effect/temp_visual/trap/mine_collapse/left/short(T)
-		var/obj/effect/temp_visual/trap/mine_collapse/right/short/right = new /obj/effect/temp_visual/trap/mine_collapse/right/short(T)
-		if(left && right && time_delay > left.duration) // set fade out to disappear when collapse() is called
-			left.fade_time = right.fade_time = time_delay - left.duration
+		var/obj/effect/temp_visual/trap/mine_collapse/short/warning = new /obj/effect/temp_visual/trap/mine_collapse/short(T)
+		if(warning && time_delay > warning.duration) // set fade out to disappear when collapse() is called
+			warning.fade_time = time_delay - warning.duration
 	else
 		time_delay = 4 SECONDS
-		new /obj/effect/temp_visual/trap/mine_collapse/left(T)
-		new /obj/effect/temp_visual/trap/mine_collapse/right(T)
+		new /obj/effect/temp_visual/trap/mine_collapse(T)
 	addtimer(CALLBACK(src, PROC_REF(collapse), triggered_by_neighbor), wait = time_delay)
 	if(do_sfx)
 		playsound(src, 'sound/misc/cavein.ogg', 200, TRUE)
@@ -158,22 +156,12 @@ GLOBAL_VAR_INIT(mine_collapse_active, 0)
 
 /obj/effect/temp_visual/trap/mine_collapse
 	icon = 'icons/effects/effects.dmi'
-	icon_state = "trap"
+	icon_state = "trapdouble"
 	light_outer_range = 0 // don't spam SSlighting
 	duration = 3 SECONDS
 	fade_time = 1 SECONDS
 
-/obj/effect/temp_visual/trap/mine_collapse/left
-	pixel_x = -8
-
-/obj/effect/temp_visual/trap/mine_collapse/right
-	pixel_x = 8
-
-/obj/effect/temp_visual/trap/mine_collapse/left/short
-	duration = 2 SECONDS
-	fade_time = 0 SECONDS
-
-/obj/effect/temp_visual/trap/mine_collapse/right/short
+/obj/effect/temp_visual/trap/mine_collapse/short
 	duration = 2 SECONDS
 	fade_time = 0 SECONDS
 
