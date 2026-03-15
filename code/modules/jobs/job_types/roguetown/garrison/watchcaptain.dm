@@ -46,7 +46,8 @@
 
 /datum/advclass/watchcaptain/watchcaptain
 	name = "Watch Captain"
-	tutorial = "You are a not just anybody but the Captain of the City's Watch. While you may have started as some peasant or mercenary, you have advanced through the ranks to that of someone who commands respect and wields it. Take up arms, Watch Captain!"
+	tutorial = "You are the most experienced of the City Watch, leading the city watchmen in maintaining order in hightown and attending to threats and crimes below the keep's attention. \
+				See to those brave city watchmen under your command and fill in the gaps knights leave in their wake. Obey the orders of the Knight-Captain and the Crown."
 	outfit = /datum/outfit/job/roguetown/watchcaptain/watchcaptain
 
 	category_tags = list(CTAG_SHERIFF)

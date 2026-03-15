@@ -118,7 +118,7 @@
 				l_hand = /obj/item/rogueweapon/greataxe/steel
 			if("Javelins & Shield")
 				beltr = /obj/item/quiver/javelin/steel
-				backl = /obj/item/rogueweapon/shield/tower/metal
+				backl = /obj/item/rogueweapon/shield/tower/
 			if("Blackhorn Longbow")
 				beltr = /obj/item/quiver/arrows
 				backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/longbow/warden
