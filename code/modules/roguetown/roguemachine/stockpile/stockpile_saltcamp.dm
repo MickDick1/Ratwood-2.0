@@ -203,7 +203,7 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 
 /obj/structure/roguemachine/ticket_master
 	name = "Ticket Slide"
-	desc = "Only ticket winners may get to ride the sorrid slide."
+	desc = "Only ticket winners may get to ride the sorrid slide to freedom. Looks like it will strip whoever passes through."
 	icon = 'icons/roguetown/misc/machines.dmi'
 	icon_state = "headeater"
 	density = FALSE
@@ -246,15 +246,28 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 		say("Sorry, slide out of service!")
 		return ..()
 	if(ishuman(user))
+		var/mob/living/carbon/human/winner = user
 		if(istype(P, /obj/item/detroyt_toll))
-			if(user.buckled) // don't stay remote-buckled
-				user.buckled.unbuckle_mob(user, TRUE)
+			if(winner.buckled) // don't stay remote-buckled
+				winner.buckled.unbuckle_mob(winner, TRUE)
 			var/turf/T = get_turf(slide_other_end)
 			if(T)
 				playsound(src, 'sound/misc/disposalflush.ogg', 50, FALSE, -1)
 				playsound(slide_other_end, 'sound/misc/disposalflush.ogg', 50, FALSE, -1)
-				do_teleport(user, T, channel = TELEPORT_CHANNEL_FREE)
-				to_chat(user, span_danger("You are instantly sucked into the slide!"))
+				to_chat(winner, span_danger("You are instantly sucked into the slide!"))
+				for(var/obj/item/W in winner)
+					if(W == P) // don't drop ticket
+						continue
+					if(istype(W, /obj/item/undies)) // let them keep their modesty
+						continue
+					if(HAS_TRAIT(W, TRAIT_NO_SELF_UNEQUIP) || HAS_TRAIT(W, TRAIT_NODROP) || HAS_TRAIT(W, CURSED_ITEM_TRAIT))
+						continue
+					winner.dropItemToGround(W)
+				winner.regenerate_icons()
+				if(do_teleport(winner, T, channel = TELEPORT_CHANNEL_FREE))
+					winner.Paralyze(5 SECONDS, ignore_canstun = TRUE)
+				else
+					to_chat(winner, span_danger("Something stops you from being pulled into the slide!"))
 		else
 			say("You must first earn your freedom with the ticket.")
 		return FALSE
