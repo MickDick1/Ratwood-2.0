@@ -365,7 +365,7 @@
 		),
 		"Blacksmith Set" = list(
 			/obj/item/rogueweapon/hammer/copper,
-			/obj/item/rogueweapon/tongs/bronze,
+			/obj/item/rogueweapon/tongs,
 			/obj/item/rogueweapon/huntingknife/bronze,
 			/obj/item/ingot/iron,
 			/obj/item/ingot/iron,
@@ -442,7 +442,7 @@
 						H.AddSpell(new item_path)
 					else
 						// Handle regular items - add to special_items with actual item name
-						var/item_name = initial(item_path.name)
+						var/item_name = initial(item_path:name)
 						var/unique_key = "[item_name] ([profession_set_name] [counter])"
 						H.mind.special_items[unique_key] = item_path
 					counter++
@@ -455,7 +455,7 @@
 			var/combo_list = daily_tools_combos[combo_name]
 			var/counter = 1
 			for(var/item_path in combo_list)
-				var/item_name = initial(item_path.name)
+				var/item_name = initial(item_path:name)
 				var/unique_key = "[item_name] ([combo_name] [counter])"
 				H.mind.special_items[unique_key] = item_path
 				counter++
