@@ -849,6 +849,12 @@
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 3
 
+/obj/item/clothing/cloak/darkcloak/bear/wardenmaster
+	name = "Warden trophy-cloak"
+	desc = "Made from the mightiest, most ferocious black direbear pelt. The mark of a distinguished huntsman."
+	sellprice = 80
+	color = "#99a39d"
+
 /obj/item/clothing/cloak/apron/maid
 	name = "maid apron"
 	desc = "The frilly apron of a housemaster. It has pockets to store small things."

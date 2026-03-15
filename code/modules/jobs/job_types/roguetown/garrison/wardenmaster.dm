@@ -33,15 +33,14 @@
 //All skills/traits are on the loadouts. All are identical. Welcome to the stupid way we have to make sub-classes...
 /datum/outfit/job/roguetown/wardenmaster
 	head = /obj/item/clothing/head/roguetown/helmet/bascinet/antler
-	mask = /obj/item/clothing/head/roguetown/roguehood/warden/antler
 	neck = /obj/item/clothing/neck/roguetown/bevor
-	cloak = /obj/item/clothing/cloak/wardencloak
+	cloak = /obj/item/clothing/cloak/darkcloak/bear/wardenmaster
 	armor = /obj/item/clothing/suit/roguetown/armor/leather/studded/warden/upgraded
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy
-	wrists = /obj/item/clothing/wrists/roguetown/splintarms
+	wrists = /obj/item/clothing/wrists/roguetown/bracers
 	gloves = /obj/item/clothing/gloves/roguetown/plate/iron
 	belt = /obj/item/storage/belt/rogue/leather
-	pants = /obj/item/clothing/under/roguetown/splintlegs
+	pants = /obj/item/clothing/under/roguetown/chainlegs
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather/reinforced
 	wrists = /obj/item/clothing/wrists/roguetown/bracers
 	backr = /obj/item/storage/backpack/rogue/satchel
