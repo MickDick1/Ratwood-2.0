@@ -372,6 +372,12 @@
 	max_integrity = 9000
 	damage_deflection = 40
 
+/obj/structure/bars/nopassthrow
+	desc = "The bars are too thick to throw anything through the gaps."
+
+/obj/structure/bars/nopassthrow/CanPass(atom/movable/mover, turf/target)
+	return isobserver(mover)
+
 /*
 /obj/structure/bars/CheckExit(atom/movable/O, turf/target)
 	if(istype(O) && (O.pass_flags & PASSGRILLE))
