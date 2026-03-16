@@ -60,6 +60,10 @@
 				else if(!W.climbable)
 					success = FALSE
 					return success
+			cont = Tstep.GetAllContents(/obj/structure/bars/nopassthrow)
+			for(var/obj/structure/bars/nopassthrow/bars in cont)
+				success = FALSE
+				return success
 		else
 			success = FALSE
 			return success
