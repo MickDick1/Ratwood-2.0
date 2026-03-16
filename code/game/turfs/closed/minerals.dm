@@ -107,7 +107,7 @@
 	if(damage_flag == "stab" || damage_flag == "blunt")
 		if(istype(src, /turf/closed/mineral/rogue) || istype(src, /turf/closed/mineral/random/rogue)) // if a natural stone wall was destroyed, spawn a trigger trap for mine shaft collapsing
 			var/turf/T = get_turf(src)
-			if(!locate(/obj/structure/mine_collapse) in T) // there doesn't exist a trap here, add to turf
+			if(!isnull(T) && !locate(/obj/structure/mine_collapse) in T) // there isn't a trap here, add to turf
 				var/obj/structure/mine_collapse/new_trap = new /obj/structure/mine_collapse(T)
 				if(new_trap) // to any future coders - do not randomize this type, it'll break the salt mines prison camp and let them mine iron, which'll let them break out too easily
 					new_trap.respawn_rock = src.type
