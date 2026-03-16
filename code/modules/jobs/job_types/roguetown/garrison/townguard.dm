@@ -68,7 +68,7 @@
 	you patrol the city streets, on the look out for crime and disorder. \
 	Armed with chains and a trusty beating stick, you are charged with catching \
 	thieves, vagrants and troublemakers, confiscating illicit goods, and administering swift and orderly justice.\
-	While you may be called upon as members of the garrison by the Marshal and Crown, your true loyalty resides with the Watch Captain and the city. \"
+	While you may be called upon as members of the garrison by the Marshal and Crown, your true loyalty resides with the Watch Captain and the city."
 	outfit = /datum/outfit/job/roguetown/guardsman/cityguard
 
 	category_tags = list(CTAG_WATCH)
@@ -105,7 +105,7 @@
 	..()
 	H.adjust_blindness(-3)
 	if(H.mind)
-		var/weapons = list("Stunmace & Shield","Polehammer", "Maul - +STR/CON, -SPD/PER", "Crossbow - +SPD/PER, -STR/CON")
+		var/weapons = list("Stunmace & Shield","Polehammer", "Maul - +STR/CON/INT, -SPD/PER", "Crossbow - +SPD/PER, -STR/CON")
 		var/weapon_choice = input(H, "Choose your weapon.", "TAKE UP ARMS") as anything in weapons
 		H.set_blindness(0)
 		switch(weapon_choice)
