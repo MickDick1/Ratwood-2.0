@@ -50,6 +50,10 @@
 	for(var/i = 0, i <= dist, i++)
 		last_dir = get_dir(last_step, Tt)
 		var/turf/Tstep = get_step(last_step, last_dir)
+		var/area/Tarea = get_area(Tstep)
+		if(Tarea?.noteleport)
+			success = FALSE
+			return success
 		if(!Tstep.density)
 			success = TRUE
 			var/list/cont = Tstep.GetAllContents(/obj/structure/roguewindow)
@@ -60,10 +64,6 @@
 				else if(!W.climbable)
 					success = FALSE
 					return success
-			cont = Tstep.GetAllContents(/obj/structure/bars/nopassthrow)
-			for(var/obj/structure/bars/nopassthrow/bars in cont)
-				success = FALSE
-				return success
 		else
 			success = FALSE
 			return success
