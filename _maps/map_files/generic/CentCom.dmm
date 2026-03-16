@@ -1585,6 +1585,10 @@
 	},
 /turf/open/floor/rogue/cobblerock,
 /area/rogue/outdoors/banditcamp)
+"gj" = (
+/obj/item/reagent_containers/glass/bowl/aalloy,
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/dietroyt)
 "gl" = (
 /mob/living/simple_animal/hostile/retaliate/smallrat,
 /turf/open/floor/rogue/naturalstone,
@@ -2580,6 +2584,13 @@
 /area/rogue/dietroyt)
 "lh" = (
 /obj/structure/fermentation_keg/random/water,
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/dietroyt)
+"li" = (
+/obj/structure/fluff/traveltile{
+	aportalgoesto = "EscapeDieTroyt2";
+	aportalid = "EscapeDieTroyt1"
+	},
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/dietroyt)
 "ln" = (
@@ -5057,6 +5068,12 @@
 	},
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/outdoors/cave/inhumen/wretch/ghrotto)
+"yw" = (
+/obj/structure/bars/nopassthrow{
+	max_integrity = 2000
+	},
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/dietroyt)
 "yx" = (
 /obj/structure/stairs/stone{
 	dir = 4
@@ -8318,6 +8335,12 @@
 /obj/structure/vine,
 /turf/open/water/bath,
 /area/rogue/outdoors/cave/inhumen/wretch/ghrotto)
+"Og" = (
+/obj/structure/roguemachine/ticket_master{
+	gid = "Penal_Escape"
+	},
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/dietroyt)
 "Oh" = (
 /obj/structure/bookcase/random{
 	density = 0;
@@ -8375,6 +8398,9 @@
 /obj/item/clothing/neck/roguetown/cursed_collar,
 /obj/item/clothing/neck/roguetown/cursed_collar,
 /obj/item/clothing/neck/roguetown/cursed_collar,
+/obj/item/clothing/gloves/roguetown/nomagic,
+/obj/item/clothing/gloves/roguetown/nomagic,
+/obj/item/clothing/gloves/roguetown/nomagic,
 /turf/open/floor/rogue/blocks,
 /area/rogue/dietroyt)
 "Op" = (
@@ -16241,7 +16267,7 @@ NV
 or
 Ai
 Ai
-NV
+Og
 NV
 NV
 NV
@@ -16648,7 +16674,7 @@ vA
 il
 Gz
 NV
-NV
+gj
 NV
 il
 ZH
@@ -16747,11 +16773,11 @@ rQ
 "}
 (48,1,1) = {"
 oL
-Ci
-Ci
-Ci
-Ci
-NV
+sa
+sa
+sa
+sa
+sa
 NV
 NV
 RW
@@ -16877,11 +16903,11 @@ rQ
 "}
 (49,1,1) = {"
 oL
-Ci
-Ci
-Ci
-Ci
-NV
+yw
+yw
+yw
+sa
+sa
 NV
 NV
 zS
@@ -17007,11 +17033,11 @@ rQ
 "}
 (50,1,1) = {"
 oL
-Ci
-Ci
-Ci
-Ci
+li
 NV
+yw
+sa
+sa
 NV
 NV
 NC
@@ -17137,11 +17163,11 @@ rQ
 "}
 (51,1,1) = {"
 oL
-Ci
-Ci
-Ci
-Ci
 NV
+NV
+yw
+sa
+sa
 NV
 il
 RW
@@ -17267,11 +17293,11 @@ rQ
 "}
 (52,1,1) = {"
 oL
-Ci
-Ci
-Ci
-Ci
+Og
 NV
+yw
+sa
+sa
 NV
 NV
 RW
@@ -17397,11 +17423,11 @@ JY
 "}
 (53,1,1) = {"
 oL
-Ci
-Ci
-Ci
-Ci
-NV
+yw
+yw
+yw
+sa
+sa
 NV
 NV
 NV
@@ -17527,11 +17553,11 @@ JY
 "}
 (54,1,1) = {"
 oL
-Ci
-Ci
-Ci
-Ci
-NV
+sa
+sa
+sa
+sa
+sa
 NV
 NV
 NV
@@ -17657,11 +17683,11 @@ JY
 "}
 (55,1,1) = {"
 oL
-Ci
-Ci
-Ci
-Ci
-NV
+sa
+sa
+sa
+sa
+sa
 NV
 NV
 il
