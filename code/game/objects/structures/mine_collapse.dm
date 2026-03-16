@@ -19,7 +19,7 @@ GLOBAL_VAR_INIT(mine_collapse_active, 0)
 	var/time_between_triggers = 1 MINUTES //takes a minute to recharge
 	var/obj/structure/barricade/support_beam_near = null
 
-	var/turf/closed/respawn_rock = /turf/closed/mineral/random/rogue
+	var/turf/closed/respawn_rock = /turf/closed/mineral/rogue
 	var/rolling_rocks = FALSE
 
 	var/list/static/whitelist_typecache
