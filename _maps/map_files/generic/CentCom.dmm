@@ -2592,7 +2592,7 @@
 	aportalid = "EscapeDieTroyt1"
 	},
 /turf/open/floor/rogue/naturalstone,
-/area/rogue/nomagicdietroyt)
+/area/rogue/dietroyt/nomagic)
 "ln" = (
 /obj/structure/bars,
 /turf/open/floor/rogue/cobble,
@@ -3152,7 +3152,7 @@
 /area/rogue/dietroyt)
 "od" = (
 /turf/open/floor/rogue/naturalstone,
-/area/rogue/nomagicdietroyt)
+/area/rogue/dietroyt/nomagic)
 "oe" = (
 /obj/machinery/light/rogue/wallfire/candle/l,
 /turf/open/floor/rogue/cobblerock,
@@ -5076,7 +5076,7 @@
 	max_integrity = 2000
 	},
 /turf/open/floor/rogue/naturalstone,
-/area/rogue/nomagicdietroyt)
+/area/rogue/dietroyt/nomagic)
 "yx" = (
 /obj/structure/stairs/stone{
 	dir = 4
@@ -8067,7 +8067,7 @@
 	gid = "Penal_Escape"
 	},
 /turf/open/floor/rogue/naturalstone,
-/area/rogue/nomagicdietroyt)
+/area/rogue/dietroyt/nomagic)
 "MS" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/rogue/cobble/mossy,
