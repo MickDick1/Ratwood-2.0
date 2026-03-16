@@ -9,7 +9,7 @@
 	sleeved = 'icons/roguetown/clothing/onmob/rings.dmi'
 	sleevetype = "shirt"
 	icon_state = ""
-	slot_flags = ITEM_SLOT_RING
+	slot_flags = ITEM_SLOT_RING|ITEM_SLOT_HANDS
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	anvilrepair = /datum/skill/craft/armorsmithing
 	experimental_inhand = FALSE
@@ -132,7 +132,7 @@
 
 /obj/item/clothing/ring/active/nomag/activate(mob/user)
 	. = ..()
-	AddComponent(/datum/component/anti_magic, TRUE, FALSE, FALSE, ITEM_SLOT_RING, INFINITY, FALSE)
+	AddComponent(/datum/component/anti_magic, TRUE, FALSE, FALSE, ITEM_SLOT_RING, ITEM_SLOT_HANDS, INFINITY, FALSE)
 
 /obj/item/clothing/ring/active/nomag/demagicify()
 	. = ..()

@@ -9,7 +9,7 @@
 	possible_item_intents = list(INTENT_GENERIC)
 	force = 10
 	throwforce = 10
-	slot_flags = ITEM_SLOT_MOUTH|ITEM_SLOT_HIP|ITEM_SLOT_NECK|ITEM_SLOT_RING
+	slot_flags = ITEM_SLOT_MOUTH|ITEM_SLOT_HIP|ITEM_SLOT_NECK|ITEM_SLOT_RING|ITEM_SLOT_HANDS
 	obj_flags = null
 	icon = 'icons/roguetown/items/misc.dmi'
 	w_class = WEIGHT_CLASS_SMALL
@@ -42,6 +42,35 @@
 		qdel(src)
 		return FALSE
 	. = ..()
+
+/obj/item/mattcoin/attack_self(mob/user)
+	. = ..()
+	(mob/user)
+	if(overlays.len)
+		..()
+		return
+
+	var/icon/J = new('icons\roguetown\clothing\rings.dmi')
+	var/list/istates = J.IconStates()
+	for(var/icon_s in istates)
+		if(!findtext(icon_s, "[icon_state]_"))
+			istates.Remove(icon_s)
+			continue
+		istates.Add(replacetextEx(icon_s, "[icon_state]_", ""))
+		istates.Remove(icon_s)
+
+	if(!istates.len)
+		..()
+		return
+
+	var/picked_name = input(user, "Choose a Disguise", "ROGUETOWN", name) as null|anything in sortList(istates)
+	if(!picked_name)
+		picked_name = "none"
+	var/mutable_appearance/M = mutable_appearance('icons\roguetown\clothing\rings.dmi', "[icon_state]_[picked_name]")
+	M.appearance_flags = NO_CLIENT_COLOR
+	add_overlay(M)
+
+	update_icon()
 
 /obj/item/mattcoin/attack_right(mob/living/carbon/human/user)
 	user.changeNext_move(CLICK_CD_INTENTCAP)
