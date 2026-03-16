@@ -254,7 +254,6 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 			if(T)
 				playsound(src, 'sound/misc/disposalflush.ogg', 50, FALSE, -1)
 				playsound(slide_other_end, 'sound/misc/disposalflush.ogg', 50, FALSE, -1)
-				to_chat(winner, span_danger("You are instantly sucked into the slide!"))
 				for(var/obj/item/W in winner)
 					if(W == P) // don't drop ticket
 						continue
@@ -264,8 +263,9 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 						continue
 					winner.dropItemToGround(W)
 				winner.regenerate_icons()
-				if(do_teleport(winner, T, channel = TELEPORT_CHANNEL_FREE))
+				if(do_teleport(winner, T, channel = TELEPORT_CHANNEL_FREE, forced = TRUE))
 					winner.Paralyze(5 SECONDS, ignore_canstun = TRUE)
+					to_chat(winner, span_danger("You are instantly sucked into the slide!"))
 				else
 					to_chat(winner, span_danger("Something stops you from being pulled into the slide!"))
 		else
