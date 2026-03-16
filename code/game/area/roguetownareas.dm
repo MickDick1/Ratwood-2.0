@@ -526,6 +526,24 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	first_time_text = "DIE TROYT"
 	detail_text = DETAIL_TEXT_DIETROYT
 
+area/rogue/nomagicdietroyt
+	name = "die troyt"
+	icon_state = "cell"
+	ambientsounds = AMB_CAVEWATER
+	ambientnight = AMB_CAVEWATER
+	spookysounds = SPOOKY_CAVE
+	spookynight = SPOOKY_CAVE
+	droning_sound = 'sound/music/area/underdark.ogg'
+	droning_sound_dusk = null
+	droning_sound_night = null
+	cell_area = TRUE
+	town_area = TRUE
+	no_special_item_retrieval = TRUE
+	deathsight_message = "the drone of pickaxes and penance"
+	first_time_text = "DIE TROYT"
+	detail_text = DETAIL_TEXT_DIETROYT
+	noteleport = TRUE
+
 /area/rogue/indoors/town/tavern
 	name = "tavern"
 	icon_state = "tavern"
