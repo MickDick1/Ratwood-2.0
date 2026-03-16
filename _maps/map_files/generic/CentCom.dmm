@@ -2592,7 +2592,7 @@
 	aportalid = "EscapeDieTroyt1"
 	},
 /turf/open/floor/rogue/naturalstone,
-/area/rogue/dietroyt)
+/area/rogue/nomagicdietroyt)
 "ln" = (
 /obj/structure/bars,
 /turf/open/floor/rogue/cobble,
@@ -3150,6 +3150,9 @@
 "oc" = (
 /turf/open/water/swamp,
 /area/rogue/dietroyt)
+"od" = (
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/nomagicdietroyt)
 "oe" = (
 /obj/machinery/light/rogue/wallfire/candle/l,
 /turf/open/floor/rogue/cobblerock,
@@ -5073,7 +5076,7 @@
 	max_integrity = 2000
 	},
 /turf/open/floor/rogue/naturalstone,
-/area/rogue/dietroyt)
+/area/rogue/nomagicdietroyt)
 "yx" = (
 /obj/structure/stairs/stone{
 	dir = 4
@@ -8059,6 +8062,12 @@
 	},
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors/ravoxarena)
+"MQ" = (
+/obj/structure/roguemachine/ticket_master{
+	gid = "Penal_Escape"
+	},
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/nomagicdietroyt)
 "MS" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/rogue/cobble/mossy,
@@ -17034,7 +17043,7 @@ rQ
 (50,1,1) = {"
 oL
 li
-NV
+od
 yw
 sa
 sa
@@ -17163,8 +17172,8 @@ rQ
 "}
 (51,1,1) = {"
 oL
-NV
-NV
+od
+od
 yw
 sa
 sa
@@ -17293,8 +17302,8 @@ rQ
 "}
 (52,1,1) = {"
 oL
-Og
-NV
+MQ
+od
 yw
 sa
 sa
