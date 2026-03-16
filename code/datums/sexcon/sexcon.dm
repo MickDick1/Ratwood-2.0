@@ -838,40 +838,33 @@
 		return FALSE
 	return TRUE
 
-/datum/sex_controller/proc/has_chastity_penis() // used for sex actions which specifically involve the penis 
-	var/modular_result = modular_has_chastity_penis()
-	if(!isnull(modular_result))
-		return modular_result
+/// Returns TRUE if the user's penis is currently blocked by a chastity device.
+/// Base implementation checks TRAIT_CHASTITY_CAGE, TRAIT_CHASTITY_FULL, and TRAIT_CHASTITY_PENIS_BLOCKED.
+/// Overridden in chastity_helpers.dm to handle cursed device modes before falling through to ..().
+/datum/sex_controller/proc/has_chastity_penis()
+	return HAS_TRAIT(user, TRAIT_CHASTITY_FULL) || HAS_TRAIT(user, TRAIT_CHASTITY_CAGE) || HAS_TRAIT(user, TRAIT_CHASTITY_PENIS_BLOCKED)
 
-	return FALSE
+/// Returns TRUE if the user's vagina is currently blocked by a chastity device.
+/// Base implementation checks TRAIT_CHASTITY_FULL and TRAIT_CHASTITY_VAGINA_BLOCKED.
+/// Overridden in chastity_helpers.dm to handle cursed device modes before falling through to ..().
+/datum/sex_controller/proc/has_chastity_vagina()
+	return HAS_TRAIT(user, TRAIT_CHASTITY_FULL) || HAS_TRAIT(user, TRAIT_CHASTITY_VAGINA_BLOCKED)
 
-/datum/sex_controller/proc/has_chastity_vagina() // used for sex actions which specifically involve the vagina
-	var/modular_result = modular_has_chastity_vagina()
-	if(!isnull(modular_result))
-		return modular_result
+/// Returns TRUE if any front anatomy (penis OR vagina) is blocked by chastity.
+/// Delegates to has_chastity_penis() and has_chastity_vagina() so cursed device overrides apply automatically.
+/datum/sex_controller/proc/has_chastity_cage()
+	return has_chastity_penis() || has_chastity_vagina()
 
-	return FALSE
-
-/datum/sex_controller/proc/has_chastity_cage() // used to broadly disallow sex actions regardless of genital configuration
-	var/modular_result = modular_has_chastity_cage()
-	if(!isnull(modular_result))
-		return modular_result
-
-	return FALSE
-
+/// Returns TRUE if the user's chastity device is a flat-style cage (/obj/item/chastity/chastity_cage/flat).
+/// Base always returns FALSE — flat detection requires device access; overridden in chastity_helpers.dm.
 /datum/sex_controller/proc/has_chastity_flat()
-	var/modular_result = modular_has_chastity_flat()
-	if(!isnull(modular_result))
-		return modular_result
-
 	return FALSE
 
-/datum/sex_controller/proc/has_chastity_anal() // same as above but specifically for anal related sex_actions
-	var/modular_result = modular_has_chastity_anal()
-	if(!isnull(modular_result))
-		return modular_result
-
-	return FALSE
+/// Returns TRUE if the user's anal access is currently blocked by a chastity device.
+/// Base implementation checks TRAIT_CHASTITY_ANAL and TRAIT_CHASTITY_FULL.
+/// Overridden in chastity_helpers.dm to handle cursed device modes before falling through to ..().
+/datum/sex_controller/proc/has_chastity_anal()
+	return HAS_TRAIT(user, TRAIT_CHASTITY_ANAL) || HAS_TRAIT(user, TRAIT_CHASTITY_FULL)
 
 /datum/sex_controller/proc/considered_limp()
 	if(arousal >= AROUSAL_HARD_ON_THRESHOLD)

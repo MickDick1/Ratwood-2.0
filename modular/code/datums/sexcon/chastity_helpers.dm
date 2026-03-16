@@ -62,65 +62,55 @@
 		return FALSE
 	return TRUE
 
-/// Returns TRUE if the user's penis is currently blocked by their chastity device.
-/// For cursed devices, respects the cursed_front_mode (mode 1 = penis open, mode 3 = all open).
-/// For standard devices, checks TRAIT_CHASTITY_CAGE, TRAIT_CHASTITY_FULL, and TRAIT_CHASTITY_PENIS_BLOCKED.
-/datum/sex_controller/proc/modular_has_chastity_penis()
+/// Cursed device override for has_chastity_penis().
+/// If the user's device is in cursed mode, evaluates cursed_front_mode directly (mode 1 or 3 = penis exposed).
+/// Falls through to ..() (trait check) for standard devices.
+/datum/sex_controller/proc/has_chastity_penis()
 	var/obj/item/chastity/device = user?.chastity_device
 	if(istype(device) && device.chastity_cursed)
-		var/has_penis = !!user.getorganslot(ORGAN_SLOT_PENIS)
-		if(!has_penis)
+		if(!user.getorganslot(ORGAN_SLOT_PENIS))
 			return FALSE
 		// Cursed mode 1 and 3 expose penis access.
 		return !(device.cursed_front_mode == 1 || device.cursed_front_mode == 3)
-	if(HAS_TRAIT(user, TRAIT_CHASTITY_FULL) || HAS_TRAIT(user, TRAIT_CHASTITY_CAGE) || HAS_TRAIT(user, TRAIT_CHASTITY_PENIS_BLOCKED))
-		return TRUE
-	return FALSE
+	return ..()
 
-/// Returns TRUE if the user's vagina is currently blocked by their chastity device.
-/// For cursed devices, respects the cursed_front_mode (mode 2 = vagina open, mode 3 = all open).
-/// For standard devices, checks TRAIT_CHASTITY_FULL and TRAIT_CHASTITY_VAGINA_BLOCKED.
-/datum/sex_controller/proc/modular_has_chastity_vagina()
+/// Cursed device override for has_chastity_vagina().
+/// If the user's device is in cursed mode, evaluates cursed_front_mode directly (mode 2 or 3 = vagina exposed).
+/// Falls through to ..() (trait check) for standard devices.
+/datum/sex_controller/proc/has_chastity_vagina()
 	var/obj/item/chastity/device = user?.chastity_device
 	if(istype(device) && device.chastity_cursed)
-		var/has_vagina = !!user.getorganslot(ORGAN_SLOT_VAGINA)
-		if(!has_vagina)
+		if(!user.getorganslot(ORGAN_SLOT_VAGINA))
 			return FALSE
 		// Cursed mode 2 and 3 expose vagina access.
 		return !(device.cursed_front_mode == 2 || device.cursed_front_mode == 3)
-	if(HAS_TRAIT(user, TRAIT_CHASTITY_FULL) || HAS_TRAIT(user, TRAIT_CHASTITY_VAGINA_BLOCKED))
-		return TRUE
-	return FALSE
+	return ..()
 
-/// Returns TRUE if any front anatomy (penis OR vagina) is currently blocked by chastity.
-/// Convenience wrapper around modular_has_chastity_penis() and modular_has_chastity_vagina().
-/datum/sex_controller/proc/modular_has_chastity_cage()
-	return modular_has_chastity_penis() || modular_has_chastity_vagina()
-
-/// Returns TRUE if the user's chastity device is a flat-style cage (/obj/item/chastity/chastity_cage/flat).
-/// Used to gate flat-cage-specific flavor text and behavior.
-/datum/sex_controller/proc/modular_has_chastity_flat()
+/// Flat-cage override for has_chastity_flat().
+/// Returns TRUE only when the equipped device is /obj/item/chastity/chastity_cage/flat.
+/// Falls through to ..() (always FALSE) for all other device types.
+/datum/sex_controller/proc/has_chastity_flat()
 	var/obj/item/chastity/device = user?.chastity_device
 	if(!istype(device, /obj/item/chastity/chastity_cage/flat))
-		return FALSE
+		return ..()
 	return TRUE
 
-/// Returns TRUE if the user's anal access is currently blocked by their chastity device.
-/// For cursed devices, checks cursed_anal_open directly. For standard devices, checks TRAIT_CHASTITY_ANAL and TRAIT_CHASTITY_FULL.
-/datum/sex_controller/proc/modular_has_chastity_anal()
+/// Cursed device override for has_chastity_anal().
+/// If the user's device is in cursed mode, evaluates cursed_anal_open directly.
+/// Falls through to ..() (trait check) for standard devices.
+/datum/sex_controller/proc/has_chastity_anal()
 	var/obj/item/chastity/device = user?.chastity_device
 	if(istype(device) && device.chastity_cursed)
 		return !device.cursed_anal_open
-	if(HAS_TRAIT(user, TRAIT_CHASTITY_ANAL) || HAS_TRAIT(user, TRAIT_CHASTITY_FULL))
-		return TRUE
-	return FALSE
+	return ..()
+
 
 /// Returns TRUE if the user can use their penis for sex actions.
 /// Requires: no TRAIT_LIMPDICK, no chastity cage blocking, a present and functional penis organ.
 /datum/sex_controller/proc/modular_can_use_penis()
 	if(HAS_TRAIT(user, TRAIT_LIMPDICK))
 		return FALSE
-	if(modular_has_chastity_penis())
+	if(has_chastity_penis())
 		return FALSE
 	var/obj/item/organ/penis/penor = user.getorganslot(ORGAN_SLOT_PENIS)
 	if(!penor)
@@ -132,7 +122,7 @@
 /// Returns TRUE if the user can use their vagina for sex actions.
 /// Requires: no chastity belt blocking, a present vagina organ.
 /datum/sex_controller/proc/modular_can_use_vagina()
-	if(modular_has_chastity_vagina())
+	if(has_chastity_vagina())
 		return FALSE
 	if(!user.getorganslot(ORGAN_SLOT_VAGINA))
 		return FALSE
@@ -143,7 +133,7 @@
 /// Emits a visible_message (range suppressed if suppress_moan is set) and calls cum_onto(user).
 /// Returns TRUE if the spill happened, FALSE otherwise — callers use this to skip their own generic climax message.
 /datum/sex_controller/proc/modular_try_handle_chastity_ejaculation()
-	if(!(modular_has_chastity_cage() || modular_has_chastity_anal()))
+	if(!(has_chastity_cage() || has_chastity_anal()))
 		return FALSE
 	if(!prob(50))
 		return FALSE
@@ -161,7 +151,7 @@
 /// Falls back to default_msg if no chastity is active (pass-through for non-chastity callers).
 /datum/sex_controller/proc/modular_get_chastity_climax_message(default_msg)
 	var/climax_msg = default_msg
-	if(modular_has_chastity_cage() || modular_has_chastity_anal())
+	if(has_chastity_cage() || has_chastity_anal())
 		climax_msg = "[user] climaxes and makes a mess in their chastity device!"
 	if(HAS_TRAIT(user, TRAIT_CHASTITY_SPIKED))
 		climax_msg = "[user] climaxes and makes a messy release in their spiked chastity!"
