@@ -41,8 +41,6 @@ GLOBAL_LIST_INIT(virtue_mount_choices_noble, (list(
 	list("brown mare (horse)", /mob/living/simple_animal/hostile/retaliate/rogue/horse/brown/tame/saddled),
 	list("black stallion (horse)", /mob/living/simple_animal/hostile/retaliate/rogue/horse/male/black/tame/saddled),
 	list("black mare (horse)", /mob/living/simple_animal/hostile/retaliate/rogue/horse/black/tame/saddled),
-	list("fogbeast mare", /mob/living/simple_animal/hostile/retaliate/rogue/fogbeast/tame/saddled),
-	list("fogbeast stallion", /mob/living/simple_animal/hostile/retaliate/rogue/fogbeast/male/tame/saddled),
 )))
 
 /datum/stressevent/precious_mob_died
@@ -69,8 +67,6 @@ GLOBAL_LIST_INIT(virtue_mount_choices_noble, (list(
 /mob/living/carbon/human
 	/// Weakref to our bespoke Saddleborn mount (added by the virtue)
 	var/datum/weakref/saddleborn_mount
-	/// World time of the last tick the mount this human is riding moved
-	var/last_mount_move_time = 0
 
 /proc/setup_saddleborn_mount_move_delay(mob/living/carbon/human/user, mob/living/simple_animal/mount)
 	if(!user || !istype(mount, /mob/living/simple_animal/hostile))
@@ -152,7 +148,7 @@ GLOBAL_LIST_INIT(virtue_mount_choices_noble, (list(
 			the_real_honse.name = honse_name
 			the_real_honse.real_name = honse_name
 
-	if(HAS_TRAIT(user, TRAIT_NOBLE) && istype(the_real_honse, /mob/living/simple_animal/hostile/retaliate/rogue/saiga))
+	if(istype(the_real_honse, /mob/living/simple_animal/hostile/retaliate/rogue/saiga))
 		var/saiga_barding = list("None","Padded Barding","Chainmail Barding")
 		var/saiga_barding_choice = input(user, "What protection have you acquired for your steed?", "Saddleborn") as anything in saiga_barding
 		switch(saiga_barding_choice)
@@ -162,7 +158,7 @@ GLOBAL_LIST_INIT(virtue_mount_choices_noble, (list(
 			if("Chainmail Barding")
 				the_real_honse.bbarding = new /obj/item/clothing/barding/chain()
 				the_real_honse.update_icon()
-	else if(HAS_TRAIT(user, TRAIT_NOBLE) && istype(the_real_honse, /mob/living/simple_animal/hostile/retaliate/rogue/fogbeast))
+	else if(istype(the_real_honse, /mob/living/simple_animal/hostile/retaliate/rogue/fogbeast))
 		var/fogbeast_barding = list("None","Padded Barding","Chainmail Barding")
 		var/fogbeast_barding_choice = input(user, "What protection have you acquired for your steed?", "Saddleborn") as anything in fogbeast_barding
 		switch(fogbeast_barding_choice)

@@ -2179,6 +2179,14 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	name = "Eoran Caparison"
 	path = /obj/item/caparison/eora
 
+/datum/loadout_item/caparison/azure
+	name = "Ducal Caparison"
+	path = /obj/item/caparison/azure
+
 /datum/loadout_item/caparison/fogbeast
 	name = "Fogbeast Caparison"
 	path = /obj/item/caparison/fogbeast
+
+/datum/loadout_item/caparison/fogbeast/azure
+	name = "Ducal Caparison (Fogbeast)"
+	path = /obj/item/caparison/fogbeast/azure

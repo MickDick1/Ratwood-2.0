@@ -4,10 +4,6 @@
 		return FALSE
 	if(stat)
 		return FALSE
-	if(intenty && intenty.type == INTENT_GRAB && istype(src, /mob/living/simple_animal))
-		var/mob/living/simple_animal/S = src
-		if(S.tame)
-			return FALSE
 	if(!canparry && !candodge) //mob can do neither of these
 		return FALSE
 	if(user == src)

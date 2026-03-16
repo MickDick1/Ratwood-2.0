@@ -1282,9 +1282,17 @@
 	name = "eoran caparison"
 	result = list(/obj/item/caparison/eora)
 
+/datum/crafting_recipe/roguetown/sewing/caparison/azure
+	name = "ducal caparison"
+	result = list(/obj/item/caparison/azure)
+
 /datum/crafting_recipe/roguetown/sewing/caparison/fogbeast
 	name = "fogbeast caparison"
 	result = list(/obj/item/caparison/fogbeast)
+
+/datum/crafting_recipe/roguetown/sewing/caparison/fogbeast/azure
+	name = "ducal caparison (fogbeast)"
+	result = list(/obj/item/caparison/fogbeast/azure)
 
 // -- Barding
 /datum/crafting_recipe/roguetown/sewing/barding

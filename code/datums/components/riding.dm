@@ -123,7 +123,7 @@
 			var/list/offsets = get_offsets(passindex)
 			var/rider_dir = get_rider_dir(passindex)
 			if(!has_fixedeye)
-				buckled_mob.setDir(buckled_mob.rider_look_dir || rider_dir)
+				buckled_mob.setDir(rider_dir)
 				dir_loop:
 					for(var/offsetdir in offsets)
 						if(offsetdir == AM_dir)
@@ -192,22 +192,9 @@
 	return TRUE
 
 /datum/component/riding/proc/handle_ride(mob/user, direction)
-	user.rider_look_dir = 0 // Cancel any rider look override when movement is attempted
 	var/atom/movable/AM = parent
-	var/fixedeye_driver = FALSE
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		if(H.fixedeye)
-			fixedeye_driver = TRUE
-			if(AM.dir != H.dir)
-				AM.setDir(H.dir)
-				handle_vehicle_layer()
-				handle_vehicle_offsets()
 	if(user.incapacitated())
 		Unbuckle(user)
-		return
-
-	if(driver && user != driver) // only the designated driver/first rider can steer
 		return
 
 	if(world.time < last_vehicle_move + ((last_move_diagonal? 2 : 1) * vehicle_move_delay))
@@ -271,10 +258,6 @@
 		else
 			last_move_diagonal = FALSE
 
-		if(fixedeye_driver)
-			// Fixed-eye riders can strafe, so movement direction and facing direction can differ.
-			// Force the mount to visually face where the driver is looking.
-			AM.setDir(user.dir)
 		handle_vehicle_layer()
 		handle_vehicle_offsets()
 	else

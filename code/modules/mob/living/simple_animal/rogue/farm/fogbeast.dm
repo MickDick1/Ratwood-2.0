@@ -1,4 +1,4 @@
-GLOBAL_LIST_INIT(valid_fogbeast_colors, list("White" = COLOR_WHITE, "Gray" = COLOR_GRAY, "Brown" = COLOR_DARK_BROWN, "Chestnut" = COLOR_DARK_ORANGE))
+GLOBAL_LIST_INIT(valid_fogbeast_colors, list("White" = COLOR_WHITE, "Gray" = COLOR_GRAY, "Black" = COLOR_ALMOST_BLACK, "Brown" = COLOR_DARK_BROWN, "Chestnut" = COLOR_DARK_ORANGE))
 
 /mob/living/simple_animal/hostile/retaliate/rogue/fogbeast
 	name = "fogbeast mare"
@@ -61,8 +61,7 @@ GLOBAL_LIST_INIT(valid_fogbeast_colors, list("White" = COLOR_WHITE, "Gray" = COL
 	fogbeast_color = set_fogbeast_color
 	if(!fogbeast_color)
 		fogbeast_color = pick(GLOB.valid_fogbeast_colors)
-	// Keep atom color neutral; coat tint is rendered as a dedicated overlay in update_icon().
-	color = null
+	color = GLOB.valid_fogbeast_colors[fogbeast_color]
 
 /mob/living/simple_animal/hostile/retaliate/rogue/fogbeast/tame
 	tame = TRUE
@@ -76,48 +75,18 @@ GLOBAL_LIST_INIT(valid_fogbeast_colors, list("White" = COLOR_WHITE, "Gray" = COL
 // BEHAVIORS
 /mob/living/simple_animal/hostile/retaliate/rogue/fogbeast/update_icon()
 	cut_overlays()
-	var/obj/item/clothing/barding/current_barding = bbarding
-	var/coat_color = GLOB.valid_fogbeast_colors[fogbeast_color]
-	color = null
-	// Fogbeast barding is rendered manually below with strict appearance flags.
-	// Temporarily clear bbarding so parent update_icon() does not add a second, tinted pass.
-	bbarding = null
 	..()
-	bbarding = current_barding
 	if(stat != DEAD)
-		// Re-apply coat tint as its own body overlay so gear never inherits mount color.
-		var/mutable_appearance/coat_overlay = mutable_appearance(icon, icon_state, MOB_LAYER)
-		coat_overlay.color = coat_color
-		coat_overlay.appearance_flags = RESET_ALPHA|RESET_COLOR|NO_CLIENT_COLOR
-		add_overlay(coat_overlay)
 		if(ssaddle)
 			var/mutable_appearance/saddlet = mutable_appearance(icon, "saddle-above", 4.3)
-			saddlet.color = null
 			saddlet.appearance_flags = RESET_ALPHA|RESET_COLOR
 			add_overlay(saddlet)
 			saddlet = mutable_appearance(icon, "saddle")
-			saddlet.color = null
 			saddlet.appearance_flags = RESET_ALPHA|RESET_COLOR
 			add_overlay(saddlet)
 		if(has_buckled_mobs())
-			// The fogbeast mounted body overlay can visually wash barding while buckled.
-			// Keep the mounted overlay only when no barding is equipped.
-			if(!bbarding)
-				var/mutable_appearance/mounted = mutable_appearance(icon, "[icon_state]_mounted", 4.3)
-				mounted.color = null
-				mounted.appearance_flags = RESET_ALPHA|RESET_COLOR
-				add_overlay(mounted)
-		if(bbarding)
-			var/barding_layer = caparison_over_barding ? 5 : 6
-			var/barding_overlay = bbarding.female_barding_state && gender == FEMALE ? bbarding.female_barding_state : bbarding.barding_state
-			var/mutable_appearance/barding_base_overlay = mutable_appearance(bbarding.barding_icon, barding_overlay, barding_layer)
-			barding_base_overlay.color = COLOR_WHITE
-			barding_base_overlay.appearance_flags = RESET_ALPHA|RESET_COLOR|NO_CLIENT_COLOR
-			var/mutable_appearance/barding_above_overlay = mutable_appearance(bbarding.barding_icon, barding_overlay + "-above", barding_layer - 0.69)
-			barding_above_overlay.color = COLOR_WHITE
-			barding_above_overlay.appearance_flags = RESET_ALPHA|RESET_COLOR|NO_CLIENT_COLOR
-			add_overlay(barding_base_overlay)
-			add_overlay(barding_above_overlay)
+			var/mutable_appearance/mounted = mutable_appearance(icon, "[icon_state]_mounted", 4.3)
+			add_overlay(mounted)
 
 
 /mob/living/simple_animal/hostile/retaliate/rogue/fogbeast/get_sound(input)

@@ -243,14 +243,12 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	. = ..()
 	if(tame)
 		. += span_notice("This animal appears to be tamed.")
-		if(owner && !QDELETED(owner))
-			. += span_notice("It is tamed to [owner.name].")
 	if(ssaddle)
-		. += "This animal is saddled: [ssaddle.name]."
+		. += span_notice("This animal is saddled: ([ssaddle.name]).")
 	if(ccaparison)
-		. += "This animal is wearing a caparison: [ccaparison.name]."
+		. += span_notice("This animal is wearing a caparison: ([ccaparison.name]).")
 	if(bbarding)
-		. += "This animal is wearing a bard: [bbarding.name]."
+		. += span_notice("This animal is wearing a bard: ([bbarding.name]).")
 
 /mob/living/simple_animal/attack_right(mob/user, params)
 	if(ccaparison)
@@ -329,10 +327,8 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		if(bbarding)
 			var/barding_overlay = bbarding.female_barding_state && gender == FEMALE ? bbarding.female_barding_state : bbarding.barding_state
 			var/mutable_appearance/barding_base_overlay = mutable_appearance(bbarding.barding_icon, barding_overlay, barding_layer)
-			barding_base_overlay.color = null
 			barding_base_overlay.appearance_flags = RESET_ALPHA|RESET_COLOR
 			var/mutable_appearance/barding_above_overlay = mutable_appearance(bbarding.barding_icon, barding_overlay + "-above", barding_layer - 0.69)
-			barding_above_overlay.color = null
 			barding_above_overlay.appearance_flags = RESET_ALPHA|RESET_COLOR
 			add_overlay(barding_base_overlay)
 			add_overlay(barding_above_overlay)
@@ -1075,36 +1071,8 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 			var/health_deficiency = getBruteLoss() + getFireLoss()
 			if(!HAS_TRAIT(src, TRAIT_IGNOREDAMAGESLOWDOWN) && (health <= round(maxHealth * 0.5) || health_deficiency >= round(maxHealth * 0.5)))
 				new_delay = max(new_delay, initial(move_to_delay) + 2)
-			if(ishuman(user))
-				var/mob/living/carbon/human/H = user
-				if(H.cmode)
-					var/combat_delay_mult
-					if(H.fixedeye || H.tempfixeye)
-						// Fixed-eye combat should stay mobile while still paying a smaller combat tax.
-						combat_delay_mult = (H.m_intent == MOVE_INTENT_RUN) ? 1.06 : 1.03
-					else
-						// Non fixed-eye mounted running in combat should be slower.
-						combat_delay_mult = (H.m_intent == MOVE_INTENT_RUN) ? 1.15 : 1.05
-					new_delay *= combat_delay_mult
-					if(H.fixedeye || H.tempfixeye)
-						// In fixed-eye strafe movement, riding reductions can otherwise nullify the combat penalty.
-						var/base_delay = (H.m_intent == MOVE_INTENT_RUN) ? (move_to_delay - 1) : move_to_delay
-						new_delay = max(new_delay, base_delay * combat_delay_mult)
-				else
-					var/backward_dir = turn(H.dir, 180)
-					var/moving_backward = (direction & backward_dir)
-					if(moving_backward && (H.fixedeye || H.tempfixeye))
-						// Non-combat backpedal on mounts mirrors fixed-eye combat slowdown strength.
-						var/backpedal_delay_mult = (H.m_intent == MOVE_INTENT_RUN) ? 1.06 : 1.03
-						new_delay *= backpedal_delay_mult
-						var/base_delay = (H.m_intent == MOVE_INTENT_RUN) ? (move_to_delay - 1) : move_to_delay
-						new_delay = max(new_delay, base_delay * backpedal_delay_mult)
 			riding_datum.vehicle_move_delay = max(1, new_delay)
 			if(loc != oldloc)
-				for(var/mob/living/carbon/human/rider in buckled_mobs)
-					rider.vars["last_mount_move_time"] = world.time
-					rider.update_action_buttons_icon()
-					addtimer(CALLBACK(rider, TYPE_PROC_REF(/mob, update_action_buttons_icon)), 2 SECONDS)
 				var/obj/structure/mineral_door/MD = locate() in loc
 				if(MD && !MD.ridethrough)
 					if(!HAS_TRAIT(user, TRAIT_EQUESTRIAN))
