@@ -5,7 +5,7 @@ GLOBAL_VAR_INIT(mine_collapse_active, 0)
 
 /obj/structure/mine_collapse
 	name = "mineshaft collapse trigger"
-	desc = "You shouldn't be seeing this, however if you are a mapper, placing this down will respawn a random natural wall rockwall (override via respawn_rock var)"
+	desc = "You shouldn't be seeing this, however if you are a mapper, placing this down will respawn a generic natural rock wall (override via respawn_rock var)"
 	icon = 'icons/obj/hand_of_god_structures.dmi'
 	icon_state = "trap"
 	density = FALSE
@@ -17,7 +17,7 @@ GLOBAL_VAR_INIT(mine_collapse_active, 0)
 	obj_flags = INDESTRUCTIBLE
 	var/last_trigger = 0
 	var/time_between_triggers = 1 MINUTES //takes a minute to recharge
-	var/obj/structure/barricade/support_beam_near = null
+	var/datum/weakref/support_beam_ref = null
 
 	var/turf/closed/respawn_rock = /turf/closed/mineral/rogue
 	var/rolling_rocks = FALSE
@@ -56,18 +56,23 @@ GLOBAL_VAR_INIT(mine_collapse_active, 0)
 /obj/structure/mine_collapse/proc/found_near_support_beam(radius)
 	var/turf/center_turf = get_turf(src)
 
-	if(support_beam_near) // check last found support beam
-		if(!QDELETED(support_beam_near) && istype(support_beam_near)) // support beam still exists
+	var/obj/structure/barricade/mineshaft/support_beam = null
+	if(support_beam_ref) // check last found support beam
+		support_beam = support_beam_ref.resolve()
+		if(!QDELETED(support_beam) && istype(support_beam)) // support beam still exists
 			return TRUE
-		support_beam_near = null
+		support_beam_ref = null
 
 	if(radius <= 0)
-		support_beam_near = locate(/obj/structure/barricade/mineshaft) in center_turf
-		return support_beam_near && istype(support_beam_near)
-	for(var/turf/checked_turf as anything in RANGE_TURFS(radius, center_turf))
-		var/obj/structure/barricade/mineshaft/support_beam = locate() in checked_turf
+		support_beam = locate(/obj/structure/barricade/mineshaft) in center_turf
 		if(support_beam && istype(support_beam))
-			support_beam_near = support_beam
+			support_beam_ref = WEAKREF(support_beam)
+			return TRUE
+		return FALSE
+	for(var/turf/checked_turf as anything in RANGE_TURFS(radius, center_turf))
+		support_beam = locate() in checked_turf
+		if(support_beam && istype(support_beam))
+			support_beam_ref = WEAKREF(support_beam)
 			return TRUE
 	return FALSE
 
