@@ -420,9 +420,9 @@
 	/datum/job/roguetown/sheriff,\
 	/datum/job/roguetown/squire,\
 	/datum/job/roguetown/guardsman,\
-	/datum/job/roguetown/mamluk,\
-	/datum/job/roguetown/mamluksergeant,\
 	/datum/job/roguetown/janissary,\
+	/datum/job/roguetown/janissarysergeant,\
+	/datum/job/roguetown/azeb,\
 	/datum/job/roguetown/slavemaster,\
 	/datum/job/roguetown/rookie,\
 	/datum/job/roguetown/guardsman

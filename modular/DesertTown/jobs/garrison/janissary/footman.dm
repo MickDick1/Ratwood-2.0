@@ -1,11 +1,11 @@
 // Melee goon. STR and martial setup.
-/datum/advclass/mamluk/footman
-	name = "Mamluk Footman"
+/datum/advclass/janissary/footman
+	name = "Janissary Footman"
 	tutorial = "You are a member of the Sultans Retinue. Ensure the safety of the Sultan and their subjects, defend the powers that be from the horrors of the outside world, and keep the Sultanate alive."
-	outfit = /datum/outfit/job/roguetown/mamluk/footman
+	outfit = /datum/outfit/job/roguetown/janissary/footman
 	//allowed_maps = list("Desert Town")
 
-	category_tags = list(CTAG_MAMLUK)
+	category_tags = list(CTAG_JANISSARY)
 	// traits_applied = list(TRAIT_MEDIUMARMOR)
 	subclass_stats = list(
 		STATKEY_STR = 2,// seems kinda lame but remember guardsman bonus!!
@@ -34,7 +34,7 @@
 		/datum/skill/misc/tracking = SKILL_LEVEL_NOVICE,
 	)
 
-/datum/outfit/job/roguetown/mamluk/footman/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/job/roguetown/janissary/footman/pre_equip(mob/living/carbon/human/H)
 	..()
 
 	armor = /obj/item/clothing/suit/roguetown/armor/chainmail/mamaluke

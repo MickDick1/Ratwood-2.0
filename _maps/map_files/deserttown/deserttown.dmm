@@ -933,7 +933,7 @@
 /turf/open/floor/rogue/deserttile,
 /area/rogue/under/deserttown/basement/town)
 "aBj" = (
-/obj/effect/landmark/start/dt/mamluk,
+/obj/effect/landmark/start/dt/janissary,
 /obj/effect/landmark/start/manorguardsman,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/deserttown/garrison)
@@ -8651,7 +8651,7 @@
 /area/rogue/indoors/deserttown/warden)
 "eqO" = (
 /obj/structure/chair/wood/zybantine,
-/obj/effect/landmark/start/dt/mamluk,
+/obj/effect/landmark/start/dt/janissary,
 /obj/effect/decal/cobbleedge{
 	icon_state = "borderfall";
 	pixel_y = -8
@@ -9800,7 +9800,7 @@
 	},
 /area/rogue/indoors/deserttown)
 "eSP" = (
-/obj/effect/landmark/start/dt/mamluk,
+/obj/effect/landmark/start/dt/janissaryary,
 /obj/effect/landmark/start/manorguardsman,
 /obj/structure/roguemachine/bounty{
 	pixel_y = 32
@@ -10744,8 +10744,8 @@
 /area/rogue/under/cavewet/bogcaves)
 "fns" = (
 /obj/structure/rack/rogue,
-/obj/item/clothing/head/roguetown/helmet/mamalukehelm,
-/obj/item/clothing/head/roguetown/helmet/mamalukehelm,
+/obj/item/clothing/head/roguetown/helmet/janissaryhelm,
+/obj/item/clothing/head/roguetown/helmet/janissaryhelm,
 /turf/open/floor/rogue/deserttile{
 	icon_state = "tiledrab2"
 	},
@@ -11685,7 +11685,7 @@
 /obj/structure/mineral_door/wood{
 	locked = 1;
 	lockid = "garrison";
-	name = "Mamluk Garrison"
+	name = "Janissary Garrison"
 	},
 /turf/open/floor/rogue/concrete{
 	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
@@ -12700,7 +12700,7 @@
 /obj/effect/landmark/start/bogguardsman{
 	dir = 1
 	},
-/obj/effect/landmark/start/dt/janissary,
+/obj/effect/landmark/start/dt/azeb,
 /turf/open/floor/rogue/lightpath,
 /area/rogue/outdoors/desert)
 "goV" = (
@@ -13920,7 +13920,7 @@
 /turf/open/floor/rogue/tile/harem1,
 /area/rogue/indoors/deserttown/manor)
 "gYL" = (
-/obj/effect/landmark/start/dt/mamluk,
+/obj/effect/landmark/start/dt/janissary,
 /obj/effect/landmark/start/manorguardsman,
 /obj/structure/rack/rogue/shelf,
 /turf/open/floor/carpet/royalblack,
@@ -18361,8 +18361,8 @@
 /area/rogue/outdoors/deserttown)
 "jpw" = (
 /obj/structure/rack/rogue,
-/obj/item/clothing/suit/roguetown/armor/chainmail/mamaluke,
-/obj/item/clothing/suit/roguetown/armor/chainmail/mamaluke,
+/obj/item/clothing/suit/roguetown/armor/chainmail/janissary,
+/obj/item/clothing/suit/roguetown/armor/chainmail/janissary,
 /turf/open/floor/rogue/deserttile{
 	icon_state = "tiledrab2"
 	},
@@ -21549,7 +21549,7 @@
 /area/rogue/under/deserttown/basement/town)
 "kRw" = (
 /obj/effect/landmark/start/manorguardsman,
-/obj/effect/landmark/start/dt/mamluk,
+/obj/effect/landmark/start/dt/janissary,
 /obj/machinery/light/rogue/candle,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/deserttown/garrison)
@@ -25052,7 +25052,7 @@
 	dir = 1
 	},
 /obj/structure/rack/rogue/shelf,
-/obj/effect/landmark/start/dt/mamluksergeant,
+/obj/effect/landmark/start/dt/janissaryarysergeant,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/deserttown/garrison)
 "mSi" = (
@@ -25661,7 +25661,7 @@
 	dir = 4;
 	locked = 1;
 	lockid = "warden";
-	name = "Janissary Fort"
+	name = "Azeb Fort"
 	},
 /turf/open/floor/rogue/herringbone{
 	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
@@ -25999,7 +25999,7 @@
 /obj/effect/landmark/start/bogguardsman{
 	dir = 1
 	},
-/obj/effect/landmark/start/dt/janissary,
+/obj/effect/landmark/start/dt/azeb,
 /turf/open/transparent/openspace,
 /area/rogue/outdoors/desert)
 "nra" = (
@@ -29824,8 +29824,8 @@
 /area/rogue/indoors/deserttown/smithguild)
 "pkS" = (
 /obj/structure/rack/rogue,
-/obj/item/clothing/suit/roguetown/armor/chainmail/mamaluke,
-/obj/item/clothing/suit/roguetown/armor/chainmail/mamaluke,
+/obj/item/clothing/suit/roguetown/armor/chainmail/janissary,
+/obj/item/clothing/suit/roguetown/armor/chainmail/janissary,
 /turf/open/floor/rogue/woodturned,
 /area/rogue/indoors/deserttown/garrison)
 "plb" = (
@@ -34623,7 +34623,7 @@
 /area/rogue/indoors/deserttown/academy)
 "rDH" = (
 /obj/effect/landmark/start/bogmaster,
-/obj/effect/landmark/start/dt/janissaryagha,
+/obj/effect/landmark/start/dt/azebagha,
 /turf/open/floor/rogue/sandbrick,
 /area/rogue/outdoors/desert)
 "rDK" = (
@@ -34813,8 +34813,8 @@
 /area/rogue/indoors/deserttown/bath)
 "rFN" = (
 /obj/structure/rack/rogue/shelf/biggest,
-/obj/item/clothing/head/roguetown/helmet/mamalukehelm,
-/obj/item/clothing/head/roguetown/helmet/mamalukehelm,
+/obj/item/clothing/head/roguetown/helmet/janissaryhelm,
+/obj/item/clothing/head/roguetown/helmet/janissaryhelm,
 /turf/open/floor/rogue/woodturned,
 /area/rogue/indoors/deserttown/garrison)
 "rGk" = (
@@ -35271,7 +35271,7 @@
 /turf/open/floor/rogue/tile/harem,
 /area/rogue/indoors/deserttown/tavern)
 "rRm" = (
-/obj/effect/landmark/start/dt/mamluk,
+/obj/effect/landmark/start/dt/janissary,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/deserttown/garrison)
 "rRq" = (
@@ -42641,7 +42641,7 @@
 /obj/structure/table/wood/poor,
 /obj/item/natural/feather,
 /obj/structure/roguemachine/mail{
-	mailtag = "Janissary Outpost"
+	mailtag = "Azeb Outpost"
 	},
 /turf/open/floor/rogue/herringbone,
 /area/rogue/indoors/deserttown/warden)

@@ -104,10 +104,10 @@ GLOBAL_LIST_INIT(garrison_positions, list(
 	"Dungeoneer",
 	//desert
 	"Cataphract",
-	"Mamluk",
-	"Mamluk Sergeant",
-	"Janissary Agha",
 	"Janissary",
+	"Janissary Sergeant",
+	"Azeb",
+	"Azeb Agha",
 	"Slave Master",
 
 ))

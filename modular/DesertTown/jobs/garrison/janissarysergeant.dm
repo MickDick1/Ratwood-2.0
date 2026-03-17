@@ -1,6 +1,6 @@
-/datum/job/roguetown/mamluksergeant
-	title = "Mamluk Sergeant"// Googling terms Naqib seems to mean something like Captain and has a nice ring to it?
-	flag = MAMLUKSERGEANT
+/datum/job/roguetown/janissarysergeant
+	title = "Janissary Sergeant"// Googling terms Naqib seems to mean something like Captain and has a nice ring to it?
+	flag = JANISSARYSERGEANT
 	department_flag = GARRISON
 	faction = "Station"
 	total_positions = 1
@@ -8,15 +8,15 @@
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = ACCEPTED_RACES
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
-	tutorial = "You are the most experienced of the SULTAN's Soldiery, leading the MAMLUK in maintaining order and attending to threats and crimes below the PALACE's attention. \
+	tutorial = "You are the most experienced of the SULTAN's Soldiery, leading the Janissary in maintaining order and attending to threats and crimes below the PALACE's attention. \
 				See to those under your command and fill in the gaps CATAPHRACTS leave in their wake. Obey the orders of your Marshal and the SULTAN."
 	display_order = JDO_SERGEANT
 	whitelist_req = TRUE
 	round_contrib_points = 3
 	social_rank = SOCIAL_RANK_YEOMAN
 
-	outfit = /datum/outfit/job/roguetown/mamluksergeant
-	advclass_cat_rolls = list(CTAG_MAMLUKSERGEANT = 20)
+	outfit = /datum/outfit/job/roguetown/janissarysergeant
+	advclass_cat_rolls = list(CTAG_JANISSARYSERGEANT = 20)
 
 	give_bank_account = 50
 	min_pq = 6
@@ -24,19 +24,19 @@
 	cmode_music = 'sound/music/combat_desert1.ogg'
 	job_traits = list(TRAIT_GUARDSMAN, TRAIT_STEELHEARTED, TRAIT_MEDIUMARMOR)
 	job_subclasses = list(
-		/datum/advclass/mamluksergeant/mamluksergeant
+		/datum/advclass/janissarysergeant/janissarysergeant
 	)
 
-/datum/outfit/job/roguetown/mamluksergeant
+/datum/outfit/job/roguetown/janissarysergeant
 	job_bitflag = BITFLAG_GARRISON
 
-/datum/job/roguetown/mamluksergeant/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
+/datum/job/roguetown/janissarysergeant/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	. = ..()
 	if(ishuman(L))
 		addtimer(CALLBACK(L, TYPE_PROC_REF(/mob, cloak_and_title_setup)), 50)
 
 //All skills/traits are on the loadouts. All are identical. Welcome to the stupid way we have to make sub-classes...
-/datum/outfit/job/roguetown/mamluksergeant
+/datum/outfit/job/roguetown/janissarysergeant
 	armor = /obj/item/clothing/suit/roguetown/armor/chainmail/mamaluke
 	pants = /obj/item/clothing/under/roguetown/chainlegs
 	neck = /obj/item/clothing/neck/roguetown/bevor
@@ -50,12 +50,12 @@
 	id = /obj/item/scomstone/garrison
 
 //Rare-ish anti-armor two hander sword. Kinda alternative of a bastard sword type. Could be cool.
-/datum/advclass/mamluksergeant/mamluksergeant
+/datum/advclass/janissarysergeant/janissarysergeant
 	name = "Sergeant-at-Arms"
-	tutorial = "You are a not just anybody but the mamluksergeant-at-Arms of the Duchy's garrison. While you may have started as some peasant or mercenary, you have advanced through the ranks to that of someone who commands respect and wields it. Take up arms, mamluksergeant!"
-	outfit = /datum/outfit/job/roguetown/mamluksergeant/mamluksergeant
+	tutorial = "You are a not just anybody but the janissarysergeant-at-Arms of the Duchy's garrison. While you may have started as some peasant or mercenary, you have advanced through the ranks to that of someone who commands respect and wields it. Take up arms, janissarysergeant!"
+	outfit = /datum/outfit/job/roguetown/janissarysergeant/janissarysergeant
 
-	category_tags = list(CTAG_MAMLUKSERGEANT)
+	category_tags = list(CTAG_JANISSARYSERGEANT)
 	subclass_stats = list(
 		STATKEY_STR = 2,
 		STATKEY_INT = 1,
@@ -83,7 +83,7 @@
 		/datum/skill/misc/tracking = SKILL_LEVEL_APPRENTICE,	//Decent tracking akin to Skirmisher.
 	)
 
-/datum/outfit/job/roguetown/mamluksergeant/mamluksergeant/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/job/roguetown/janissarysergeant/janissarysergeant/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.mind)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/order/movemovemove)

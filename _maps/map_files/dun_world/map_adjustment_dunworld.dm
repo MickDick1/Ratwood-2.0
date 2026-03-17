@@ -15,10 +15,10 @@
 		/datum/job/roguetown/headslave,
 		/datum/job/roguetown/sheikh,
 
-		/datum/job/roguetown/mamluk,
-		/datum/job/roguetown/mamluksergeant,
 		/datum/job/roguetown/janissary,
-		/datum/job/roguetown/JanissaryAgha,
+		/datum/job/roguetown/janissarysergeant,
+		/datum/job/roguetown/azeb,
+		/datum/job/roguetown/azebagha,
 		/datum/job/roguetown/slavemaster,
 		
 		/datum/job/roguetown/slave,

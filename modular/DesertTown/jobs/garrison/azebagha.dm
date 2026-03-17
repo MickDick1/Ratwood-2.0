@@ -1,6 +1,6 @@
-/datum/job/roguetown/JanissaryAgha
-	title = "Janissary Agha"
-	flag = JANISSARYAGHA
+/datum/job/roguetown/azebagha
+	title = "Azeb Agha"
+	flag = AZEBAGHA
 	department_flag = GARRISON
 	faction = "Station"
 	total_positions = 1
@@ -9,7 +9,7 @@
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = ACCEPTED_RACES
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD)
-	tutorial = "An experienced soldier of the Sultan's Janissary Corp you have been tasked with overseeing the newly constructed border. \
+	tutorial = "An experienced soldier of the Sultan's Azeb Corp you have been tasked with overseeing the newly constructed border. \
 				You report to the Royal Family and their sheikhs, \
 				and your job is to keep the younger Janissaries in line and to ensure the routes to the city remain safe.\
 				The Border must not fall."
@@ -18,8 +18,8 @@
 	round_contrib_points = 3
 	social_rank = SOCIAL_RANK_YEOMAN
 
-	outfit = /datum/outfit/job/roguetown/JanissaryAgha
-	advclass_cat_rolls = list(CTAG_JANISSARYAGHA = 20)
+	outfit = /datum/outfit/job/roguetown/azebagha
+	advclass_cat_rolls = list(CTAG_AZEBAGHA = 20)
 
 	give_bank_account = 50
 	min_pq = 6
@@ -27,12 +27,12 @@
 	cmode_music = 'sound/music/combat_desert1.ogg'
 	job_traits = list(TRAIT_OUTDOORSMAN, TRAIT_WOODSMAN, TRAIT_SURVIVAL_EXPERT, TRAIT_STEELHEARTED, TRAIT_MEDIUMARMOR)
 	job_subclasses = list(
-		/datum/advclass/JanissaryAgha/JanissaryAgha
+		/datum/advclass/azebagha/azebagha
 	)
-/datum/outfit/job/roguetown/JanissaryAgha
+/datum/outfit/job/roguetown/azebagha
 	job_bitflag = BITFLAG_GARRISON
 
-/datum/job/roguetown/JanissaryAgha/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
+/datum/job/roguetown/azebagha/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	. = ..()
 	if(ishuman(L))
 		var/mob/living/carbon/human/H = L
@@ -47,7 +47,7 @@
 				S.name = "Agha Cloak ([index])"
 
 //All skills/traits are on the loadouts. All are identical. Welcome to the stupid way we have to make sub-classes...
-/datum/outfit/job/roguetown/JanissaryAgha
+/datum/outfit/job/roguetown/azebagha
 	armor = /obj/item/clothing/suit/roguetown/armor/brigandine/agha
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy
 	pants = /obj/item/clothing/under/roguetown/chainlegs/kilt
@@ -62,15 +62,15 @@
 	id = /obj/item/scomstone/garrison
 
 //Rare-ish anti-armor two hander sword. Kinda alternative of a bastard sword type. Could be cool.
-/datum/advclass/JanissaryAgha/JanissaryAgha
+/datum/advclass/azebagha/azebagha
 	name = "Sergeant-at-Arms"
-	tutorial = "An experienced soldier of the Sultan's Janissary Corp you have been tasked with overseeing the newly constructed border. \
+	tutorial = "An experienced soldier of the Sultan's Azeb Corp you have been tasked with overseeing the newly constructed border. \
 				You report to the Royal Family and their Councillors, \
 				and your job is to keep the younger Janissaries in line and to ensure the routes to the city remain safe.\
 				The Border must not fall."
-	outfit = /datum/outfit/job/roguetown/JanissaryAgha/JanissaryAgha
+	outfit = /datum/outfit/job/roguetown/azebagha/azebagha
 
-	category_tags = list(CTAG_JANISSARYAGHA)
+	category_tags = list(CTAG_AZEBAGHA)
 	subclass_stats = list(
 		STATKEY_STR = 2,
 		STATKEY_INT = 1,
@@ -98,7 +98,7 @@
 		/datum/skill/misc/tracking = SKILL_LEVEL_EXPERT,	
 	)
 
-/datum/outfit/job/roguetown/JanissaryAgha/JanissaryAgha/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/job/roguetown/azebagha/azebagha/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.mind)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/order/movemovemove)

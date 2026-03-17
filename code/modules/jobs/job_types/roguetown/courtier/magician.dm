@@ -113,6 +113,7 @@
 	r_hand = /obj/item/rogueweapon/woodstaff/riddle_of_steel/magos
 	backl = /obj/item/storage/backpack/rogue/satchel
 	if(SSmapping.config.map_name == "Desert Town")
+		cloak = null
 		head = /obj/item/clothing/head/roguetown/jafar
 		armor = /obj/item/clothing/suit/roguetown/shirt/jafar
 		belt = /obj/item/storage/belt/rogue/leather/jafar

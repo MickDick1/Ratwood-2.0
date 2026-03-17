@@ -2,9 +2,9 @@
 
 //armor
 //Common workhorse armour for men at arms? Seems like it should be decent alround basic protection, like a hauberk (but not underarmour)
-/obj/item/clothing/suit/roguetown/armor/chainmail/mamaluke
+/obj/item/clothing/suit/roguetown/armor/chainmail/janissary
 	slot_flags = ITEM_SLOT_ARMOR
-	name = "mamaluke chainmail"
+	name = "janissary chainmail"
 	desc = "A longer steel maille that protects the legs, still doesn't protect against arrows though."
 	body_parts_covered = COVERAGE_FULL
 	icon = 'modular/DesertTown/icons/clothing/armor.dmi'
@@ -65,8 +65,8 @@
 	block2add = FOV_BEHIND
 	smeltresult = /obj/item/ingot/steel
 
-/obj/item/clothing/head/roguetown/helmet/mamalukehelm
-	name = "mamaluke Helm"
+/obj/item/clothing/head/roguetown/helmet/janissaryhelm
+	name = "Janissary Helmet"
 	desc = "A helmet with too much style."
 	icon = 'modular/DesertTown/icons/clothing/head.dmi'
 	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/head.dmi'

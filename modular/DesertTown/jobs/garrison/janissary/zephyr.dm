@@ -1,11 +1,11 @@
 // In exchange for martial skills beyond ranged, they can now set traps, too.
-/datum/advclass/mamluk/zephyr
-	name = "Mamluk Zephyr"
+/datum/advclass/janissary/zephyr
+	name = "Janissary Zephyr"
 	tutorial = "You are a professional soldier of the realm, specializing in ranged implements. You sport a keen eye, looking for your enemies weaknesses."
 	//allowed_maps = list("Desert Town")
-	outfit = /datum/outfit/job/roguetown/mamluk/zephyr
+	outfit = /datum/outfit/job/roguetown/janissary/zephyr
 
-	category_tags = list(CTAG_MAMLUK)
+	category_tags = list(CTAG_JANISSARY)
 	//Garrison ranged/speed class. Time to go wild
 	subclass_stats = list(
 		STATKEY_SPD = 2,// seems kinda lame but remember guardsman bonus!!
@@ -34,7 +34,7 @@
 	)
 	extra_context = "Can set traps."
 
-/datum/outfit/job/roguetown/mamluk/zephyr/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/job/roguetown/janissary/zephyr/pre_equip(mob/living/carbon/human/H)
 	..()
 	neck = /obj/item/clothing/neck/roguetown/chaincoif
 	pants = /obj/item/clothing/under/roguetown/splintlegs

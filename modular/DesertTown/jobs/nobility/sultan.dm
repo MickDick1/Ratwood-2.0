@@ -17,7 +17,7 @@
 		/obj/effect/proc_holder/spell/self/convertrole/slave,
 		/obj/effect/proc_holder/spell/self/convertrole/guard,
 		/obj/effect/proc_holder/spell/self/grant_nobility,
-		/obj/effect/proc_holder/spell/self/convertrole/janissary
+		/obj/effect/proc_holder/spell/self/convertrole/azeb
 	)
 	outfit = /datum/outfit/job/roguetown/sultan
 	visuals_only_outfit = /datum/outfit/job/roguetown/sultan/visuals
@@ -402,10 +402,10 @@
 	refuse_message = "I refuse."
 	recharge_time = 100
 
-/obj/effect/proc_holder/spell/self/convertrole/janissary
-	name = "Recruit Janissary"
-	new_role = "Janissary"
+/obj/effect/proc_holder/spell/self/convertrole/azeb
+	name = "Recruit Azeb"
+	new_role = "Azeb"
 	recruitment_faction = "Bog Guard"
-	recruitment_message = "Serve the Janissaries, %RECRUIT!"
+	recruitment_message = "Serve the my will, %RECRUIT!"
 	accept_message = "FOR THE CROWN!"
 	refuse_message = "I refuse."

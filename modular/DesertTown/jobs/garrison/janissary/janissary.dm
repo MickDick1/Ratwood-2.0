@@ -1,6 +1,6 @@
-/datum/job/roguetown/mamluk
-	title = "Mamluk"
-	flag = MAMLUK
+/datum/job/roguetown/janissary
+	title = "Janissary"
+	flag = JANISSARY
 	department_flag = GARRISON
 	faction = "Station"
 	total_positions = 8
@@ -14,8 +14,8 @@
 	display_order = JDO_CASTLEGUARD
 	whitelist_req = TRUE
 
-	outfit = /datum/outfit/job/roguetown/mamluk
-	advclass_cat_rolls = list(CTAG_MAMLUK = 20)
+	outfit = /datum/outfit/job/roguetown/janissary
+	advclass_cat_rolls = list(CTAG_JANISSARY = 20)
 
 	give_bank_account = 22
 	min_pq = 3
@@ -25,14 +25,14 @@
 	social_rank = SOCIAL_RANK_YEOMAN
 	cmode_music = 'sound/music/combat_desert1.ogg'
 	job_subclasses = list(
-		/datum/advclass/mamluk/footman,
-		/datum/advclass/mamluk/zephyr,
+		/datum/advclass/janissary/footman,
+		/datum/advclass/janissary/zephyr,
 	)
 
-/datum/outfit/job/roguetown/mamluk
+/datum/outfit/job/roguetown/janissary
 	job_bitflag = BITFLAG_GARRISON
 
-/datum/outfit/job/roguetown/mamluk
+/datum/outfit/job/roguetown/janissary
 	shoes = /obj/item/clothing/shoes/roguetown/shalal
 	beltl = /obj/item/rogueweapon/whip
 	belt = /obj/item/storage/belt/rogue/leather

@@ -4,16 +4,16 @@
 	icon_state = "arrow"
 
 
-/obj/effect/landmark/start/dt/janissaryagha
-	name = "Janissary Agha"
-/obj/effect/landmark/start/dt/janissary
-	name = "Janissary"
+/obj/effect/landmark/start/dt/azebagha
+	name = "Azeb Agha"
+/obj/effect/landmark/start/dt/azeb
+	name = "Azeb"
 /obj/effect/landmark/start/dt/cataphract
 	name = "Cataphract"
-/obj/effect/landmark/start/dt/mamluk
-	name = "Mamluk"
-/obj/effect/landmark/start/dt/mamluksergeant
-	name = "Mamluk Sergeant"
+/obj/effect/landmark/start/dt/janissary
+	name = "Janissary"
+/obj/effect/landmark/start/dt/janissarysergeant
+	name = "Janissary Sergeant"
 /obj/effect/landmark/start/dt/slavemaster
 	name = "Slave master"
 

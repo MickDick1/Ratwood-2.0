@@ -61,7 +61,7 @@
 		/datum/job/roguetown/vanguard,//  jannissary
 		/datum/job/roguetown/warden,//  jannissary
 		/datum/job/roguetown/dungeoneer,// Slavemaster. Okay it's a bit different but it's nice to cut bloat y'know!
-		/datum/job/roguetown/sergeant,//mamluk sergeant
+		/datum/job/roguetown/sergeant,//janissary sergeant
 		// /datum/job/roguetown/squire,
 		// /datum/job/roguetown/veteran,
 
@@ -114,9 +114,9 @@
 		// /datum/job/roguetown/sheikh,
 		// /datum/job/roguetown/magician,
 
-		// /datum/job/roguetown/mamluk,
 		// /datum/job/roguetown/janissary,
-		// /datum/job/roguetown/JanissaryAgha,
+		// /datum/job/roguetown/azeb,
+		// /datum/job/roguetown/azebagha,
 		// /datum/job/roguetown/slavemaster,
 		
 		// /datum/job/roguetown/dtslave,

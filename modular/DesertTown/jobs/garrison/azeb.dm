@@ -1,5 +1,5 @@
-/datum/job/roguetown/janissary
-	title = "Janissary"
+/datum/job/roguetown/azeb
+	title = "Azeb"
 	flag = BOGGUARD
 	department_flag = GARRISON
 	faction = "Station"
@@ -17,8 +17,8 @@
 	whitelist_req = TRUE
 	allowed_maps = list("Desert Town")
 
-	outfit = /datum/outfit/job/roguetown/janissary
-	advclass_cat_rolls = list(CTAG_JANISSARY = 20)
+	outfit = /datum/outfit/job/roguetown/azeb
+	advclass_cat_rolls = list(CTAG_AZEB = 20)
 
 	give_bank_account = 16
 	min_pq = 0
@@ -28,8 +28,8 @@
 	social_rank = SOCIAL_RANK_PEASANT
 	job_traits = list(TRAIT_OUTDOORSMAN, TRAIT_WOODSMAN, TRAIT_SURVIVAL_EXPERT)
 	job_subclasses = list(
-		/datum/advclass/janissary/ranger,
-		/datum/advclass/janissary/footman
+		/datum/advclass/azeb/ranger,
+		/datum/advclass/azeb/footman
 	)
 
 	
@@ -47,17 +47,17 @@
 					index = H.real_name
 				S.name = "Jannissary Cloak ([index])"
 
-/datum/outfit/job/roguetown/janissary
+/datum/outfit/job/roguetown/azeb
 	backr = /obj/item/storage/backpack/rogue/satchel
 	id = /obj/item/scomstone/bad/garrison
 	job_bitflag = BITFLAG_GARRISON
 
-/datum/advclass/janissary/ranger
+/datum/advclass/azeb/ranger
 	name = "Ranger"
 	tutorial = "You are well versed in the ways of handling a bow. \
 	You will stand in the back, and protect the front with arrows."
-	outfit = /datum/outfit/job/roguetown/janissary/ranger
-	category_tags = list(CTAG_JANISSARY)
+	outfit = /datum/outfit/job/roguetown/azeb/ranger
+	category_tags = list(CTAG_AZEB)
 	traits_applied = list(TRAIT_DODGEEXPERT)
 	subclass_stats = list(
 		STATKEY_PER = 2,//7 points weighted, same as MAA. They get temp buffs in the city instead of in the city.
@@ -88,7 +88,7 @@
 		/datum/skill/craft/cooking = SKILL_LEVEL_NOVICE, // This should let them fry meat on fires.
 	)
 
-/datum/outfit/job/roguetown/janissary/ranger/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/job/roguetown/azeb/ranger/pre_equip(mob/living/carbon/human/H)
 	..()
 	head = /obj/item/clothing/head/roguetown/helmet/sallet/zyb
 	mask = /obj/item/clothing/head/roguetown/roguehood/shalal/nomad
@@ -114,12 +114,12 @@
 	H.verbs |= /mob/proc/haltyell
 	H.set_blindness(0)
 
-/datum/advclass/janissary/footman
+/datum/advclass/azeb/footman
 	name = "Footman"
 	tutorial = "You are well versed in the ways of handling a sword. \
 	You will stand in the front, and protect."
-	outfit = /datum/outfit/job/roguetown/janissary/footman
-	category_tags = list(CTAG_JANISSARY)
+	outfit = /datum/outfit/job/roguetown/azeb/footman
+	category_tags = list(CTAG_AZEB)
 	traits_applied = list(TRAIT_MEDIUMARMOR)
 	subclass_stats = list(
 		STATKEY_STR = 2,//7 points weighted, same as MAA. They get temp buffs in the desert instead of in the city.
@@ -154,7 +154,7 @@
 		/datum/skill/craft/cooking = SKILL_LEVEL_NOVICE, // This should let them fry meat on fires.
 	)
 
-/datum/outfit/job/roguetown/janissary/footman/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/job/roguetown/azeb/footman/pre_equip(mob/living/carbon/human/H)
 	..()
 	head = /obj/item/clothing/head/roguetown/helmet/sallet/zyb
 	mask = /obj/item/clothing/head/roguetown/roguehood/shalal/nomad
