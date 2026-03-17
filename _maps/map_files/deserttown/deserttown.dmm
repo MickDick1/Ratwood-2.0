@@ -1851,7 +1851,6 @@
 "aZN" = (
 /obj/structure/mineral_door/wood/donjon{
 	dir = 8;
-	lockdiff = 1;
 	locked = 1;
 	lockid = "church";
 	name = "Church Dungeon"
@@ -2194,7 +2193,6 @@
 /area/rogue/indoors/deserttown/manor)
 "big" = (
 /obj/structure/mineral_door/wood/donjon{
-	lockdiff = 1;
 	locked = 1;
 	lockid = "sherrif";
 	name = "Mayor";
@@ -34368,7 +34366,6 @@
 /area/rogue/outdoors/mountains)
 "rvQ" = (
 /obj/structure/mineral_door/wood/donjon{
-	lockdiff = 1;
 	locked = 1;
 	lockid = "sheriff";
 	name = "Mayor"
@@ -45186,7 +45183,6 @@
 "wNb" = (
 /obj/structure/mineral_door/wood/donjon{
 	dir = 8;
-	lockdiff = 2;
 	locked = 1;
 	lockid = "steward";
 	masterkey = 0;
