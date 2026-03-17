@@ -53,6 +53,11 @@
 	daily_payments["Archivist"] = 10
 	daily_payments["Magicians Associate"] = 10
 	daily_payments["Jester"] = 6
+	daily_payments["Janissary"] = 20
+	daily_payments["Slave Master"] = 50
+	daily_payments["Mamluk"] = 30
+	daily_payments["Mamluk Sergeant"] = 40 //Garrison
+	daily_payments["Headslave"] = 20 //Manor-House
 
 /obj/structure/roguemachine/steward/attackby(obj/item/P, mob/user, params)
 	if(istype(P, /obj/item/roguekey))

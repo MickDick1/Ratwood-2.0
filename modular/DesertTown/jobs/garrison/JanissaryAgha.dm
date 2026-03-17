@@ -1,6 +1,6 @@
 /datum/job/roguetown/JanissaryAgha
 	title = "Janissary Agha"
-	flag = SERGEANT
+	flag = JANISSARYAGHA
 	department_flag = GARRISON
 	faction = "Station"
 	total_positions = 1
@@ -19,7 +19,7 @@
 	social_rank = SOCIAL_RANK_YEOMAN
 
 	outfit = /datum/outfit/job/roguetown/JanissaryAgha
-	advclass_cat_rolls = list(CTAG_SERGEANT = 20)
+	advclass_cat_rolls = list(CTAG_JANISSARYAGHA = 20)
 
 	give_bank_account = 50
 	min_pq = 6
@@ -70,7 +70,7 @@
 				The Border must not fall."
 	outfit = /datum/outfit/job/roguetown/JanissaryAgha/JanissaryAgha
 
-	category_tags = list(CTAG_SERGEANT)
+	category_tags = list(CTAG_JANISSARYAGHA)
 	subclass_stats = list(
 		STATKEY_STR = 2,
 		STATKEY_INT = 1,

@@ -25087,6 +25087,7 @@
 	dir = 1
 	},
 /obj/structure/rack/rogue/shelf,
+/obj/effect/landmark/start/dt/mamluksergeant,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/deserttown/garrison)
 "mSi" = (

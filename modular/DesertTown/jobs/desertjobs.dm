@@ -5,6 +5,8 @@
 #define CTAG_AMIR			"CAT_AMIR"		// Heir alt
 #define CTAG_CATAPHRACT		"CAT_CATAPHRACT"	// Knight alt
 #define CTAG_JANISSARY		"CAT_JANISSARY"		// Warden (?) alt
+#define CTAG_JANISSARYAGHA	"CAT_JANISSARYAGHA"		// Warden (?) alt
+#define CTAG_MAMLUKSERGEANT	"CAT_MAMLUKSERGEANT"		// Sergeant class - Handles Sergeant class selector (weapons selection)
 #define CTAG_MAMLUK			"CAT_MAMLUK"		// Menatarms alt
 #define CTAG_SLAVEMASTER	"CAT_SLAVEMASTER"
 #define CTAG_DTTOWNER		"CAT_DTTOWNER"
@@ -25,6 +27,7 @@
 #define VIZIER		(1<<2)
 // #define STEWARD		(1<<3)
 #define CATAPHRACT		(1<<4)
+#define MAMLUKSERGEANT	(1<<6)
 // #define GUARD_CAPTAIN		(1<<5)
 // #define MARSHAL		(1<<6)
 // #define HOSTAGE		(1<<7)
@@ -37,7 +40,9 @@
 #define SLAVEMASTER	(1<<2)
 // #define SQUIRE		(1<<3)
 // #define BOGGUARD	(1<<4)
+#define JANISSARY	(1<<4)
 // #define SERGEANT	(1<<5)
+#define JANISSARYAGHA	(1<<5)
 // #define SHERIFF		(1<<6)
 
 // #define CHURCHMEN		(1<<2)

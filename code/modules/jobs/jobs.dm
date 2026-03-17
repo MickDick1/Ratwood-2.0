@@ -105,6 +105,7 @@ GLOBAL_LIST_INIT(garrison_positions, list(
 	//desert
 	"Cataphract",
 	"Mamluk",
+	"Mamluk Sergeant",
 	"Janissary Agha",
 	"Janissary",
 	"Slave Master",

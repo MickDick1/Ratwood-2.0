@@ -19,6 +19,7 @@
 		/datum/job/roguetown/dtmagician,
 
 		/datum/job/roguetown/mamluk,
+		/datum/job/roguetown/mamluksergeant,
 		/datum/job/roguetown/janissary,
 		/datum/job/roguetown/JanissaryAgha,
 		/datum/job/roguetown/slavemaster,

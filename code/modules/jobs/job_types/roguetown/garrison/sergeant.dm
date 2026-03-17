@@ -166,6 +166,16 @@
 				to_chat(user, span_alert("I cannot order one not of my ranks!"))
 				revert_cast()
 				return
+		if(user.job == "Mamluk Sergeant")
+			if(!(target.job in list("Mamluk")))
+				to_chat(user, span_alert("I cannot order one not of my ranks!"))
+				revert_cast()
+				return
+		if(user.job == "Janissary Agha")
+			if(!(target.job in list("Janissary")))
+				to_chat(user, span_alert("I cannot order one not of my ranks!"))
+				revert_cast()
+				return
 		if(target == user)
 			to_chat(user, span_alert("I cannot order myself!"))
 			revert_cast()
@@ -232,6 +242,16 @@
 				to_chat(user, span_alert("I cannot order one not of my ranks!"))
 				revert_cast()
 				return
+		if(user.job == "Mamluk Sergeant")
+			if(!(target.job in list("Mamluk")))
+				to_chat(user, span_alert("I cannot order one not of my ranks!"))
+				revert_cast()
+				return
+		if(user.job == "Janissary Agha")
+			if(!(target.job in list("Janissary")))
+				to_chat(user, span_alert("I cannot order one not of my ranks!"))
+				revert_cast()
+				return
 		if(target == user)
 			to_chat(user, span_alert("I cannot order myself!"))
 			revert_cast()
@@ -264,6 +284,16 @@
 				return
 		if(user.job == "Knight Captain")
 			if(!(target.job in list("Knight", "Squire")))
+				to_chat(user, span_alert("I cannot order one not of my ranks!"))
+				revert_cast()
+				return
+		if(user.job == "Mamluk Sergeant")
+			if(!(target.job in list("Mamluk")))
+				to_chat(user, span_alert("I cannot order one not of my ranks!"))
+				revert_cast()
+				return
+		if(user.job == "Janissary Agha")
+			if(!(target.job in list("Janissary")))
 				to_chat(user, span_alert("I cannot order one not of my ranks!"))
 				revert_cast()
 				return
@@ -326,6 +356,16 @@
 				return
 		if(user.job == "Knight Captain")
 			if(!(target.job in list("Knight", "Squire")))
+				to_chat(user, span_alert("I cannot order one not of my ranks!"))
+				revert_cast()
+				return
+		if(user.job == "Mamluk Sergeant")
+			if(!(target.job in list("Mamluk")))
+				to_chat(user, span_alert("I cannot order one not of my ranks!"))
+				revert_cast()
+				return
+		if(user.job == "Janissary Agha")
+			if(!(target.job in list("Janissary")))
 				to_chat(user, span_alert("I cannot order one not of my ranks!"))
 				revert_cast()
 				return

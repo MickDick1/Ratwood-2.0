@@ -12,7 +12,8 @@
 	name = "Cataphract"
 /obj/effect/landmark/start/dt/mamluk
 	name = "Mamluk"
-
+/obj/effect/landmark/start/dt/mamluksergeant
+	name = "Mamluk Sergeant"
 /obj/effect/landmark/start/dt/slavemaster
 	name = "Slave master"
 

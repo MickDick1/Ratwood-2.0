@@ -423,6 +423,7 @@
 	/datum/job/roguetown/squire,\
 	/datum/job/roguetown/guardsman,\
 	/datum/job/roguetown/mamluk,\
+	/datum/job/roguetown/mamluksergeant,\
 	/datum/job/roguetown/janissary,\
 	/datum/job/roguetown/slavemaster,\
 	/datum/job/roguetown/rookie,\

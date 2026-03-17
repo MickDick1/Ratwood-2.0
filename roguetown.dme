@@ -2924,6 +2924,7 @@
 #include "modular\DesertTown\jobs\garrison\janissary.dm"
 #include "modular\DesertTown\jobs\garrison\JanissaryAgha.dm"
 #include "modular\DesertTown\jobs\garrison\slavemaster.dm"
+#include "modular\DesertTown\jobs\garrison\mamluksergeant.dm"
 #include "modular\DesertTown\jobs\garrison\mamluk\footman.dm"
 #include "modular\DesertTown\jobs\garrison\mamluk\mamluk.dm"
 #include "modular\DesertTown\jobs\garrison\mamluk\zephyr.dm"
