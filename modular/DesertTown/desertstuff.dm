@@ -1,4 +1,7 @@
 //drape
+/obj/structure/drape/
+	plane = -3
+
 /obj/structure/drape/desert
 	name = "desert drape"
 	desc = "Made from durable fabric."
@@ -10,6 +13,7 @@
 	desc = "Made from prestigious fabric."
 	icon = 'modular/DesertTown/icons/drapes.dmi'
 	icon_state = "zybantinedrape1"
+	color = "#a3a3a3"
 
 /obj/structure/drape/zybantine/Initialize()
 	. = ..()
