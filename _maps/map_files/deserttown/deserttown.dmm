@@ -37462,6 +37462,9 @@
 	},
 /obj/item/reagent_containers/food/snacks/rogue/meat/steak,
 /obj/item/reagent_containers/food/snacks/rogue/meat/steak,
+/obj/effect/spawner/lootdrop/roguetown/dungeon/food,
+/obj/effect/spawner/lootdrop/roguetown/dungeon/food,
+/obj/effect/spawner/lootdrop/roguetown/dungeon/food,
 /turf/open/floor/rogue/tile/harem,
 /area/rogue/indoors/deserttown/smithguild)
 "sTn" = (
@@ -239145,9 +239148,9 @@ mxD
 mxD
 mxD
 mxD
-tZp
-tZp
-tZp
+mxD
+mxD
+mxD
 mxD
 mxD
 mxD
@@ -239446,11 +239449,11 @@ mxD
 mxD
 mxD
 mxD
+mxD
 tZp
 tZp
-iHL
 tZp
-tZp
+mxD
 mxD
 mxD
 mxD
@@ -239749,9 +239752,9 @@ mxD
 mxD
 mxD
 tZp
-dTX
-xBI
-dTX
+tZp
+iHL
+tZp
 tZp
 mxD
 mxD
@@ -240049,11 +240052,11 @@ mxD
 mxD
 mxD
 mxD
+mxD
 tZp
-tZp
-hxE
+dTX
 xBI
-hxE
+dTX
 tZp
 mxD
 mxD
@@ -240352,8 +240355,8 @@ mxD
 mxD
 mxD
 tZp
+tZp
 hxE
-xBI
 xBI
 hxE
 tZp
@@ -240656,8 +240659,8 @@ mxD
 tZp
 hxE
 xBI
+xBI
 hxE
-tZp
 tZp
 mxD
 mxD
@@ -240960,7 +240963,7 @@ hxE
 xBI
 hxE
 tZp
-mxD
+tZp
 mxD
 mxD
 mxD
