@@ -935,6 +935,7 @@
 "aBj" = (
 /obj/effect/landmark/start/dt/janissary,
 /obj/effect/landmark/start/manorguardsman,
+/obj/effect/landmark/start/dt/janissary,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/deserttown/garrison)
 "aBm" = (
@@ -3219,6 +3220,7 @@
 /area/rogue/indoors/town/church)
 "bKR" = (
 /obj/effect/landmark/start/manorguardsman,
+/obj/effect/landmark/start/dt/janissary,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/deserttown/garrison)
 "bKS" = (
@@ -9357,6 +9359,12 @@
 	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
 	},
 /area/rogue/indoors/deserttown)
+"eIm" = (
+/obj/machinery/light/rogue/candle/red/r,
+/turf/open/floor/rogue/tile/brownbrick{
+	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
+	},
+/area/rogue/indoors/deserttown/garrison)
 "eIw" = (
 /obj/item/natural/stone,
 /turf/open/floor/rogue/dunes,
@@ -9800,11 +9808,11 @@
 	},
 /area/rogue/indoors/deserttown)
 "eSP" = (
-/obj/effect/landmark/start/dt/janissaryary,
 /obj/effect/landmark/start/manorguardsman,
 /obj/structure/roguemachine/bounty{
 	pixel_y = 32
 	},
+/obj/effect/landmark/start/dt/janissary,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/deserttown/garrison)
 "eTG" = (
@@ -13616,8 +13624,8 @@
 /obj/structure/closet/crate/roguecloset/lord,
 /obj/item/scomstone,
 /obj/item/rogueweapon/greatsword,
-/obj/item/clothing/shoes/roguetown/boots/nobleboot,
 /obj/machinery/light/rogue/candle/l,
+/obj/item/rogueweapon/whip/antique,
 /turf/open/floor/rogue/carpet/lord/center,
 /area/rogue/indoors/deserttown/manor)
 "gPe" = (
@@ -13923,6 +13931,7 @@
 /obj/effect/landmark/start/dt/janissary,
 /obj/effect/landmark/start/manorguardsman,
 /obj/structure/rack/rogue/shelf,
+/obj/effect/landmark/start/dt/janissary,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/deserttown/garrison)
 "gYN" = (
@@ -21551,6 +21560,7 @@
 /obj/effect/landmark/start/manorguardsman,
 /obj/effect/landmark/start/dt/janissary,
 /obj/machinery/light/rogue/candle,
+/obj/effect/landmark/start/dt/janissary,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/deserttown/garrison)
 "kRD" = (
@@ -25052,7 +25062,7 @@
 	dir = 1
 	},
 /obj/structure/rack/rogue/shelf,
-/obj/effect/landmark/start/dt/janissaryarysergeant,
+/obj/effect/landmark/start/dt/janissarysergeant,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/deserttown/garrison)
 "mSi" = (
@@ -32257,8 +32267,6 @@
 /area/rogue/under/deserttown/basement/keep)
 "qxB" = (
 /obj/structure/closet/crate/roguecloset/lord,
-/obj/item/clothing/head/roguetown/helmet/heavy/blkknight,
-/obj/item/clothing/suit/roguetown/armor/plate/blkknight,
 /turf/open/floor/rogue/carpet/lord/center,
 /area/rogue/indoors/deserttown/manor)
 "qxK" = (
@@ -34332,9 +34340,7 @@
 /turf/open/floor/rogue/desert_grass,
 /area/rogue/outdoors/deserttown)
 "ruo" = (
-/obj/structure/stairs{
-	icon = 'modular/DesertTown/icons/stairs.dmi'
-	},
+/obj/structure/stairs/desert,
 /turf/open/floor/rogue/tile/brownbrick{
 	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
 	},
@@ -35271,6 +35277,7 @@
 /turf/open/floor/rogue/tile/harem,
 /area/rogue/indoors/deserttown/tavern)
 "rRm" = (
+/obj/effect/landmark/start/dt/janissary,
 /obj/effect/landmark/start/dt/janissary,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/deserttown/garrison)
@@ -42416,9 +42423,7 @@
 	},
 /area/rogue/under/deserttown/basement/town)
 "vvt" = (
-/obj/structure/stairs{
-	icon = 'modular/DesertTown/icons/stairs.dmi'
-	},
+/obj/structure/stairs/desert,
 /turf/open/floor/rogue/tile/brownbrick{
 	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
 	},
@@ -44336,6 +44341,12 @@
 /obj/structure/bed/rogue/inn/double,
 /turf/open/floor/carpet/red,
 /area/rogue/indoors/deserttown/smithguild)
+"wrm" = (
+/obj/structure/fluff/walldeco/stone/bronze{
+	color = "#f5cc8e"
+	},
+/turf/closed/wall/mineral/rogue/sandbrick,
+/area/rogue/indoors/deserttown/garrison)
 "wrp" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
@@ -363231,7 +363242,7 @@ jlj
 iDv
 kMO
 jlj
-jlj
+wrm
 qzQ
 wgb
 qzQ
@@ -364137,7 +364148,7 @@ jlj
 rni
 pez
 pez
-jlj
+wrm
 qzQ
 wgb
 qzQ
@@ -366854,7 +366865,7 @@ rSt
 jlj
 jnC
 vvt
-kMO
+eIm
 jlj
 qzQ
 wgb

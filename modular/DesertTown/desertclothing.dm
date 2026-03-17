@@ -36,6 +36,22 @@
 	equip_delay_self = 4 SECONDS
 	smelt_bar_num = 2
 
+/obj/item/clothing/suit/roguetown/armor/plate/cataphract/sultan
+	name = "sultan scale"
+	desc = "Impenetrable scales like an ancient black dragon!"
+	color = "#5e5d5d"
+	armor = ARMOR_PLATE_BSTEEL
+	max_integrity = ARMOR_INT_CHEST_PLATE_BLACKSTEEL
+	smeltresult = /obj/item/ingot/blacksteel
+
+/obj/item/clothing/head/roguetown/helmet/heavy/cataphract/sultan
+	name = "sultan helm"
+	desc = "Impenetrable scales like an ancient black dragon!"
+	color = "#5e5d5d"
+	armor = ARMOR_PLATE_BSTEEL
+	max_integrity = ARMOR_INT_CHEST_PLATE_BLACKSTEEL
+	smeltresult = /obj/item/ingot/blacksteel
+
 // /obj/item/clothing/suit/roguetown/armor/chainmail/janissary //SPRITE ALREADY USED BY ATGERVI STUFF!
 // 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
 // 	name = "Janissary Mail"
