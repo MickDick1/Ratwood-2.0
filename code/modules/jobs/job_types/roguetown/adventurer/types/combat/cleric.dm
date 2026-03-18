@@ -309,11 +309,9 @@
 				if("ENDURING, AS HE DOES - FAITH")
 					C.grant_miracles(H, cleric_tier = CLERIC_T2, passive_gain = CLERIC_REGEN_MINOR, devotion_limit = CLERIC_REQ_2)
 					H.adjust_skillrank_up_to(/datum/skill/magic/holy, SKILL_LEVEL_JOURNEYMAN, TRUE)
-					H.change_stat(STATKEY_WIL, 1) //ENDURE
 					armor = /obj/item/clothing/suit/roguetown/armor/plate/half/fluted/ornate
 				if("VEYLED, LIKE HIS MARTYRS - ARMOUR")
 					C.grant_miracles(H, cleric_tier = CLERIC_T1, passive_gain = CLERIC_REGEN_WEAK, devotion_limit = CLERIC_REQ_1)
-					H.change_stat(STATKEY_CON, 1) //SURVIVE
 					ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC) //Basically a bit more flavourful Knight Errant, so may as very well give HEAVYARMOR
 					armor = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/ornate
 	var/weapons = list("Longsword","Mace","Flail","Whip","Spear","Axe")
@@ -597,8 +595,6 @@
 		if(/datum/patron/old_god) //Basically no good miracles to speak of, so get better stats instead.
 			cloak = /obj/item/clothing/cloak/psydontabard
 			head = /obj/item/clothing/head/roguetown/roguehood/psydon
-			H.change_stat(STATKEY_WIL, 2)
-			H.change_stat(STATKEY_CON, 2)
 		if(/datum/patron/divine/astrata)
 			head = /obj/item/clothing/head/roguetown/roguehood/astrata
 			cloak = /obj/item/clothing/suit/roguetown/shirt/robe/astrata
