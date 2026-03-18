@@ -158,7 +158,9 @@
 		var/sacred_prayer = "Dear Eora, I embraced this binding in foolish haste because I'm a dullard and I'm sorry, so so so sorry for being such a stupid stupid stupid person and I'm begging you please please please free my loins."
 		var/encoded_sacred_prayer = html_encode(sacred_prayer)
 		var/prayer_prompt = "Recite the Prayer of Foolish Repentance EXACTLY as written:\n\n\"[sacred_prayer]\"\n\n(You must type this yourself - copying is forbidden by divine law)"
-		var/prayer_attempt = tgui_input_text(src, prayer_prompt, "Prayer of Foolish Repentance", "", length(encoded_sacred_prayer), FALSE, TRUE, 0, FALSE, GLOB.tgui_always_state, FALSE, TRUE)
+		// multiline=TRUE so the wrapping textarea is readable; bigmodal=TRUE for a large window that shows the full prompt.
+		// disable_paste=TRUE enforces hand-typing; max_length locks out anything longer than the prayer itself.
+		var/prayer_attempt = tgui_input_text(src, prayer_prompt, "Prayer of Foolish Repentance", default = "", max_length = length(encoded_sacred_prayer), multiline = TRUE, encode = TRUE, ui_state = GLOB.tgui_always_state, bigmodal = TRUE, disable_paste = TRUE)
 
 		if(!prayer_attempt)
 			to_chat(src, span_warning("Eora does not hear your silence."))
