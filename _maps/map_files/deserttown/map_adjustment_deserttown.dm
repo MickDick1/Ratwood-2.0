@@ -20,13 +20,14 @@
 		/datum/job/roguetown/magician = list(display_title = "Palace Magician"),
 	)
 	tutorial_adjust = list(
-		/datum/job/roguetown/marshal = "CHANGE THIS LATER. Manage the town outside of the palace. Hang out in the mayor building!!!",
+		// /datum/job/roguetown/marshal = "CHANGE THIS LATER. Manage the town outside of the palace. Hang out in the mayor building!!!",
+		/datum/job/roguetown/marshal = "CHANGE THIS LATER. You are entrusted as the highest military authority by the Sultan. Hang out in your fancy house. Act as the primary go-between and coordinator between the main pillars of might - The Cataphract Captain (and their Cataphracts), the Janissary Sergeant (and their Janissaries) and the Azeb Agha (and the Azebs)",
 		/datum/job/roguetown/physician = "You are a master physician, trusted by the Sultan themself to administer expert care to the Royal family, the court, \
 		its protectors and its subjects. While primarily a resident of the keep in the palace medical wing, you also have access \
 		 to the local clinic in the bazaar, where lesser licensed apothecaries ply their trade under your occasional passing tutelage.",
 		/datum/job/roguetown/magician = "Your creed is one dedicated to the conquering of the arcane arts and the constant thrill of knowledge. \
 		You owe your life to the Sultan, for it was his coin that allowed you to continue your studies in these dark times. \
-		In return, you have proven time and time again as justicar and trusted advisor to their reign."
+		In return, you have proven time and time again as justicar and trusted advisor to their reign.",
 	)
 	/// Jobs that this map won't use
 	blacklist = list(
@@ -107,7 +108,7 @@
 		// /datum/job/roguetown/dtvillager,
 
 		// /datum/job/roguetown/sultan,
-		// /datum/job/roguetown/cataracht,
+		// /datum/job/roguetown/cataphract,
 		// /datum/job/roguetown/vizier,
 
 		// /datum/job/roguetown/headslave,
@@ -115,6 +116,7 @@
 		// /datum/job/roguetown/magician,
 
 		// /datum/job/roguetown/janissary,
+		// /datum/job/roguetown/janissarysergeant,
 		// /datum/job/roguetown/azeb,
 		// /datum/job/roguetown/azebagha,
 		// /datum/job/roguetown/slavemaster,
