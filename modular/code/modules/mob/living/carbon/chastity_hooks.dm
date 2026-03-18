@@ -89,9 +89,10 @@
 
 /**
  * Called by toggle_extreme_ERP() (via hascall) when the player disables extreme ERP content.
- * If the player is currently wearing a spiked chastity device (chastity_type >= 3), it is
- * forcibly removed and dropped at their feet — spiked devices are extreme content and must
- * not remain on a player who has opted out of that category.
+ * If the player is currently wearing a spiked chastity device, it is forcibly removed and
+ * dropped at their feet — spiked devices are extreme content and must not remain on a player
+ * who has opted out of that category. Spiked status is determined by TRAIT_CHASTITY_SPIKED
+ * being present in the device's chastity_standard_traits entry (the authoritative source).
  * Non-spiked devices are left undisturbed.
  */
 /client/proc/modular_handle_extreme_erp_toggle_disable()
@@ -99,7 +100,7 @@
 		return
 	var/mob/living/carbon/human/human_mob = mob
 	var/obj/item/chastity/device = human_mob.chastity_device
-	if(!device || device.chastity_type < 3)
+	if(!device || !(TRAIT_CHASTITY_SPIKED in GLOB.chastity_standard_traits[device.chastity_type + 1]))
 		return
 	device.remove_chastity(human_mob)
 	device.forceMove(get_turf(human_mob))

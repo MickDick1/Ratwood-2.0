@@ -7,7 +7,8 @@
 		to_chat(user, span_warning("I have chastity content disabled."))
 		return
 	// Spiked devices are extreme content — require the wearer's explicit opt-in.
-	if(chastity_type >= 3 && (H.client?.prefs && !H.client.prefs.extreme_erp))
+	// Use the trait list as the authoritative spiked check so this stays in sync with chastity_standard_traits.
+	if((TRAIT_CHASTITY_SPIKED in GLOB.chastity_standard_traits[chastity_type + 1]) && (H.client?.prefs && !H.client.prefs.extreme_erp))
 		to_chat(user, span_warning("Eora intervenes. I cannot equip a spiked device."))
 		return
 	if(!can_cage_target(H, user))
@@ -39,7 +40,8 @@
 		to_chat(user, span_warning("I have chastity content disabled."))
 		return
 	// Spiked devices are extreme content — the wearer must have explicitly opted in.
-	if(chastity_type >= 3 && (H.client?.prefs && !H.client.prefs.extreme_erp))
+	// Use the trait list as the authoritative spiked check so this stays in sync with chastity_standard_traits.
+	if((TRAIT_CHASTITY_SPIKED in GLOB.chastity_standard_traits[chastity_type + 1]) && (H.client?.prefs && !H.client.prefs.extreme_erp))
 		to_chat(user, span_warning("Eora intervenes. They cannot be fitted with a spiked device."))
 		return
 	if(!can_cage_target(H, user))

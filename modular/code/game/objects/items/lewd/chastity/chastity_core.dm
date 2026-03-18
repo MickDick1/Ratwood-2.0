@@ -1,12 +1,20 @@
 /// Indexed by chastity_type + 1. Each entry is the list of traits applied by apply_standard_chastity_traits().
-/// Type 0 = full belt, 1 = cage, 2 = cage+anal, 3 = spiked cage, 4 = spiked cage+anal.
+/// Type 0 = intersex full device, 1 = cage, 2 = cage+anal, 3 = spiked cage, 4 = spiked cage+anal.
+/// Type 5 = insertable belt (vagina only), 6 = insertable+anal, 7 = spiked insertable, 8 = spiked insertable+anal, 9 = spiked intersex.
+/// Insertable belts (types 5-8) use TRAIT_CHASTITY_VAGINA_BLOCKED rather than TRAIT_CHASTITY_FULL so that
+/// has_chastity_anal() (which checks FULL) does NOT fire on non-shielded insertable variants.
 /// Cursed devices do NOT use this list — their traits are toggled dynamically via apply_cursed_state().
 GLOBAL_LIST_INIT(chastity_standard_traits, list(
-	list(TRAIT_CHASTITY_FULL),
-	list(TRAIT_CHASTITY_CAGE),
-	list(TRAIT_CHASTITY_CAGE, TRAIT_CHASTITY_ANAL),
-	list(TRAIT_CHASTITY_CAGE, TRAIT_CHASTITY_SPIKED),
-	list(TRAIT_CHASTITY_CAGE, TRAIT_CHASTITY_ANAL, TRAIT_CHASTITY_SPIKED),
+	list(TRAIT_CHASTITY_FULL),                                                        // type 0 — intersex full device
+	list(TRAIT_CHASTITY_CAGE),                                                        // type 1 — cock cage
+	list(TRAIT_CHASTITY_CAGE, TRAIT_CHASTITY_ANAL),                                  // type 2 — cage + anal shield
+	list(TRAIT_CHASTITY_CAGE, TRAIT_CHASTITY_SPIKED),                                // type 3 — spiked cage
+	list(TRAIT_CHASTITY_CAGE, TRAIT_CHASTITY_ANAL, TRAIT_CHASTITY_SPIKED),           // type 4 — spiked cage + anal
+	list(TRAIT_CHASTITY_VAGINA_BLOCKED),                                              // type 5 — insertable belt (vagina only, no anal shield)
+	list(TRAIT_CHASTITY_VAGINA_BLOCKED, TRAIT_CHASTITY_ANAL),                        // type 6 — insertable + anal shield
+	list(TRAIT_CHASTITY_VAGINA_BLOCKED, TRAIT_CHASTITY_SPIKED),                      // type 7 — spiked insertable
+	list(TRAIT_CHASTITY_VAGINA_BLOCKED, TRAIT_CHASTITY_ANAL, TRAIT_CHASTITY_SPIKED), // type 8 — spiked insertable + anal
+	list(TRAIT_CHASTITY_FULL, TRAIT_CHASTITY_SPIKED)                                 // type 9 — spiked intersex device
 ))
 
 /obj/item/chastity
@@ -34,7 +42,7 @@ GLOBAL_LIST_INIT(chastity_standard_traits, list(
 	w_class = WEIGHT_CLASS_TINY
 	resistance_flags = INDESTRUCTIBLE
 	var/datum/bodypart_feature/chastity/chastity_feature // snowflake slot for chastity items, belt's dont work as clothing equippables
-	var/chastity_type = 0 // 0 = full, 1 = cage, 2 = cage with anal, 3 = spiked cage, 4 = spiked cage with anal
+	var/chastity_type = 0 // 0 = full, 1 = cage, 2 = cage with anal, 3 = spiked cage, 4 = spiked cage with anal, 5 = insertable, 6 = insertable with anal, 7 = spiked insertable, 8 = spiked insertable with anal, 9 = spiked intersex device
 	var/chastity_organtype = 0 // 0 = neuter, 1 = penis required, 2 = vagina required, 3 = both required
 	var/obj/item/roguekey/chastity/generated_key = null // persistent key object for this device; reused across re-equips
 	var/lockable = TRUE // if the device can be traditionally locked with a key or lockpick, should be true for everything but cursed devices which are locked via the collar master menu

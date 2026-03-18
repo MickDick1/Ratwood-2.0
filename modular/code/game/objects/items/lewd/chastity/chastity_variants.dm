@@ -77,14 +77,14 @@
 	item_state = "cage_insert"
 	mob_overlay_icon = "cage_insert"
 	sprite_acc = /datum/sprite_accessory/chastity/full
-	chastity_type = 0
+	chastity_type = 5
 	chastity_organtype = 2
 	suffix = null
 
 /obj/item/chastity/chastity_belt/anal
 	name = "chastity insertable with anal shield"
 	desc = "An insertable belt with additional rear shielding."
-	chastity_type = 2
+	chastity_type = 6
 	icon_state = "cage_insert_shield"
 	item_state = "cage_insert_shield"
 	sprite_acc = /datum/sprite_accessory/chastity/anal
@@ -93,7 +93,7 @@
 /obj/item/chastity/chastity_belt/spiked
 	name = "spiked chastity insertable"
 	desc = "An insertable belt fitted with cruel inward spikes."
-	chastity_type = 3
+	chastity_type = 7
 	icon_state = "cage_insert_spiked"
 	item_state = "cage_insert_spiked"
 	sprite_acc = /datum/sprite_accessory/chastity/spiked_belt
@@ -102,7 +102,7 @@
 /obj/item/chastity/chastity_belt/spiked_anal
 	name = "spiked chastity insertable with anal shield"
 	desc = "A spiked insertable belt with rear denial shielding."
-	chastity_type = 4
+	chastity_type = 8
 	icon_state = "cage_insert_spikeshield"
 	item_state = "cage_insert_spikeshield"
 	sprite_acc = /datum/sprite_accessory/chastity/spiked_belt_anal
@@ -115,14 +115,14 @@
 	item_state = "cage_belt"
 	mob_overlay_icon = "cage_belt"
 	sprite_acc = /datum/sprite_accessory/chastity/intersex
-	chastity_type = 1
+	chastity_type = 0
 	chastity_organtype = 3
 	suffix = null
 
 /obj/item/chastity/intersex/spiked
 	name = "spiked intersex chastity device"
 	desc = "An intersex device fitted with inward punishment spikes."
-	chastity_type = 3
+	chastity_type = 9
 	icon_state = "cage_belt"
 	item_state = "cage_belt"
 	sprite_acc = /datum/sprite_accessory/chastity/spiked
