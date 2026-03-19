@@ -592,7 +592,7 @@
 		)
 	H.cmode_music = 'sound/music/cmode/church/combat_reckoning.ogg'
 	switch(H.patron?.type)
-		if(/datum/patron/old_god) //Basically no good miracles to speak of, so get better stats instead.
+		if(/datum/patron/old_god)
 			cloak = /obj/item/clothing/cloak/psydontabard
 			head = /obj/item/clothing/head/roguetown/roguehood/psydon
 		if(/datum/patron/divine/astrata)
