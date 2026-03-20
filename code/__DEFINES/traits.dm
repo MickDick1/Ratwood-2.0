@@ -108,6 +108,7 @@
 #define TRAIT_CHASTITY_ANAL "Anal Shield" //Prevents penetrative anal sex. Given by a chastity device with an anal shield.
 #define TRAIT_CHASTITY_SPIKED "Genital Spikes" // Causes discomfort during arousal.
 #define TRAIT_CHASTITY_LOCKED "Locked Chastity Device" // Prevents removal of the chastity device.
+#define TRAIT_EXTREME_TEMPERATURE_IMMUNE "Extreme Temperature Immunity" //immunitty to heatstroke and frostbite without damage reduction
 
 //Hearthstone port (Tracking)
 #define TRAIT_PERFECT_TRACKER "Huntmaster" //Will always find any tracks and analyzes them perfectly.
@@ -224,6 +225,7 @@
 #define TRAIT_NOHUNGER	"Foodless"
 #define TRAIT_DARKVISION "Darksight"
 #define TRAIT_NOCSHADES "Nocshaded"
+#define TRAIT_SANDSTORMED "Sandstormed"
 #define TRAIT_LIGHT_STEP	"Light Step"
 #define TRAIT_AZURENATIVE "Vale Native"
 #define TRAIT_SLEUTH	"Sleuth"
@@ -514,7 +516,8 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_CHASTITY_SPIKED = span_info("My chastity device is equipped with spikes constantly pressing against my nethers."),
 	TRAIT_CHASTITY_LOCKED = span_info("My chastity device is locked, it's impossible to remove without the key."),
 	TRAIT_GANG_A = span_info("I belong to the Rontz Ratz gang"),
-	TRAIT_GANG_B = span_info("I belong to the Blortz Volves gang")
+	TRAIT_GANG_B = span_info("I belong to the Blortz Volves gang"),
+	TRAIT_EXTREME_TEMPERATURE_IMMUNE = span_info("I will not suffer ills from extreme temperatures, wether hot or cold, yet fire and ice can still harm me.")
 ))
 
 // trait accessor defines
@@ -698,6 +701,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_REFUSED_VAMP_CONVERT "refused_vampire_conversion"
 /// makes your footsteps completely silent
 #define TRAIT_SILENT_FOOTSTEPS "silent_footsteps"
+#define TRAIT_SANDSTORM_GOGGLES "sandstorm_eyeprotection"
 
 //bodypart traits
 #define TRAIT_PARALYSIS	"paralysis" //Used for limb-based paralysis and full body paralysis
