@@ -2931,7 +2931,6 @@
 #include "modular\DesertTown\jobs\nobility\sultan.dm"
 #include "modular\DesertTown\jobs\nobility\vizier.dm"
 #include "modular\DesertTown\jobs\youngfolk\dtprince.dm"
-#include "modular\DesertTown\jobs\youngfolk\dtshophand.dm"
 #include "modular\DesertTown\jobs\youngfolk\dtslave.dm"
 #include "modular\Mapping\icons\Mapping_aides.dm"
 #include "modular\Neu_Farming\code\eggs.dm"

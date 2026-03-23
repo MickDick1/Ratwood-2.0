@@ -11,25 +11,19 @@
 		/datum/job/roguetown/sultan,
 		/datum/job/roguetown/cataphract,
 		/datum/job/roguetown/vizier,
-
 		/datum/job/roguetown/headslave,
 		/datum/job/roguetown/sheikh,
-
 		/datum/job/roguetown/janissary,
 		/datum/job/roguetown/janissarysergeant,
 		/datum/job/roguetown/azeb,
 		/datum/job/roguetown/azebagha,
 		/datum/job/roguetown/slavemaster,
-		
 		/datum/job/roguetown/slave,
 		/datum/job/roguetown/dtprince,
-		/datum/job/roguetown/dtshophand,
-		
 		/datum/job/roguetown/adventurer/courtslave,
-		
-		/datum/job/roguetown/vanguard,
-		/datum/job/roguetown/guardsman,
-		/datum/job/roguetown/rookie)
+		        
+		/datum/job/roguetown/townguard,
+		/datum/job/roguetown/vanguard)
 	slot_adjust = list(
 		/datum/job/roguetown/warden = 6,
 	)

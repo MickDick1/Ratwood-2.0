@@ -28,6 +28,8 @@
 		/datum/job/roguetown/magician = "Your creed is one dedicated to the conquering of the arcane arts and the constant thrill of knowledge. \
 		You owe your life to the Sultan, for it was his coin that allowed you to continue your studies in these dark times. \
 		In return, you have proven time and time again as justicar and trusted advisor to their reign.",
+		/datum/job/roguetown/shophand = "You work the largest store in Al-Ashur by grace of the Merchant who has shackled you to this drudgery. The work of stocking shelves and taking inventory for your employer is mind-numbing and repetitive--but at least you have a roof over your head and comfortable surroundings. With time, perhaps you will one day be more than a glorified servant.",
+
 	)
 	/// Jobs that this map won't use
 	blacklist = list(
@@ -100,30 +102,23 @@
 		// /datum/job/roguetown/wapprentice,
 		// /datum/job/roguetown/orphan,
 		/datum/job/roguetown/prince,//dtprince
-		/datum/job/roguetown/shophand,//dtshophand
+		// /datum/job/roguetown/shophand,
 		
 	)
 
 //list to blacklist for other maps (update as new replacements are added)
-		// /datum/job/roguetown/dtvillager,
-
 		// /datum/job/roguetown/sultan,
 		// /datum/job/roguetown/cataphract,
 		// /datum/job/roguetown/vizier,
-
 		// /datum/job/roguetown/headslave,
 		// /datum/job/roguetown/sheikh,
-		// /datum/job/roguetown/magician,
-
 		// /datum/job/roguetown/janissary,
 		// /datum/job/roguetown/janissarysergeant,
 		// /datum/job/roguetown/azeb,
 		// /datum/job/roguetown/azebagha,
 		// /datum/job/roguetown/slavemaster,
-		
 		// /datum/job/roguetown/dtslave,
 		// /datum/job/roguetown/dtprince,
-		// /datum/job/roguetown/dtshophand,
 
 	threat_regions = list(
 		THREAT_REGION_DESERT_NEAR,
