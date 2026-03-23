@@ -38,3 +38,4 @@
 	belt = /obj/item/storage/belt/rogue/leather
 	backr = /obj/item/storage/backpack/rogue/satchel
 	id = /obj/item/scomstone/bad/garrison
+	cloak = /obj/item/clothing/cloak/citywatch/janissary

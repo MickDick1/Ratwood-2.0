@@ -667,6 +667,14 @@
 	. = ..()
 	AddComponent(/datum/component/storage/concrete/roguetown/cloak)
 
+/obj/item/clothing/cloak/citywatch/janissary
+	name = "janissary cape"
+	desc = "A light cloak held together by a gilded badge, depicting the Grand Sultan's house. The sign of a faithful servant."
+	icon = 'modular/DesertTown/icons/clothing/shadowcloak.dmi'
+	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/shadowcloak.dmi'
+	icon_state = "jan"
+	item_state = "jan"
+
 // /obj/item/clothing/cloak/dunestalker/dropped(mob/living/carbon/human/user)
 // 	..()
 // 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
