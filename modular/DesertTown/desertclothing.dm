@@ -348,6 +348,9 @@
 /obj/item/clothing/head/roguetown/turban/grey
 	color = "#848484"
 
+/obj/item/clothing/head/roguetown/turban/red
+	color = CLOTHING_RED
+
 /obj/item/clothing/head/roguetown/turban/random
 
 /obj/item/clothing/head/roguetown/turban/random/Initialize()
