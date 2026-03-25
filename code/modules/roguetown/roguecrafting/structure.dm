@@ -150,16 +150,8 @@
 	verbage_simple = "construct"
 	verbage = "constructs"
 
-/datum/crafting_recipe/roguetown/structures/zizocross
-	name = "inverted wooden cross"
-	result = /obj/structure/fluff/psycross/zizocross
-	reqs = list(/obj/item/grown/log/tree/small = 2)
-	verbage_simple = "construct"
-	verbage = "constructs"
-	craftdiff = 3
-
 /datum/crafting_recipe/roguetown/structure/zizo_shrine
-	name = "profane shrine"
+	name = "wooden inverse cross"
 	reqs = list(
 		/obj/item/grown/log/tree/small = 1,
 		/obj/item/natural/stone = 2,
