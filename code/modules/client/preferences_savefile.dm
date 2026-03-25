@@ -753,6 +753,14 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["familiar_ooc_extra"]				>> familiar_prefs.familiar_ooc_extra
 	S["familiar_ooc_extra_link"]		>> familiar_prefs.familiar_ooc_extra_link
 
+/datum/preferences/proc/_load_gnoll_prefs(S)
+	S["gnoll_name"]						>> gnoll_prefs.gnoll_name
+	S["gnoll_pronouns"]					>> gnoll_prefs.gnoll_pronouns
+	S["gnoll_pelt_type"]				>> gnoll_prefs.pelt_type
+	S["gnoll_genitals_penis"]			>> gnoll_prefs.genitals["penis"]
+	S["gnoll_genitals_vagina"]			>> gnoll_prefs.genitals["vagina"]
+	S["gnoll_genitals_breasts"]			>> gnoll_prefs.genitals["breasts"]
+
 /datum/preferences/proc/load_character(slot)
 	if(!path)
 		return FALSE
@@ -816,6 +824,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	_load_appearence(S)
 	_load_height(S)
 	_load_familiar_prefs(S)
+	_load_gnoll_prefs(S)
 
 	var/patron_typepath
 	S["selected_patron"]	>> patron_typepath
@@ -1158,6 +1167,13 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["familiar_ooc_notes"] , familiar_prefs?.familiar_ooc_notes)
 	WRITE_FILE(S["familiar_ooc_extra"] , familiar_prefs?.familiar_ooc_extra)
 	WRITE_FILE(S["familiar_ooc_extra_link"] , familiar_prefs?.familiar_ooc_extra_link)
+	//Gnoll Files
+	WRITE_FILE(S["gnoll_name"] , gnoll_prefs?.gnoll_name)
+	WRITE_FILE(S["gnoll_pronouns"] , gnoll_prefs?.gnoll_pronouns)
+	WRITE_FILE(S["gnoll_pelt_type"] , gnoll_prefs?.pelt_type)
+	WRITE_FILE(S["gnoll_genitals_penis"] , gnoll_prefs?.genitals["penis"])
+	WRITE_FILE(S["gnoll_genitals_vagina"] , gnoll_prefs?.genitals["vagina"])
+	WRITE_FILE(S["gnoll_genitals_breasts"] , gnoll_prefs?.genitals["breasts"])
 
 	return TRUE
 

@@ -344,6 +344,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/list/nsfw_img_gallery = list()
 
 	var/datum/familiar_prefs/familiar_prefs
+	var/datum/gnoll_prefs/gnoll_prefs
 
 	var/taur_type = null
 	var/taur_color = "ffffff"
@@ -363,6 +364,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	parent = C
 	migrant  = new /datum/migrant_pref(src)
 	familiar_prefs = new /datum/familiar_prefs(src)
+	gnoll_prefs = new /datum/gnoll_prefs(src)
 
 	for(var/custom_name_id in GLOB.preferences_custom_names)
 		custom_names[custom_name_id] = get_default_name(custom_name_id)
@@ -619,6 +621,8 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "<b>Unrevivable:</b> <a href='?_src_=prefs;preference=dnr;task=input'>[dnr_pref ? "Yes" : "No"]</a><BR>"
 
 			dat += "<b>Be a Familiar:</b><a href='?_src_=prefs;preference=familiar_prefs;task=input'>Familiar Preferences</a>"
+
+			dat += "<br><b>Gnoll Customization:</b><a href='?_src_=prefs;preference=gnoll_prefs;task=input'>Gnoll Preferences</a>"
 
 /*
 			dat += "<br><br><b>Special Names:</b><BR>"
@@ -2376,6 +2380,9 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 
 				if("familiar_prefs")
 					familiar_prefs.fam_show_ui()
+
+				if("gnoll_prefs")
+					gnoll_prefs.gnoll_show_ui(user)
 
 				if("species")
 					var/list/species = list()

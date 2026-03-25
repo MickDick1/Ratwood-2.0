@@ -1,0 +1,10 @@
+Using vendored Bun 1.2.16
+:: Juke Build version 0.8.1
+=> Starting 'bun'
+:: Skipping 'dm' (up to date)
+bun install v1.2.16 (631e6748)
+
+Checked 728 installs across 732 packages (no changes) [174.00ms]
+=> Finished 'bun' in 0.275s
+:: Skipping 'tgui' (up to date)
+=> Done in 13.484s

@@ -45,13 +45,67 @@
 			H.mind.add_antag_datum(new_antag)
 			H.verbs |= /mob/living/carbon/human/proc/gnoll_inspect_skin
 
+/mob/living/carbon/human/proc/apply_gnoll_preferences()
+	if(!client?.prefs?.gnoll_prefs)
+		return
+
+	var/datum/gnoll_prefs/prefs = client.prefs.gnoll_prefs
+
+	if(prefs.gnoll_name)
+		real_name = prefs.gnoll_name
+
+	if(prefs.gnoll_pronouns)
+		pronouns = prefs.gnoll_pronouns
+
+	if(prefs.pelt_type)
+		icon_state = prefs.pelt_type
+		dna?.species?.custom_base_icon = prefs.pelt_type
+
+	var/wants_penis = !!prefs.genitals["penis"]
+	var/wants_vagina = !!prefs.genitals["vagina"]
+	var/wants_breasts = !!prefs.genitals["breasts"]
+
+	var/obj/item/organ/penis/penis = getorganslot(ORGAN_SLOT_PENIS)
+	if(wants_penis)
+		if(!penis)
+			penis = new()
+			penis.Insert(src, TRUE, FALSE)
+		var/obj/item/organ/testicles/testicles = getorganslot(ORGAN_SLOT_TESTICLES)
+		if(!testicles)
+			testicles = new()
+			testicles.Insert(src, TRUE, FALSE)
+	else if(penis)
+		penis.Remove(src)
+		qdel(penis)
+		var/obj/item/organ/testicles/testicles = getorganslot(ORGAN_SLOT_TESTICLES)
+		if(testicles)
+			testicles.Remove(src)
+			qdel(testicles)
+
+	var/obj/item/organ/vagina/vagina = getorganslot(ORGAN_SLOT_VAGINA)
+	if(wants_vagina)
+		if(!vagina)
+			vagina = new()
+			vagina.Insert(src, TRUE, FALSE)
+	else if(vagina)
+		vagina.Remove(src)
+		qdel(vagina)
+
+	var/obj/item/organ/breasts/breasts = getorganslot(ORGAN_SLOT_BREASTS)
+	if(wants_breasts)
+		if(!breasts)
+			breasts = new()
+			breasts.Insert(src, TRUE, FALSE)
+	else if(breasts)
+		breasts.Remove(src)
+		qdel(breasts)
+
+	update_body()
+
 /datum/outfit/job/roguetown/gnoll/proc/don_pelt(mob/living/carbon/human/H)
 	if(H.mind)
-		var/pelts = list("firepelt", "rotpelt", "whitepelt", "bloodpelt", "nightpelt", "darkpelt")
-		var/pelt_choice = input(H, "Choose your pelt.", "SPILL THEIR ENTRAILS.") as anything in pelts
+		H.apply_gnoll_preferences()
 		H.set_blindness(0)
-		H.icon_state = "[pelt_choice]"
-		H.dna?.species?.custom_base_icon = "[pelt_choice]"
 		H.regenerate_icons()
 		H.AddSpell(new /obj/effect/proc_holder/spell/self/claws/gnoll)
 		H.AddSpell(new /obj/effect/proc_holder/spell/self/howl/gnoll)
@@ -73,17 +127,6 @@
 		else
 			to_chat(H, span_bignotice("Isolated from my pack, I am likely a lone soul this week. I should especially avoid getting killed, and look for my pack next week."))
 		to_chat(H, span_bignotice("Graggar is patient, and values good strategy. I mustn't be hasty, especially if my marks prove difficult to isolate.\n Perhaps there is merit in forging alliances, or setting up camp."))
-		spawn(50)
-			var/name_choice = alert(H, "What name do you want?", "MY NAME IS [H.real_name]", "Pick New Name", "Random Gnoll Name", "Keep Current Name")
-			switch(name_choice)
-				if("Pick New Name")
-					H.choose_name_popup("GNOLL")
-					to_chat(H, span_notice("Your name is now [H.real_name]."))
-				if("Random Gnoll Name")
-					H.real_name = "[pick(GLOB.wolf_prefixes)] [pick(GLOB.wolf_suffixes)]"
-					to_chat(H, span_notice("Your name is now [H.real_name]."))
-				if("Keep Current Name")
-					to_chat(H, span_notice("You keep your name as [H.real_name]."))
 
 /mob/living/carbon/human/proc/gnoll_inspect_skin()
 	set name = "Inspect Pelt"

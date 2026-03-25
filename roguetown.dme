@@ -1511,6 +1511,7 @@
 #include "code\modules\client\client_topic_lang.dm"
 #include "code\modules\client\darkmode.dm"
 #include "code\modules\client\familiar_prefs.dm"
+#include "code/modules/client/gnoll_prefs.dm"
 #include "code\modules\client\gods_rankings.dm"
 #include "code\modules\client\language_menu.dm"
 #include "code\modules\client\loadout_menu.dm"
