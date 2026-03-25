@@ -81,6 +81,10 @@
 /datum/species/gnoll/send_voice(mob/living/carbon/human/H)
 	playsound(get_turf(H), pick('sound/vo/mobs/wwolf/wolftalk1.ogg','sound/vo/mobs/wwolf/wolftalk2.ogg'), 100, TRUE, -1)
 
+/datum/species/gnoll/proc/cancel_default_bark(datum/source, list/hearers, message, range, atom/movable/speech_source, bubble_type, list/spans, datum/language/message_language, message_mode)
+	SIGNAL_HANDLER
+	return TRUE
+
 /datum/species/gnoll/regenerate_icons(mob/living/carbon/human/H)
 	H.icon = 'icons/roguetown/mob/monster/gnoll.dmi'
 	H.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB)
@@ -91,6 +95,7 @@
 /datum/species/gnoll/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	. = ..()
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
+	RegisterSignal(C, COMSIG_MOVABLE_QUEUE_BARK, PROC_REF(cancel_default_bark))
 	var/mob/living/carbon/human/H = C
 	var/pelt_type = "firepelt" // default
 	if(H.client?.prefs?.gnoll_prefs)
@@ -100,6 +105,11 @@
 	C.pixel_x = -8
 	C.base_pixel_y = -4
 	C.pixel_y = -4
+
+/datum/species/gnoll/on_species_loss(mob/living/carbon/C)
+	. = ..()
+	UnregisterSignal(C, COMSIG_MOB_SAY)
+	UnregisterSignal(C, COMSIG_MOVABLE_QUEUE_BARK)
 
 /datum/species/gnoll/update_damage_overlays(mob/living/carbon/human/H)
 	H.remove_overlay(DAMAGE_LAYER)
