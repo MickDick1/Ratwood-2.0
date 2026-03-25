@@ -68,7 +68,10 @@
 		/datum/language/gronnic,
 		/datum/language/beast,
 	)
-	public_examine_desc = span_red("Oh gods! What is that thing? Is that a GNOLL!?")
+	stress_examine = TRUE
+	stress_desc = span_red("Gods above... a Gnoll!!")
+	examine_stress_event = /datum/stressevent/gnoll_examine
+	examine_stress_event_xenophobic = /datum/stressevent/gnoll_examine
 	var/gnoll_armor_icon = "beserker"
 
 /datum/species/gnoll/send_voice(mob/living/carbon/human/H)

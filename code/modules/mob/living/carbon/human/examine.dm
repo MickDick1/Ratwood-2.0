@@ -892,13 +892,10 @@
 				if(dna.species.stress_examine)//some species don't have a stress desc
 					. += dna.species.stress_desc
 				if(!HAS_TRAIT(user, TRAIT_TOLERANT))//They're given the stress event if they qualify for racism and aren't tolerant.
-					var/stress_type = /datum/stressevent/shunned_race
+					var/stress_type = dna.species.examine_stress_event
 					if(HAS_TRAIT(user, TRAIT_XENOPHOBIC))//Xenophobic are hit worse. By a bit.
-						stress_type = /datum/stressevent/shunned_race_xenophobic
+						stress_type = dna.species.examine_stress_event_xenophobic
 					user.add_stress(stress_type)
-
-	if((user != src) && dna?.species?.public_examine_desc)
-		. += dna.species.public_examine_desc
 
 	if((user != src) && isliving(user))
 		var/mob/living/L = user
