@@ -235,11 +235,11 @@
 	var/datum/sex_controller/wearer_sexcon = source.sexcon
 	if(!wearer_sexcon)
 		return FALSE
-	if((checked_part & SEX_PART_COCK) && wearer_sexcon.modular_has_chastity_penis())
+	if((checked_part & SEX_PART_COCK) && wearer_sexcon.has_chastity_penis())
 		return COMPONENT_SEX_ACTION_BLOCK
-	if((checked_part & SEX_PART_CUNT) && wearer_sexcon.modular_has_chastity_vagina())
+	if((checked_part & SEX_PART_CUNT) && wearer_sexcon.has_chastity_vagina())
 		return COMPONENT_SEX_ACTION_BLOCK
-	if((checked_part & SEX_PART_ANUS) && wearer_sexcon.modular_has_chastity_anal())
+	if((checked_part & SEX_PART_ANUS) && wearer_sexcon.has_chastity_anal())
 		return COMPONENT_SEX_ACTION_BLOCK
 	return FALSE
 
@@ -317,8 +317,8 @@
 	if(!wearer_sexcon)
 		return null
 
-	var/has_penis_chastity = wearer_sexcon.modular_has_chastity_penis()
-	var/has_vagina_chastity = wearer_sexcon.modular_has_chastity_vagina()
+	var/has_penis_chastity = wearer_sexcon.has_chastity_penis()
+	var/has_vagina_chastity = wearer_sexcon.has_chastity_vagina()
 	var/devout = is_devout_chastity_wearer(source)
 
 	// Anal penetration — anatomy-specific banks unchanged; devout still get the unified receive bank.
@@ -377,7 +377,7 @@
 		return null
 
 	// Retention overrides everything — even devout wearers feel that particular hell distinctly.
-	if(wearer_sexcon.modular_has_chastity_vagina() && has_retained_creampie(source))
+	if(wearer_sexcon.has_chastity_vagina() && has_retained_creampie(source))
 		return "chastity_insert_vagina_retention"
 
 	// Devout/church wearers experience the device through a spiritual lens regardless of anatomy.
@@ -385,14 +385,14 @@
 		return "chastity_arousal_devout"
 
 	// Intersex wearers (belt + cage) — dual denial from both directions simultaneously.
-	if(wearer_sexcon.modular_has_chastity_penis() && wearer_sexcon.modular_has_chastity_vagina())
+	if(wearer_sexcon.has_chastity_penis() && wearer_sexcon.has_chastity_vagina())
 		return "chastity_arousal_intersex"
 
 	// Belt-only wearers.
-	if(wearer_sexcon.modular_has_chastity_vagina())
+	if(wearer_sexcon.has_chastity_vagina())
 		return "chastity_arousal_vagina"
 
-	if(!wearer_sexcon.modular_has_chastity_cage())
+	if(!wearer_sexcon.has_chastity_cage())
 		return null
 
 	// Large-cock wearers get a dedicated bank describing the physical discomfort of the undersized cage.
@@ -416,7 +416,7 @@
 		return 0
 
 	var/chance = 0
-	if(wearer_sexcon.modular_has_chastity_vagina())
+	if(wearer_sexcon.has_chastity_vagina())
 		chance = has_retained_creampie(source) ? 28 : 18
 	else if(wearer_sexcon.arousal >= ACTIVE_EJAC_THRESHOLD)
 		chance = 30
@@ -444,12 +444,12 @@
 	if(is_devout_chastity_wearer(source) && pain_amt >= PAIN_MILD_EFFECT)
 		return "chastity_pain_spikes_devout"
 	// Intersex wearers with both devices spiked get their own bank — internal barbs AND external cage teeth simultaneously.
-	if(wearer_sexcon.modular_has_chastity_penis() && wearer_sexcon.modular_has_chastity_vagina() && pain_amt >= PAIN_MILD_EFFECT)
+	if(wearer_sexcon.has_chastity_penis() && wearer_sexcon.has_chastity_vagina() && pain_amt >= PAIN_MILD_EFFECT)
 		if(wearer_sexcon.is_masochist_in_spiked_chastity())
 			return "chastity_pain_spikes_intersex_masochist"
 		return "chastity_pain_spikes_intersex"
 	// Vaginal belt spikes take priority over the generic cage banks — the internal damage is its own category.
-	if(wearer_sexcon.modular_has_chastity_vagina() && pain_amt >= PAIN_MILD_EFFECT)
+	if(wearer_sexcon.has_chastity_vagina() && pain_amt >= PAIN_MILD_EFFECT)
 		if(wearer_sexcon.is_masochist_in_spiked_chastity())
 			return "chastity_pain_spikes_vagina_masochist"
 		return "chastity_pain_spikes_vagina"
@@ -476,7 +476,7 @@
 	if(!wearer_sexcon)
 		return null
 
-	var/has_restrictive_chastity = (wearer_sexcon.modular_has_chastity_cage() || wearer_sexcon.modular_has_chastity_anal())
+	var/has_restrictive_chastity = (wearer_sexcon.has_chastity_cage() || wearer_sexcon.has_chastity_anal())
 	var/weighted_roll = rand(1, 100)
 	if(HAS_TRAIT(source, TRAIT_CHASTITY_SPIKED) && weighted_roll <= 15)
 		return "chastity_movement_pain"

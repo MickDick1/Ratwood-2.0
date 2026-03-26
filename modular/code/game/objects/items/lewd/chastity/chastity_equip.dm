@@ -6,6 +6,11 @@
 	if(H.client?.prefs && !H.client.prefs.chastenable)
 		to_chat(user, span_warning("I have chastity content disabled."))
 		return
+	// Spiked devices are extreme content — require the wearer's explicit opt-in.
+	// Use the trait list as the authoritative spiked check so this stays in sync with chastity_standard_traits.
+	if((TRAIT_CHASTITY_SPIKED in GLOB.chastity_standard_traits[chastity_type + 1]) && (H.client?.prefs && !H.client.prefs.extreme_erp))
+		to_chat(user, span_warning("Eora intervenes. I cannot equip a spiked device."))
+		return
 	if(!can_cage_target(H, user))
 		return
 	if(!get_location_accessible(H, BODY_ZONE_PRECISE_GROIN))
@@ -29,10 +34,15 @@
 		return
 	var/mob/living/carbon/human/H = M
 	if(H.client?.prefs && !H.client.prefs.chastenable)
-		to_chat(user, span_warning("[H] has chastity content disabled."))
+		to_chat(user, span_warning("Eora intervenes. They have chastity content disabled."))
 		return
 	if(user?.client?.prefs && !user.client.prefs.chastenable)
 		to_chat(user, span_warning("I have chastity content disabled."))
+		return
+	// Spiked devices are extreme content — the wearer must have explicitly opted in.
+	// Use the trait list as the authoritative spiked check so this stays in sync with chastity_standard_traits.
+	if((TRAIT_CHASTITY_SPIKED in GLOB.chastity_standard_traits[chastity_type + 1]) && (H.client?.prefs && !H.client.prefs.extreme_erp))
+		to_chat(user, span_warning("Eora intervenes. They cannot be fitted with a spiked device."))
 		return
 	if(!can_cage_target(H, user))
 		return
@@ -229,7 +239,9 @@
 
 				if(penis_organ)
 					// 20% sub-chance: the slipping edge catches and tears the organ free entirely.
-					if(prob(20))
+					// Requires the wearer to have extreme ERP content enabled; without it the slip
+					// still causes a CBT wound but stops short of full avulsion.
+					if(prob(20) && H.client?.prefs?.extreme_erp)
 						H.visible_message(span_userdanger("As the lock finally gives, [user]'s chisel catches [H.p_their()] trapped prick on the way out — the edge tears through flesh and root, ripping it free alongside the falling device."))
 						playsound(drop_turf, pick('modular/sound/masomoans/agony/CBTScreamMale1.ogg', 'modular/sound/masomoans/agony/CBTScreamMale2.ogg'), 85, FALSE, 2)
 						H.add_splatter_floor(drop_turf)

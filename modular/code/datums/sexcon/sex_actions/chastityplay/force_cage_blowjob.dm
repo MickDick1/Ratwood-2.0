@@ -8,14 +8,14 @@
 /datum/sex_action/chastityplay/force_cage_blowjob/shows_on_menu(mob/living/carbon/human/user, mob/living/carbon/human/target)
     if(!requires_other_target(user, target))
         return FALSE
-    if(!target_has_cage(user))
+    if(!user.sexcon.has_chastity_penis())
         return FALSE
     return TRUE
 
 /datum/sex_action/chastityplay/force_cage_blowjob/can_perform(mob/living/carbon/human/user, mob/living/carbon/human/target)
     if(!requires_other_target(user, target))
         return FALSE
-    if(!target_has_cage(user))
+    if(!user.sexcon.has_chastity_penis())
         return FALSE
     if(!can_reach_target_groin(user, user))
         return FALSE

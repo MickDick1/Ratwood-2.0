@@ -8,7 +8,7 @@
         return FALSE
     if(!user.getorganslot(ORGAN_SLOT_PENIS))
         return FALSE
-    if(!target_has_cage(user))
+    if(!user.sexcon.has_chastity_penis())
         return FALSE
     if(!target.getorganslot(ORGAN_SLOT_VAGINA))
         return FALSE
@@ -21,7 +21,7 @@
         return FALSE
     if(!user.getorganslot(ORGAN_SLOT_PENIS))
         return FALSE
-    if(!target_has_cage(user))
+    if(!user.sexcon.has_chastity_penis())
         return FALSE
     if(!target.getorganslot(ORGAN_SLOT_VAGINA))
         return FALSE

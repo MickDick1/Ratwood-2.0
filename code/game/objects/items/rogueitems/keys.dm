@@ -491,7 +491,6 @@
 	name = "mercenary bunk iii key"
 	lockid = "merc_bunk_iii"
 
-
 /obj/item/roguekey/mercenary/bedrooms/iv
 	name = "mercenary bunk iv key"
 	lockid = "merc_bunk_iv"
@@ -559,6 +558,12 @@
 	desc = "This key looks barely used."
 	icon_state = "ekey"
 	lockid = "archive"
+
+/obj/item/roguekey/servant
+	name = "servant key"
+	desc = "A key of the ducal servants. Hope it's not lost..."
+	icon_state = "brownkey"
+	lockid = "servant"
 
 //grenchensnacker
 /obj/item/roguekey/porta
@@ -673,6 +678,15 @@
 	return ..()
 
 /obj/item/lockpick/attack(mob/M, mob/user, def_zone) // handles lockpicking code for chastity devices. Yes, this is intentionally separate from the roguekey/chastity attack proc, because it has a chance to fail and break the pick, and lord's key can bypass the checks and never break.
+	var/handled = modular_chastity_attack(M, user, def_zone)
+	if(!isnull(handled))
+		return handled
+	return ..()
+
+// Spectral lockpick from the Lesser Knock spell: attempt chastity picking first.
+// If the target has no chastity device (or isn't human), fall through to ..() which triggers the
+// touch_attack dispel logic — so the spell still cancels correctly on non-device targets.
+/obj/item/melee/touch_attack/lesserknock/attack(mob/M, mob/user, def_zone)
 	var/handled = modular_chastity_attack(M, user, def_zone)
 	if(!isnull(handled))
 		return handled

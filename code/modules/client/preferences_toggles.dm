@@ -158,7 +158,9 @@
 		var/sacred_prayer = "Dear Eora, I embraced this binding in foolish haste because I'm a dullard and I'm sorry, so so so sorry for being such a stupid stupid stupid person and I'm begging you please please please free my loins."
 		var/encoded_sacred_prayer = html_encode(sacred_prayer)
 		var/prayer_prompt = "Recite the Prayer of Foolish Repentance EXACTLY as written:\n\n\"[sacred_prayer]\"\n\n(You must type this yourself - copying is forbidden by divine law)"
-		var/prayer_attempt = tgui_input_text(src, prayer_prompt, "Prayer of Foolish Repentance", "", length(encoded_sacred_prayer), FALSE, TRUE, 0, FALSE, GLOB.tgui_always_state, FALSE, TRUE)
+		// multiline=TRUE so the wrapping textarea is readable; bigmodal=TRUE for a large window that shows the full prompt.
+		// disable_paste=TRUE enforces hand-typing; max_length locks out anything longer than the prayer itself.
+		var/prayer_attempt = tgui_input_text(src, prayer_prompt, "Prayer of Foolish Repentance", default = "", max_length = length(encoded_sacred_prayer), multiline = TRUE, encode = TRUE, ui_state = GLOB.tgui_always_state, bigmodal = TRUE, disable_paste = TRUE)
 
 		if(!prayer_attempt)
 			to_chat(src, span_warning("Eora does not hear your silence."))
@@ -182,6 +184,30 @@
 		to_chat(src, span_notice("You have revoked the permanent binding. Mortal means may now test the lock once more."))
 		log_game("[key_name(src)] disabled permanent chastity binding via humiliation prayer.")
 		message_admins("[key_name_admin(src)] disabled permanent chastity binding by reciting the humiliation prayer.")
+
+/client/verb/toggle_extreme_ERP()// toggles gore, ryona, and other extreme content in the ERP panel. This is separate from the regular ERP toggle for users who want to avoid just the extreme content but are okay with milder stuff.
+	set category = "Options"
+	set name = "Toggle Extreme ERP Content"
+	if(prefs)
+		prefs.extreme_erp = !prefs.extreme_erp
+		prefs.save_preferences()
+		if(prefs.extreme_erp)
+			to_chat(src, "Extreme ERP content enabled in the ERP panel.")
+		else
+			if(hascall(src, "modular_handle_extreme_erp_toggle_disable"))
+				call(src, "modular_handle_extreme_erp_toggle_disable")()
+			to_chat(src, "Extreme ERP content disabled in the ERP panel.")
+
+/client/verb/toggle_edging() // Toggles edging content in the ERP panel, for psydonites who clearly can't ENDURE.
+	set category = "Options"
+	set name = "Toggle Edging Content"
+	if(prefs)
+		prefs.edging = !prefs.edging
+		prefs.save_preferences()
+		if(prefs.edging)
+			to_chat(src, "You ENDVRE through orgasms.")
+		else
+			to_chat(src, "You will no longer ENDVRE through orgasms.")
 
 /client/verb/toggle_compliance_notifs() // The messages need to be on-by-default while this is in its early stages.
 	set category = "Options"

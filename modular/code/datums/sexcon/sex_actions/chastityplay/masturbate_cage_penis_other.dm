@@ -8,7 +8,8 @@
         return FALSE
     if(!target.getorganslot(ORGAN_SLOT_PENIS))
         return FALSE
-    if(!target_has_cage(target))
+    // has_chastity_cage() also matches vagina-only belts; we need a caged cock specifically.
+    if(!target.sexcon.has_chastity_penis())
         return FALSE
     return TRUE
 
@@ -17,7 +18,7 @@
         return FALSE
     if(!target.getorganslot(ORGAN_SLOT_PENIS))
         return FALSE
-    if(!target_has_cage(target))
+    if(!target.sexcon.has_chastity_penis())
         return FALSE
     if(!can_reach_target_groin(user, target))
         return FALSE

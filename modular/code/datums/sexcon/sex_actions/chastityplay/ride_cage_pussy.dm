@@ -12,7 +12,7 @@
         return FALSE
     if(user.sexcon.has_chastity_vagina())
         return FALSE
-    if(!target_has_cage(target))
+    if(!target.sexcon.has_chastity_penis())
         return FALSE
     return TRUE
 
@@ -23,7 +23,7 @@
         return FALSE
     if(user.sexcon.has_chastity_vagina())
         return FALSE
-    if(!target_has_cage(target))
+    if(!target.sexcon.has_chastity_penis())
         return FALSE
     if(!can_reach_target_groin(user, user))
         return FALSE

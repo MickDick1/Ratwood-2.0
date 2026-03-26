@@ -13,11 +13,7 @@
         return FALSE
     if(user.sexcon.has_chastity_cage())
         return FALSE
-    if(!target_has_cage(target))
-        return FALSE
-    if(!target.getorganslot(ORGAN_SLOT_PENIS))
-        return FALSE
-    if(target.sexcon.has_chastity_vagina())
+    if(!target.sexcon.has_chastity_penis())
         return FALSE
     return TRUE
 
@@ -29,11 +25,7 @@
         return FALSE
     if(!user.sexcon.can_use_penis())
         return FALSE
-    if(!target_has_cage(target))
-        return FALSE
-    if(!target.getorganslot(ORGAN_SLOT_PENIS))
-        return FALSE
-    if(target.sexcon.has_chastity_vagina())
+    if(!target.sexcon.has_chastity_penis())
         return FALSE
     if(!can_reach_target_groin(user, user))
         return FALSE

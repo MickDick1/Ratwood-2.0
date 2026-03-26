@@ -8,12 +8,13 @@
         return FALSE
     if(!user.getorganslot(ORGAN_SLOT_PENIS))
         return FALSE
-    if(!target_has_cage(user))
+    if(!user.sexcon.has_chastity_penis())
         return FALSE
     var/obj/item/organ/penis/penis = target.getorganslot(ORGAN_SLOT_PENIS)
     if(!penis || penis.sheath_type != SHEATH_TYPE_SLIT)
         return FALSE
-    if(target_has_cage(target))
+    // Target's slit must be accessible — hide if their own slit is caged.
+    if(target.sexcon.has_chastity_penis())
         return FALSE
     return TRUE
 
@@ -22,12 +23,12 @@
         return FALSE
     if(!user.getorganslot(ORGAN_SLOT_PENIS))
         return FALSE
-    if(!target_has_cage(user))
+    if(!user.sexcon.has_chastity_penis())
         return FALSE
     var/obj/item/organ/penis/penis = target.getorganslot(ORGAN_SLOT_PENIS)
     if(!penis || penis.sheath_type != SHEATH_TYPE_SLIT)
         return FALSE
-    if(target_has_cage(target))
+    if(target.sexcon.has_chastity_penis())
         return FALSE
     if(!can_reach_target_groin(user, user))
         return FALSE
