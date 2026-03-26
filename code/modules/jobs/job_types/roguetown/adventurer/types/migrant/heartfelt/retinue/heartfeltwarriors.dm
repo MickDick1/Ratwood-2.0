@@ -80,6 +80,7 @@
 		/obj/item/rogueweapon/scabbard/sheath = 1,
 		/obj/item/storage/belt/rogue/pouch/coins/mid = 1,
 		/obj/item/reagent_containers/glass/bottle/alchemical/healthpotnew = 1,
+		/obj/item/flashlight/flare/torch/lantern = 1,
 	)
 	H.verbs |= /mob/proc/haltyell
 
@@ -185,6 +186,7 @@
 		/obj/item/rogueweapon/scabbard/sheath = 1,
 		/obj/item/storage/belt/rogue/pouch/coins/mid = 1,
 		/obj/item/reagent_containers/glass/bottle/alchemical/healthpotnew = 1,
+		/obj/item/flashlight/flare/torch/lantern = 1,
 	)
 	H.verbs |= /mob/proc/haltyell
 
@@ -277,6 +279,7 @@
 		/obj/item/polishing_cream = 1,
 		/obj/item/armor_brush = 1,
 		/obj/item/reagent_containers/glass/bottle/alchemical/healthpotnew = 1,
+		/obj/item/flashlight/flare/torch/lantern = 1,
 	) 
 
 	var/weapons = list("Sword & Shield","Mace & Shield","Spear & Shield","Crossbow", "Bow")
