@@ -24,6 +24,12 @@
 
 
 /mob/Login()
+	if(!client)
+		return FALSE
+
+	canon_client = client
+	add_to_player_list()
+
 	GLOB.player_list |= src
 	lastKnownIP	= client.address
 	computer_id	= client.computer_id
@@ -32,7 +38,6 @@
 	client.screen = list()				//remove hud items just in case
 	client.images = list()
 
-	canon_client = client
 
 	if(!hud_used)
 		create_mob_hud()
