@@ -91,7 +91,7 @@
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/order/heartfelt/bolster)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/order/heartfelt/charge)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/order/heartfelt/forheartfelt)
-		// H.mind.AddSpell(new/obj/effect/proc_holder/spell/invoked/order/heartfelt/focustarget)
+		H.mind.AddSpell(new/obj/effect/proc_holder/spell/invoked/order/heartfelt/focustarget)
 		H.verbs |= list(/mob/living/carbon/human/mind/proc/setordersheartfelt)
 
 /datum/advclass/heartfelt/lord/archmage
@@ -440,7 +440,7 @@
 /datum/status_effect/buff/order/heartfelt/bolster
 	id = "bolster"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/order/heartfelt/bolster
-	effectedstats = list(STATKEY_CON = 3)
+	effectedstats = list(STATKEY_WIL = 2, STATKEY_CON = 3)
 	duration = 1 MINUTES
 
 /datum/status_effect/buff/order/heartfelt/bolster/on_apply()
@@ -516,39 +516,62 @@
 
 // Doesn't work at the moment
 
-// /obj/effect/proc_holder/spell/invoked/order/heartfelt/focustarget
-	// name = "Focus Target!"
-	// overlay_state = "focustarget"
-	// effect_to_apply = /datum/status_effect/debuff/order/heartfelt/focustarget
-	// message_varname = "targettext"
+#define TARGET_FILTER "target_marked"
 
-// /datum/status_effect/debuff/order/heartfelt/focustarget
-	//id = "target"
-	// alert_type = /atom/movable/screen/alert/status_effect/debuff/order/heartfelt/focustarget
-	// effectedstats = list("fortune" = -2)
-	// duration = 1 MINUTES
-	// var/outline_colour = "#69050a"
+/obj/effect/proc_holder/spell/invoked/order/heartfelt/focustarget/cast(list/targets, mob/living/user)
+	. = ..()
+	if(isliving(targets[1]))
+		var/mob/living/target = targets[1]
+		var/msg = user.mind.focustargettext
+		if(!msg)
+			to_chat(user, span_alert("I must say something to give an order!"))
+			return
+		if(target == user)
+			to_chat(user, span_alert("I cannot order myself to be killed!"))
+			return
+		user.say("[msg]")
+		target.apply_status_effect(/datum/status_effect/debuff/order/focustarget)
+		return TRUE
+	revert_cast()
+	return FALSE
 
-// /atom/movable/screen/alert/status_effect/debuff/order/heartfelt/focustarget
-	// name = "Targetted"
-	// desc = "A officer has marked me for death!"
-	// icon_state = "targetted"
+/obj/effect/proc_holder/spell/invoked/order/heartfelt/focustarget
+	name = "Focus Target!"
+	overlay_state = "focustarget"
+	effect_to_apply = /datum/status_effect/debuff/order/heartfelt/focustarget
+	message_varname = "targettext"
 
-// /datum/status_effect/debuff/order/heartfelt/focustarget/on_apply()
-	// . = ..()
-	// to_chat(owner, span_alert("I have been marked for death by a officer!"))
-	// ADD_TRAIT(owner, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
-	// return TRUE
+/datum/status_effect/debuff/order/heartfelt/focustarget
+	id = "target"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/order/heartfelt/focustarget
+	effectedstats = list(STATKEY_LCK = -2)
+	duration = 1 MINUTES
+	var/outline_colour = "#69050a"
 
-// /datum/status_effect/debuff/order/heartfelt/focustarget/on_remove()
-	// . = ..()
-	// REMOVE_TRAIT(owner, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
+/atom/movable/screen/alert/status_effect/debuff/order/heartfelt/focustarget
+	name = "Targetted"
+	desc = "A officer has marked me for death!"
+	icon_state = "targetted"
 
-// /obj/effect/proc_holder/spell/invoked/order/heartfelt/focustarget
-	// name = "Focus target!"
-	// overlay_state = "focustarget"
+/datum/status_effect/debuff/order/heartfelt/focustarget/on_apply()
+	. = ..()
+	var/filter = owner.get_filter(TARGET_FILTER)
+	to_chat(owner, span_alert("I have been marked for death by a officer!"))
+	ADD_TRAIT(owner, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
+	if (!filter)
+		owner.add_filter(TARGET_FILTER, 2, list("type" = "outline", "color" = outline_colour, "alpha" = 200, "size" = 1))
+	return TRUE
 
-// #undef TARGET_FILTER
+/datum/status_effect/debuff/order/heartfelt/focustarget/on_remove()
+	. = ..()
+	REMOVE_TRAIT(owner, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
+	owner.remove_filter(TARGET_FILTER)
+
+/obj/effect/proc_holder/spell/invoked/order/heartfelt/focustarget
+	name = "Focus target!"
+	overlay_state = "focustarget"
+
+#undef TARGET_FILTER
 
 /***************************************************************
  *  ORDER SETUP PROC
