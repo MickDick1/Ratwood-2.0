@@ -111,10 +111,15 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/phobia = "spiders"
 	var/shake = TRUE
 	var/sexable = FALSE
+	var/chastenable = FALSE
+	var/chastity_hardmode = CHASTITY_HARDMODE_DISABLED
+	var/extreme_erp = FALSE
+	var/edging = FALSE
 	var/compliance_notifs = TRUE
+	var/skillcap_notifs = TRUE
 	var/restricted_species_pref = null
 	var/wildshape_name = TRUE
-	var/xenophobe_pref = 1
+	var/xenophobe_pref = 0
 
 	var/list/custom_names = list()
 	var/preferred_ai_core_display = "Blue"
@@ -197,6 +202,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 	var/anonymize = TRUE
 	var/masked_examine = FALSE
+	var/nsfw_examine_always = FALSE
 	var/mute_animal_emotes = FALSE
 	var/autoconsume = FALSE
 	var/runmode = FALSE
@@ -543,7 +549,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 				if(family == FAMILY_PARTIAL)
 					spousename = "Preferred Parent"
 				dat += "<b>[spousename]:</b> <a href='?_src_=prefs;preference=setspouse'>[setspouse ? setspouse : "None"]</a><BR>"
-				if(family == FAMILY_NEWLYWED || family == FAMILY_FULL)
+				if(family != FAMILY_NONE)
 					dat += "<b>Preferred Gender:</b> <a href='?_src_=prefs;preference=gender_choice'>[gender_choice ? gender_choice : "Any Gender"]</a><BR>"
 					var/species_text
 					if(xenophobe_pref == 1)
@@ -1702,7 +1708,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 							ghost_others = GHOST_OTHERS_SIMPLE
 
 				if("name")
-					var/new_name = tgui_input_text(user, "The name of this vessel?", "IDENTITY", encode = FALSE)
+					var/new_name = tgui_input_text(user, "The name of this vessel?", "IDENTITY", real_name, encode = FALSE)
 					if(new_name)
 						new_name = reject_bad_name(new_name)
 						if(new_name)
@@ -1711,7 +1717,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 							to_chat(user, "<font color='red'>Invalid name. Your name should be at least 2 and at most [MAX_NAME_LEN] characters long. It may only contain the characters A-Z, a-z, -, ', . and ,.</font>")
 
 				if("nickname")
-					var/new_name = tgui_input_text(user, "Choose your character's nickname (For Highlighting):", "NICKNAME",  encode = FALSE)
+					var/new_name = tgui_input_text(user, "Choose your character's nickname (For Highlighting):", "NICKNAME", nickname, encode = FALSE)
 					if(new_name)
 						new_name = reject_bad_name(new_name)
 						if(new_name)
@@ -1784,14 +1790,14 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					var voicetype_input = tgui_input_list(user, "Choose your character's voice type", "VOICE TYPE", GLOB.voice_types_list)
 					if(voicetype_input)
 						voice_type = voicetype_input
-						to_chat(user, "<font color='red'>Your character will now vocalize with a [lowertext(voice_type)] affect.</font>")
+						to_chat(user, "<font color='red'>Your character will now vocalize with a [LOWER_TEXT(voice_type)] affect.</font>")
 
 				if ("voicepack")
 					var/voicepack_input = tgui_input_list(user, "Choose your character's emote voice pack", "VOICE PACK", GLOB.voice_packs_list)
 					if(voicepack_input)
 						voice_pack = voicepack_input
 						if(voicepack_input != "Default")
-							to_chat(user, span_red("<font color='red'>Your character will now audibly emote with a [lowertext(voicepack_input)] affect.") + span_notice("<br>This will override your Voice Identity and Class-specific voice packs.</font>"))
+							to_chat(user, span_red("<font color='red'>Your character will now audibly emote with a [LOWER_TEXT(voicepack_input)] affect.") + span_notice("<br>This will override your Voice Identity and Class-specific voice packs.</font>"))
 						else
 							to_chat(user, "<font color='red'>Your character will now audibly emote in accordance to their Voice Identity and any Racial / Class-specific voice packs.</font>")
 
@@ -2324,7 +2330,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 						ShowChoices(user)
 						return
 					ooc_extra_img_link = link
-					var/ext = lowertext(splittext(link, ".")[length(splittext(link, "."))])
+					var/ext = LOWER_TEXT(splittext(link, ".")[length(splittext(link, "."))])
 					var/info
 					switch(ext)
 						if("jpg", "jpeg", "png", "gif")
@@ -2360,7 +2366,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 						ShowChoices(user)
 						return
 					nsfw_ooc_extra_img_link = link
-					var/ext = lowertext(splittext(link, ".")[length(splittext(link, "."))])
+					var/ext = LOWER_TEXT(splittext(link, ".")[length(splittext(link, "."))])
 					var/info
 					switch(ext)
 						if("jpg", "jpeg", "png", "gif")
@@ -2626,7 +2632,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 						family = new_family
 						setspouse = null
 						gender_choice = ANY_GENDER
-						xenophobe_pref = 1
+						xenophobe_pref = 0
 				//Setspouse is part of the family subsystem. It will check existing families for this character and attempt to place you in this family.
 				if("setspouse")
 					var/newspouse = tgui_input_text(user, "INPUT THE IDENTITY OF ANOTHER HERO", "TIL DEATH DO US PART")
@@ -2647,8 +2653,6 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 							gender_choice = new_gender_choice
 				if("species_choice")
 					var/list/restriction_options = list("Unrestricted", "Same Race", "Select Specific Race")
-					if(family == FAMILY_FULL)
-						restriction_options -= "Unrestricted"
 					var/choice = tgui_input_list(user, "SELECT SPOUSE SPECIES RESTRICTION", "SPECIES RESTRICTION", restriction_options)
 					if(choice == "Unrestricted")
 						xenophobe_pref = 0

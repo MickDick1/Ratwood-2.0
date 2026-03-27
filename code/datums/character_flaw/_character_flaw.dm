@@ -307,6 +307,9 @@ GLOBAL_LIST_INIT(character_flaws, list(
 	if(!ishuman(user))
 		return
 	var/mob/living/carbon/human/H = user
+	var/obj/item/woodstaff = new /obj/item/rogueweapon/woodstaff(get_turf(H))
+	H.put_in_hands(woodstaff, forced = TRUE)
+
 	if(!H.wear_mask)
 		H.equip_to_slot_or_del(new /obj/item/clothing/glasses/blindfold(H), SLOT_WEAR_MASK)
 	var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
@@ -355,7 +358,7 @@ GLOBAL_LIST_INIT(character_flaws, list(
 
 /datum/charflaw/nudist
 	name = "Nudist"
-	desc = "I refuse to wear clothes. They are a hindrance to my freedom."
+	desc = "I refuse to wear clothes. They are a hindrance to my freedom. I can tolerate certain accessories."
 
 /datum/charflaw/nudist/on_mob_creation(mob/user)
 	..()
@@ -467,7 +470,7 @@ GLOBAL_LIST_INIT(character_flaws, list(
 
 /datum/charflaw/nude_sleeper
 	name = "Nude Sleeper"
-	desc = "I can't fall asleep unless I'm nude and in bed."
+	desc = "I can't fall asleep unless I'm nude and in bed. I cannot sleep while wearing equipment. (Unremovable clothing and certain accessories are allowed.)"
 
 /datum/charflaw/nude_sleeper/on_mob_creation(mob/user)
 	..()
@@ -528,11 +531,11 @@ GLOBAL_LIST_INIT(character_flaws, list(
 
 /datum/charflaw/unintelligible/on_mob_creation(mob/user)
 	var/mob/living/carbon/human/recipient = user
-	addtimer(CALLBACK(src, .proc/unintelligible_apply, recipient), 5 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(unintelligible_apply), recipient), 5 SECONDS)
 
 /datum/charflaw/unintelligible/proc/unintelligible_apply(mob/living/carbon/human/user)
 	if(user.advsetup)
-		addtimer(CALLBACK(src, .proc/unintelligible_apply, user), 5 SECONDS)
+		addtimer(CALLBACK(src, PROC_REF(unintelligible_apply), user), 5 SECONDS)
 		return
 	user.remove_language(/datum/language/common)
 	user.adjust_skillrank(/datum/skill/misc/reading, -6, TRUE)
@@ -739,7 +742,7 @@ GLOBAL_LIST_INIT(character_flaws, list(
 
 /datum/charflaw/mind_broken
 	name = "Asundered Mind (+1 TRI)"
-	desc = "My mind is asundered, wether it was by own means or an unfortunate accident. Nothing seems real to me..."
+	desc = "My mind is asundered, whether it was by my own means or an unfortunate accident. Nothing seems real to me..."
 
 /datum/charflaw/mind_broken/apply_post_equipment(mob/living/carbon/human/insane_fool)
 	insane_fool.hallucination = INFINITY
