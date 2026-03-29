@@ -43,7 +43,7 @@
 	)
 
 	subclass_stashed_items = list(
-		/obj/item/storage/roguebag/heartfelt/armorer
+		"Blacksteel and Steel Stash" = /obj/item/storage/roguebag/heartfelt/armorer
 	)
 
 /datum/outfit/job/roguetown/heartfelt/retinue/armorer/pre_equip(mob/living/carbon/human/H)
