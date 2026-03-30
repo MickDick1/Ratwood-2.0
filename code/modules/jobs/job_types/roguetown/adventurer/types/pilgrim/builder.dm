@@ -71,3 +71,6 @@
 		armor = /obj/item/clothing/suit/roguetown/armor/workervest
 		pants = /obj/item/clothing/under/roguetown/trou
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/random
+	if(H.age == AGE_OLD)
+		H.adjust_skillrank_up_to(/datum/skill/craft/carpentry, 6, TRUE)
+		H.adjust_skillrank_up_to(/datum/skill/craft/masonry, 6, TRUE)

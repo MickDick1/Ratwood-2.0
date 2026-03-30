@@ -84,3 +84,7 @@
 	else
 		armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/random
 		shoes = /obj/item/clothing/shoes/roguetown/shortboots
+	if(H.age == AGE_OLD)
+		H.adjust_skillrank_up_to(/datum/skill/craft/blacksmithing, 6, TRUE)
+		H.adjust_skillrank_up_to(/datum/skill/craft/armorsmithing, 6, TRUE)
+		H.adjust_skillrank_up_to(/datum/skill/craft/weaponsmithing, 6, TRUE)

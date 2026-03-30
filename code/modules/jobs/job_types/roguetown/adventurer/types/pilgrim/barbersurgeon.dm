@@ -54,6 +54,8 @@
 		H.change_stat(STATKEY_SPD, -1)
 		H.change_stat(STATKEY_INT, 1)
 		H.change_stat(STATKEY_PER, 1)
+		H.adjust_skillrank_up_to(/datum/skill/misc/medicine, 6, TRUE)
+		H.adjust_skillrank_up_to(/datum/skill/misc/alchemy, 4, TRUE)
 	if(H.mind)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/diagnose/secular)
 

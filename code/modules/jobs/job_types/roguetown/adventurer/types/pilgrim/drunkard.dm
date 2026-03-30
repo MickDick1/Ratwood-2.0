@@ -43,3 +43,6 @@
 						/obj/item/flashlight/flare/torch = 1,
 						)
 	ADD_TRAIT(H, TRAIT_CRACKHEAD, TRAIT_GENERIC)
+
+	if(H.age == AGE_OLD)
+		H.adjust_skillrank_up_to(/datum/skill/misc/stealing, 6, TRUE)//lol

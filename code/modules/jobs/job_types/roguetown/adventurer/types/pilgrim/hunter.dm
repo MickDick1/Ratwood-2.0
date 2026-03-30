@@ -124,3 +124,7 @@
 	if(H.mind)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/huntersyell)
 	return
+
+	if(H.age == AGE_OLD)
+		H.adjust_skillrank_up_to(/datum/skill/labor/butchering, 6, TRUE)
+		H.adjust_skillrank_up_to(/datum/skill/craft/tanning, 4, TRUE)

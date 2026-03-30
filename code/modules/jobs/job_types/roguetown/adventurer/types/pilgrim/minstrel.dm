@@ -82,3 +82,5 @@
 				backr = /obj/item/rogue/instrument/viola
 			if("Vocal Talisman")
 				backr = /obj/item/rogue/instrument/vocals
+	if(H.age == AGE_OLD)
+		H.adjust_skillrank_up_to(/datum/skill/misc/music, 6, TRUE)
