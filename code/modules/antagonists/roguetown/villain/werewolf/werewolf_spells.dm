@@ -8,7 +8,7 @@
 	var/use_language = FALSE
 	var/list/howl_sounds = list('sound/vo/mobs/wwolf/howl (1).ogg','sound/vo/mobs/wwolf/howl (2).ogg')
 	var/list/howl_sounds_far = list('sound/vo/mobs/wwolf/howldist (1).ogg','sound/vo/mobs/wwolf/howldist (2).ogg')
-	var/wolf_antag_type = /datum/antagonist/werewolf
+	var/howl_antag_type = /datum/antagonist/werewolf
 	var/howl_spies_allowed = TRUE
 	var/howl_distance_limit = 500
 	var/howl_distance_volume = 50
@@ -21,7 +21,7 @@
 	var/message = input(howl_prompt_text, howl_prompt_title) as text|null
 	if(!message) return
 
-	var/datum/antagonist/antag_data = user.mind.has_antag_datum(wolf_antag_type)
+	var/datum/antagonist/antag_data = user.mind.has_antag_datum(howl_antag_type)
 
 	// sound played for owner
 	playsound(user, pick(howl_sounds_far), 75, TRUE)
@@ -37,8 +37,8 @@
 			to_chat(player, span_notice("[speaker_name] howls to the [howl_announcement_target]: [message]"))
 			continue
 
-		// Announcement to other werewolves (and anyone else who has beast language somehow)
-		if(player.mind.has_antag_datum(wolf_antag_type) || (player.has_language(/datum/language/beast)) && howl_spies_allowed)
+		// Announcement to matching antags and beast-language listeners
+		if(player.mind.has_antag_datum(howl_antag_type) || (player.has_language(/datum/language/beast)) && howl_spies_allowed)
 			to_chat(player, span_boldannounce("[speaker_name] howls to the [howl_announcement_target]: [message]"))
 
 		//sound played for other players
@@ -47,7 +47,7 @@
 		if(player_distance > 7 && player_distance <= howl_distance_limit)
 			player.playsound_local(get_turf(player), pick(howl_sounds_far), howl_distance_volume, FALSE, pressure_affected = FALSE)
 
-	user.log_message("howls: [message] ([wolf_antag_type])", LOG_GAME)
+	user.log_message("howls: [message] ([howl_antag_type])", LOG_GAME)
 
 /obj/effect/proc_holder/spell/self/claws
 	name = "Lupine Claws"

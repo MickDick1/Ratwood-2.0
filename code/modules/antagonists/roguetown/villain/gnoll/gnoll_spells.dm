@@ -8,7 +8,7 @@
 /obj/effect/proc_holder/spell/self/howl/gnoll
 	howl_sounds = list('sound/vo/mobs/gnoll/yeen_howl.ogg')
 	howl_sounds_far = list('sound/vo/mobs/hyena/gnoll_distant.ogg')
-	wolf_antag_type = /datum/antagonist/gnoll
+	howl_antag_type = /datum/antagonist/gnoll
 	howl_distance_volume = 25
 	howl_prompt_text = "Howl at the bloodied sky..."
 	howl_prompt_title = "GORESPAWN"
