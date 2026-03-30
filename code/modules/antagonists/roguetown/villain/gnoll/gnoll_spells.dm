@@ -227,7 +227,7 @@
 			do_teleport(H, destination_turf)
 			to_chat(H, span_notice("You are swept along in the wake of the blood abduction!"))
 
-	// Basically, if a gnoll is baddass enough to abduct his target alone, no one can follow
+	// Basically, if a gnoll is badass enough to abduct his target alone, no one can follow
 	if(gnoll_hitchhikers)
 		var/obj/structure/portal_jaunt/portal = new(origin_turf)
 		portal.linked_turf = destination_turf
@@ -261,7 +261,7 @@
 	if(channeling_abduction && ishuman(parent) && get_recent_damage() >= GNOLL_ABDUCT_DAMAGE_TRESHOLD)
 		var/mob/living/carbon/human/H = parent
 		// micro stun to break any do_afters
-		// asyncronous as to not mess with signal behavior!
+		// asynchronous as to not mess with signal behavior!
 		spawn(0)
 			H.Stun(1)
 		to_chat(H, span_userdanger("The pain interrupts your concentration!"))

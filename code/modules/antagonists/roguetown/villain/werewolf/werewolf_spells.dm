@@ -34,8 +34,8 @@
 			to_chat(player, span_boldannounce("[speaker_name] howls to the hidden moon: [message]"))
 
 		//sound played for other players
-		if(player == src) continue
-		var/player_distance = get_dist(player,src)
+		if(player == user) continue
+		var/player_distance = get_dist(player, user)
 		if(player_distance > 7 && player_distance <= howl_distance_limit)
 			player.playsound_local(get_turf(player), pick(howl_sounds_far), 50, FALSE, pressure_affected = FALSE)
 

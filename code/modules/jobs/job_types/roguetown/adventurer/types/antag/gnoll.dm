@@ -1,7 +1,7 @@
 /datum/job/roguetown/gnoll
 	title = "Gnoll"
 	flag = GNOLL
-	antag_job = TRUE // whoever wrote this, I'm- gghrhhah!
+	antag_job = TRUE
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
