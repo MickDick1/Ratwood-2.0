@@ -55,6 +55,15 @@
 	to_chat(src, span_warning("I feed on succulent flesh. I feel reinvigorated."))
 	return src.reagents.add_reagent(/datum/reagent/medicine/healthpot, healing_amount)
 
+/mob/living/carbon/human/proc/gnoll_bloodpool_feed(healing_amount = 6)
+	if(has_status_effect(/datum/status_effect/fire_handler/fire_stacks/sunder) || has_status_effect(/datum/status_effect/fire_handler/fire_stacks/sunder/blessed))
+		to_chat(src, span_notice("My power is weakened, I cannot heal!"))
+		return FALSE
+
+	to_chat(src, span_warning("I lap from the blood, through Graggar's grace I am renewed!."))
+	src.reagents.add_reagent(/datum/reagent/medicine/healthpot, healing_amount)
+	return TRUE
+
 /obj/item/rogueweapon/werewolf_claw/gnoll
 	name = "Gnoll Claw"
 	// We are smarter, we can use our solid, steel-like claws to defend ourselves.
