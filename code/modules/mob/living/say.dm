@@ -293,11 +293,13 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 			continue
 		listening |= M
 		the_dead[M] = TRUE
+	var/list/hidden_ghosts = null
 	if(has_ghost_protection(src))
-		for(var/mob/dead_M in listening.Copy())
-			if(is_hidden_from_ghosts(src, dead_M))
-				listening -= dead_M
-				the_dead -= dead_M
+		hidden_ghosts = get_hidden_ghosts_for_target(src)
+		for(var/mob/dead/observer/ghost in hidden_ghosts)
+			if(ghost in listening)
+				listening -= ghost
+				the_dead -= ghost
 	log_seen(src, null, listening, original_message, SEEN_LOG_SAY)
 
 	var/eavesdropping
@@ -344,8 +346,8 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		mob_color = H.voice_color
 	var/chatmsg = "<font color = #[mob_color]><b>[src]</b></font> " + sign_verb + "."
 	var/list/ignored_mobs = understanders.Copy()
-	if(has_ghost_protection(src))
-		ignored_mobs += get_hidden_ghosts_for_target(src)
+	if(length(hidden_ghosts))
+		ignored_mobs += hidden_ghosts
 	visible_message(chatmsg, runechat_message = sign_verb, log_seen = SEEN_LOG_EMOTE, ignored_mobs = ignored_mobs)
 
 	//speech bubble
@@ -451,6 +453,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	// AZURE EDIT END
 	var/list/listening = get_hearers_in_view(message_range+eavesdrop_range, source)
 	var/list/the_dead = list()
+	var/list/hidden_ghosts = null
 //	var/list/yellareas	//CIT CHANGE - adds the ability for yelling to penetrate walls and echo throughout areas
 	for(var/_M in GLOB.player_list)
 		var/mob/M = _M
@@ -486,10 +489,11 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		listening |= M
 		the_dead[M] = TRUE
 	if(has_ghost_protection(src))
-		for(var/mob/dead_M in listening.Copy())
-			if(is_hidden_from_ghosts(src, dead_M))
-				listening -= dead_M
-				the_dead -= dead_M
+		hidden_ghosts = get_hidden_ghosts_for_target(src)
+		for(var/mob/dead/observer/ghost in hidden_ghosts)
+			if(ghost in listening)
+				listening -= ghost
+				the_dead -= ghost
 	log_seen(src, null, listening, original_message, SEEN_LOG_SAY)
 
 	var/eavesdropping
