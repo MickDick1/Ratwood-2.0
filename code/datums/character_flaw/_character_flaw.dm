@@ -15,7 +15,6 @@ GLOBAL_LIST_INIT(character_flaws, list(
 	"Hunted (+1 TRI)"=/datum/charflaw/hunted,
 	"Isolationist"=/datum/charflaw/isolationist,
 	"Junkie"=/datum/charflaw/addiction/junkie,
-	"Leper (+1 TRIUMPHS)"=/datum/charflaw/leprosy,
 	"Marked by Baotha" =/datum/charflaw/marked_by_baotha,
 	"Leper (+1 TRI)"=/datum/charflaw/leprosy,
 	"Masochist"=/datum/charflaw/addiction/masochist,
@@ -41,6 +40,13 @@ GLOBAL_LIST_INIT(character_flaws, list(
 	"Wood Arm (R) (+1 TRI)"=/datum/charflaw/limbloss/arm_r,
 	"Hemophage (+1 TRI)"=/datum/charflaw/hemophage,
 	))
+
+/// Strings in this list will not show up alongside other vices for Baotha T0 miracle "Tell Vice". 
+/// Please keep this up-to-date.
+GLOBAL_LIST_INIT(fakevice_blacklist, list(
+	"Random or No Flaw",
+	"No Flaw (-3 TRI)"
+))
 
 /datum/charflaw
 	var/name

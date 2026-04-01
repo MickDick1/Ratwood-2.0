@@ -120,23 +120,59 @@
 	var/list/fake_vices = list()
 
 /obj/effect/proc_holder/spell/invoked/baothavice/cast(list/targets, mob/living/user)
-	if(ishuman(targets[1]))
-		var/vice_found
-		var/mob/living/carbon/human/H = targets[1]
-		if(HAS_TRAIT(H, TRAIT_DECEIVING_MEEKNESS) && user.get_skill_level(/datum/skill/magic/holy) <= SKILL_LEVEL_NOVICE)
-			if(!(H in fake_vices))
-				fake_vices[H] = pick(GLOB.character_flaws)
-				vice_found = fake_vices[H]
-			else
-				vice_found = fake_vices[H]
-			if(prob(50 + ((H.STAPER - 10) * 10)))
-				to_chat(H, span_warning("A pair of prying eyes were laid on me..."))
-		if(!vice_found)
-			vice_found = H.charflaw.name
-		to_chat(user, span_info("They are... [span_warning("a [vice_found]")]"))
-		return TRUE
-	revert_cast()
-	return FALSE
+	if(!ishuman(targets[1]))
+		revert_cast()
+		return FALSE
+
+	var/mob/living/carbon/human/H = targets[1]
+	if(!length(H.vices))
+		to_chat(user, span_warning("They have no vices."))
+		revert_cast()
+		return FALSE
+
+	var/list/datum/charflaw/vices_found
+	if(HAS_TRAIT(H, TRAIT_DECEIVING_MEEKNESS) && user.get_skill_level(/datum/skill/magic/holy) <= SKILL_LEVEL_NOVICE)
+		if(!length(fake_vices[H]))
+			// Generate a lie about their vices, and save that lie for later in our copy of the spell
+			vices_found = list()
+			
+			// Pick first vice. If we roll one in the blacklist, it will be our only displayed vice.
+			var/fake_noflaw = FALSE
+			var/vice_rolled = pick(GLOB.character_flaws)
+			if(vice_rolled in GLOB.fakevice_blacklist)
+				fake_noflaw = TRUE
+			vices_found.Add(vice_rolled)
+
+			// Now the rest, if applicable. However many real vices the target has is our maximum.
+			var/vices_to_gen = max((length(H.vices) - 1), 0)
+			if(!fake_noflaw && vices_to_gen)
+				for(var/i = 1 to vices_to_gen)
+					var/vice_roll = pick(GLOB.character_flaws)
+					if(!(vice_roll in vices_found) && !(vice_roll in GLOB.fakevice_blacklist))
+						vices_found.Add(vice_roll)
+
+		// Save/load
+			fake_vices[H] = vices_found.Copy()
+		else
+			var/list/datum/charflaw/fakey = fake_vices[H]
+			vices_found = fakey.Copy()
+
+		if(prob(50 + ((H.STAPER - 10) * 10)))
+			to_chat(H, span_warning("A pair of prying eyes were laid on me..."))
+
+	if(!vices_found) // if we actually passed the check, show real vices instead
+		vices_found = H.vices.Copy()
+
+	if(!length(vices_found)) // failsafe
+		to_chat(user, span_warning("They have no vices."))
+		return FALSE
+
+	var/vices_string = english_list(vices_found)
+	var/prefix = "Their vices are... "
+	if(length(vices_found) == 1)
+		prefix = "Their vice is... "
+	to_chat(user, span_info("[prefix]") + span_warning("[vices_string]."))
+	return TRUE
 
 // T0, orison inspired healing spell that pours a drink called Lover's Ruin. Works like a red for baotha blessed, poisons non-blessed.
 /obj/effect/proc_holder/spell/targeted/touch/loversruin
