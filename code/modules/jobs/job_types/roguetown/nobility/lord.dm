@@ -16,10 +16,10 @@ GLOBAL_LIST_EMPTY(lord_titles)
 
 	spells = list(
 		/obj/effect/proc_holder/spell/self/grant_title,
-		/obj/effect/proc_holder/spell/self/convertrole/servant,
 		/obj/effect/proc_holder/spell/self/convertrole/guard,
 		/obj/effect/proc_holder/spell/self/grant_nobility,
-		/obj/effect/proc_holder/spell/self/convertrole/bog
+		/obj/effect/proc_holder/spell/self/convertrole/servant,
+		/obj/effect/proc_holder/spell/self/convertrole/bog,
 	)
 	outfit = /datum/outfit/job/roguetown/lord
 	visuals_only_outfit = /datum/outfit/job/roguetown/lord/visuals
@@ -450,4 +450,39 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	recruitment_faction = "Bog Guard"
 	recruitment_message = "Serve the Wardens, %RECRUIT!"
 	accept_message = "FOR THE GROVE!"
+	refuse_message = "I refuse."
+
+// /datum/job/roguetown/lord/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
+// 	if(SSmapping.config.map_name == "Desert Town")
+// 		spells = list(/obj/effect/proc_holder/spell/self/convertrole/slave, obj/effect/proc_holder/spell/self/convertrole/azeb)
+// 	else
+// 		spells = list(/obj/effect/proc_holder/spell/self/convertrole/servant, /obj/effect/proc_holder/spell/self/convertrole/bog)
+// 	..()
+
+/datum/job/roguetown/lord/after_spawn(mob/living/L, mob/M, latejoin = TRUE)//
+	if(SSmapping.config.map_name == "Desert Town")
+		spells = list( /obj/effect/proc_holder/spell/self/convertrole/slave,
+		/obj/effect/proc_holder/spell/self/convertrole/azeb,
+		/obj/effect/proc_holder/spell/self/grant_title,
+		/obj/effect/proc_holder/spell/self/convertrole/guard,
+		/obj/effect/proc_holder/spell/self/grant_nobility,
+		)
+	..()
+
+/obj/effect/proc_holder/spell/self/convertrole/slave
+	name = "Recruit Slave"
+	new_role = "Slave"
+	overlay_state = "recruit_servant"
+	recruitment_faction = "Servants"
+	recruitment_message = "Serve the crown, %RECRUIT!"
+	accept_message = "I OBEY, MASTER!"
+	refuse_message = "I refuse."
+	recharge_time = 100
+
+/obj/effect/proc_holder/spell/self/convertrole/azeb
+	name = "Recruit Azeb"
+	new_role = "Azeb"
+	recruitment_faction = "Bog Guard"
+	recruitment_message = "Serve the my will, %RECRUIT!"
+	accept_message = "FOR THE SULTAN!"
 	refuse_message = "I refuse."
