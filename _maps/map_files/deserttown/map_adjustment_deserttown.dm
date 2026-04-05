@@ -32,7 +32,9 @@
 		You owe your life to the Sultan, for it was his coin that allowed you to continue your studies in these dark times. \
 		In return, you have proven time and time again as justicar and trusted advisor to their reign.",
 		/datum/job/roguetown/shophand = "You work the largest store in Al-Ashur by grace of the Merchant who has shackled you to this drudgery. The work of stocking shelves and taking inventory for your employer is mind-numbing and repetitive--but at least you have a roof over your head and comfortable surroundings. With time, perhaps you will one day be more than a glorified servant.",
-
+		// /datum/job/roguetown/squire = "Your folks said you were going to be something, they had better aspirations for you than the life of a peasant. You practiced the basics \
+		// in the field alongside your friends, swordfighting with sticks, chasing rabbits with grain flail, and helping around the house lifting heavy \
+		// bags of grain. The Knight took notice of your potential and brought you on as his personal ward. You're going to be something someday."//CHANGE ME TO SOMETHING MORE DESERTY!
 	)
 	/// Jobs that this map won't use
 	blacklist = list(
