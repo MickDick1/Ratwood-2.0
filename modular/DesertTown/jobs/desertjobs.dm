@@ -185,7 +185,7 @@
 
 /datum/outfit/job/roguetown/squire/pre_equip(mob/living/carbon/human/H)
 	. = ..()
-	if(SSmapping.config.map_name == "Roguetest")
+	if(SSmapping.config.map_name == "Desert Town")
 		cloak = /obj/item/clothing/cloak/citywatch/janissary
 		shoes = /obj/item/clothing/shoes/roguetown/shalal
 		shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/zyb
