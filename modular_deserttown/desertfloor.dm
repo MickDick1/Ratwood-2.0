@@ -1,7 +1,7 @@
 /turf/open/floor/rogue/dunes
 	name = "sand"
 	desc = "Its course and rough, and it gets everywhere."
-	icon = 'modular/DesertTown/icons/desertfloor.dmi'
+	icon = 'modular_deserttown/icons/desertfloor.dmi'
 	icon_state = "dune1"
 	footstep = FOOTSTEP_SAND
 	//barefootstep = FOOTSTEP_SAND
@@ -22,7 +22,7 @@
 
 /turf/open/floor/rogue/sandbrick
 	icon_state = "sand-brick1"
-	icon = 'modular/DesertTown/icons/desertfloor.dmi'
+	icon = 'modular_deserttown/icons/desertfloor.dmi'
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
 	clawfootstep = FOOTSTEP_HARD_CLAW
@@ -45,7 +45,7 @@
 
 /turf/open/floor/rogue/citybrick
 	icon_state = "city-brick1"
-	icon = 'modular/DesertTown/icons/desertfloor.dmi'
+	icon = 'modular_deserttown/icons/desertfloor.dmi'
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
 	clawfootstep = FOOTSTEP_HARD_CLAW
@@ -111,7 +111,7 @@
 
 /turf/open/floor/rogue/lightpath
 	icon_state = "light-path1"
-	icon = 'modular/DesertTown/icons/desertfloor.dmi'
+	icon = 'modular_deserttown/icons/desertfloor.dmi'
 	canSmoothWith = list(/turf/open/floor/rogue, /turf/closed/mineral, /turf/closed/wall/mineral)
 	// slowdown = 0 //Could be due tweaking but turning it off for now for practical reasons
 	footstep = FOOTSTEP_SAND
@@ -131,7 +131,7 @@
 
 /turf/open/floor/rogue/darkpath
 	icon_state = "dark-path1"
-	icon = 'modular/DesertTown/icons/desertfloor.dmi'
+	icon = 'modular_deserttown/icons/desertfloor.dmi'
 	canSmoothWith = list(/turf/open/floor/rogue, /turf/closed/mineral, /turf/closed/wall/mineral)
 	slowdown = 0
 	footstep = FOOTSTEP_SAND
@@ -153,7 +153,7 @@
 /obj/effect/decal/desertgrassedge
 	name = ""
 	desc = ""
-	icon = 'modular/DesertTown/icons/desertfloor.dmi'
+	icon = 'modular_deserttown/icons/desertfloor.dmi'
 	icon_state = "desertgrass_edges"
 	mouse_opacity = 0
 
@@ -161,7 +161,7 @@
 /turf/open/floor/rogue/desert_grass
 	name = "desert grass"
 	desc = "Grass, barely."
-	icon = 'modular/DesertTown/icons/desertfloor.dmi'
+	icon = 'modular_deserttown/icons/desertfloor.dmi'
 	icon_state = "desertgrass1"
 	layer = MID_TURF_LAYER
 	footstep = FOOTSTEP_GRASS
@@ -191,16 +191,16 @@
 	src.ChangeTurf(/turf/open/floor/rogue/dirt, flags = CHANGETURF_INHERIT_AIR)
 
 /turf/open/floor/rogue/dirt/desert
-	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
+	icon = 'modular_deserttown/icons/alt/roguefloor.dmi'
 /turf/open/floor/rogue/dirt/road/desert
-	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
+	icon = 'modular_deserttown/icons/alt/roguefloor.dmi'
 
 
 ///.
 
 /turf/open/floor/rogue/deserttile
 	icon_state = "tiledrab"
-	icon = 'modular/DesertTown/icons/desertfloor.dmi'
+	icon = 'modular_deserttown/icons/desertfloor.dmi'
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
 	clawfootstep = FOOTSTEP_HARD_CLAW

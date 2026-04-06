@@ -84,7 +84,7 @@
 	color = "#ffc4c2"
 	},
 /turf/open/floor/rogue/concrete{
-	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
+	icon = 'modular_deserttown/icons/alt/roguefloor.dmi'
 	},
 /area/rogue/outdoors/banditcamp/desert)
 "bS" = (
@@ -92,14 +92,14 @@
 	color = "#ad885c"
 	},
 /turf/open/floor/rogue/twig{
-	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
+	icon = 'modular_deserttown/icons/alt/roguefloor.dmi'
 	},
 /area/rogue/indoors/banditcamp/desert)
 "cA" = (
 /obj/machinery/light/rogue/candle,
 /mob/living/simple_animal/pet/cat/rogue,
 /turf/open/floor/rogue/tile{
-	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
+	icon = 'modular_deserttown/icons/alt/roguefloor.dmi'
 	},
 /area/rogue/indoors/banditcamp/desert)
 "cG" = (
@@ -110,7 +110,7 @@
 "cI" = (
 /obj/structure/stairs/stone{
 	dir = 1;
-	icon = 'modular/DesertTown/icons/stairs.dmi'
+	icon = 'modular_deserttown/icons/stairs.dmi'
 	},
 /turf/open/floor/rogue/darkpath,
 /area/rogue/indoors/banditcamp/desert)
@@ -178,7 +178,7 @@
 	icon_state = "tablewood1"
 	},
 /turf/open/floor/rogue/tile{
-	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
+	icon = 'modular_deserttown/icons/alt/roguefloor.dmi'
 	},
 /area/rogue/indoors/banditcamp/desert)
 "eX" = (
@@ -360,13 +360,13 @@
 "ka" = (
 /obj/structure/stairs/stone{
 	dir = 4;
-	icon = 'modular/DesertTown/icons/stairs.dmi'
+	icon = 'modular_deserttown/icons/stairs.dmi'
 	},
 /turf/open/floor/rogue/darkpath,
 /area/rogue/indoors/banditcamp/desert)
 "kx" = (
 /turf/open/floor/rogue/twig{
-	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
+	icon = 'modular_deserttown/icons/alt/roguefloor.dmi'
 	},
 /area/rogue/outdoors/banditcamp/desert)
 "kI" = (
@@ -523,7 +523,7 @@
 "py" = (
 /obj/machinery/light/rogue/candle,
 /turf/open/floor/rogue/tile{
-	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
+	icon = 'modular_deserttown/icons/alt/roguefloor.dmi'
 	},
 /area/rogue/indoors/banditcamp/desert)
 "pF" = (
@@ -655,7 +655,7 @@
 /area/rogue/indoors/banditcamp/desert)
 "tN" = (
 /turf/open/floor/rogue/tile{
-	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
+	icon = 'modular_deserttown/icons/alt/roguefloor.dmi'
 	},
 /area/rogue/indoors/banditcamp/desert)
 "tT" = (
@@ -730,7 +730,7 @@
 	},
 /obj/machinery/light/rogue/candle,
 /turf/open/floor/rogue/tile{
-	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
+	icon = 'modular_deserttown/icons/alt/roguefloor.dmi'
 	},
 /area/rogue/indoors/banditcamp/desert)
 "wt" = (
@@ -767,7 +767,7 @@
 "xy" = (
 /obj/structure/roguewindow/harem3,
 /turf/open/floor/rogue/tile{
-	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
+	icon = 'modular_deserttown/icons/alt/roguefloor.dmi'
 	},
 /area/rogue/outdoors/banditcamp/desert)
 "xZ" = (
@@ -792,7 +792,7 @@
 	color = "#ffc4c2"
 	},
 /turf/open/floor/rogue/concrete{
-	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
+	icon = 'modular_deserttown/icons/alt/roguefloor.dmi'
 	},
 /area/rogue/outdoors/banditcamp/desert)
 "yY" = (
@@ -924,7 +924,7 @@
 "Ed" = (
 /obj/machinery/light/rogue/firebowl/standing,
 /obj/structure/fluff/statue/knight{
-	icon = 'modular/DesertTown/icons/alt/tallstructure.dmi'
+	icon = 'modular_deserttown/icons/alt/tallstructure.dmi'
 	},
 /obj/item/cushion/desert1,
 /turf/open/floor/rogue/tile/harem,
@@ -935,7 +935,7 @@
 	},
 /obj/item/rogueweapon/huntingknife/cleaver,
 /turf/open/floor/rogue/tile{
-	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
+	icon = 'modular_deserttown/icons/alt/roguefloor.dmi'
 	},
 /area/rogue/indoors/banditcamp/desert)
 "ED" = (
@@ -967,7 +967,7 @@
 /obj/item/reagent_containers/glass/cup/skull,
 /obj/item/reagent_containers/glass/cup/skull,
 /turf/open/floor/rogue/tile{
-	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
+	icon = 'modular_deserttown/icons/alt/roguefloor.dmi'
 	},
 /area/rogue/indoors/banditcamp/desert)
 "FG" = (
@@ -993,7 +993,7 @@
 "GE" = (
 /obj/machinery/light/rogue/firebowl/standing,
 /obj/structure/fluff/statue/knight/r{
-	icon = 'modular/DesertTown/icons/alt/tallstructure.dmi'
+	icon = 'modular_deserttown/icons/alt/tallstructure.dmi'
 	},
 /obj/item/cushion/desert1,
 /turf/open/floor/rogue/tile/harem,
@@ -1022,7 +1022,7 @@
 "Hc" = (
 /obj/structure/fermentation_keg/sandpot/random/water,
 /turf/open/floor/rogue/tile{
-	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
+	icon = 'modular_deserttown/icons/alt/roguefloor.dmi'
 	},
 /area/rogue/indoors/banditcamp/desert)
 "Hn" = (
@@ -1138,7 +1138,7 @@
 /obj/item/reagent_containers/food/snacks/rogue/meat/steak,
 /obj/item/reagent_containers/food/snacks/rogue/meat/steak,
 /turf/open/floor/rogue/tile{
-	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
+	icon = 'modular_deserttown/icons/alt/roguefloor.dmi'
 	},
 /area/rogue/indoors/banditcamp/desert)
 "JR" = (
@@ -1169,7 +1169,7 @@
 /obj/structure/roguewindow/harem3,
 /obj/structure/drape/desert,
 /turf/open/floor/rogue/tile{
-	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
+	icon = 'modular_deserttown/icons/alt/roguefloor.dmi'
 	},
 /area/rogue/indoors/banditcamp/desert)
 "KW" = (
@@ -1346,7 +1346,7 @@
 "Ss" = (
 /obj/structure/roguewindow/harem3,
 /turf/open/floor/rogue/tile{
-	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
+	icon = 'modular_deserttown/icons/alt/roguefloor.dmi'
 	},
 /area/rogue/indoors/banditcamp/desert)
 "Su" = (
@@ -1412,7 +1412,7 @@
 /area/rogue/outdoors/banditcamp/desert)
 "TO" = (
 /turf/open/floor/rogue/twig{
-	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
+	icon = 'modular_deserttown/icons/alt/roguefloor.dmi'
 	},
 /area/rogue/indoors/banditcamp/desert)
 "TZ" = (

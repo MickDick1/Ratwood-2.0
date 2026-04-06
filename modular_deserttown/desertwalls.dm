@@ -1,7 +1,7 @@
 /turf/closed/wall/mineral/rogue/sandstone
 	name = "sandstone wall"
 	desc = "A wall of smooth, unyielding sandstone."
-	icon = 'modular/DesertTown/icons/sandstone.dmi'
+	icon = 'modular_deserttown/icons/sandstone.dmi'
 	icon_state = "sand-stone"
 	smooth = SMOOTH_MORE
 	blade_dulling = DULLING_BASH
@@ -20,7 +20,7 @@
 /turf/closed/wall/mineral/rogue/sandbrick
 	name = "sandbrick wall"
 	desc = "A wall of smooth, unyielding bricks."
-	icon = 'modular/DesertTown/icons/sandbrick_wall.dmi'
+	icon = 'modular_deserttown/icons/sandbrick_wall.dmi'
 	icon_state = "sandbrick"
 	smooth = SMOOTH_MORE
 	blade_dulling = DULLING_BASH
