@@ -72,15 +72,10 @@
 			continue
 		if(human.advsetup || !human.class_equip_finished) // they haven't gotten their true class name yet
 			continue
-		var/base_name = "[human.real_name]"
-		var/name_count = (name_counts[base_name] || 0) + 1
-		var/class = human.get_class_title()
-		name_counts[base_name] = name_count
-		var/entry_name = (name_count > 1) ? "[base_name] ([name_count])[length(class) ? " - [class]" : ""]" : "[base_name][length(class) ? " - [class]" : ""]"
 		if(human.has_flaw(/datum/charflaw/hunted))
-			hunted_targets[entry_name] = human
+			add_target_to_list(human, hunted_targets, name_counts)
 		else if(human.job in combat_roles)
-			combat_targets[entry_name] = human
+			add_target_to_list(human, combat_targets, name_counts)
 
 	var/list/possible_targets = length(hunted_targets) ? hunted_targets : combat_targets
 
@@ -108,6 +103,17 @@
 	notify_tracked_target(selected_target)
 	to_chat(user, span_notice("You focus your senses on [selected_target.real_name]."))
 	give_tracking_directions(user)
+
+/obj/effect/proc_holder/spell/invoked/gnoll_sniff/proc/add_target_to_list(mob/living/carbon/human/human, list/target_list, list/name_counts)
+	var/base_name = "[human.real_name]"
+	var/name_count = (name_counts[base_name] || 0) + 1
+	name_counts[base_name] = name_count
+	var/class = human.get_class_title()
+	// Names will display in the format "Urist McDwarf (2) - Grudgebearer Soldier"
+	var/entry_name = (name_count > 1) ? "[base_name] ([name_count])[length(class) ? " - [class]" : ""]" : "[base_name][length(class) ? " - [class]" : ""]"
+	
+	target_list[entry_name] = human
+	return
 
 /obj/effect/proc_holder/spell/invoked/gnoll_sniff/proc/give_tracking_directions(mob/user)
 	var/mob/living/tracked_target = tracked_target_ref?.resolve()
