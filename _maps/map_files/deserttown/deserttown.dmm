@@ -11959,10 +11959,6 @@
 	color = "#e3edff"
 	},
 /area/rogue/outdoors/desertdeep)
-"fSx" = (
-/obj/structure/fermentation_keg/fancypot,
-/turf/open/floor/rogue/wood,
-/area/rogue/indoors/town/shop/desert)
 "fTx" = (
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/rogue/cobble,
@@ -33724,7 +33720,8 @@
 /area/rogue/under/town/basement/desert)
 "qgb" = (
 /obj/structure/closet/crate/chest{
-	lockid = "armory"
+	lockid = "merchant";
+	locked = 1
 	},
 /obj/item/roguegem/green,
 /obj/effect/spawner/lootdrop/roguetown/dungeon/money,
@@ -469740,7 +469737,7 @@ clr
 clr
 uqY
 uqY
-fSx
+ogu
 iTt
 dfG
 dfG
