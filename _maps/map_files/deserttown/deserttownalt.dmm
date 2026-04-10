@@ -228,12 +228,10 @@
 /obj/item/clothing/cloak/raincloak/drab,
 /obj/item/clothing/cloak/raincloak/drab,
 /obj/item/clothing/cloak/raincloak/drab,
-/obj/item/clothing/head/roguetown/roguehood/shalal/nomad,
-/obj/item/clothing/head/roguetown/roguehood/shalal/nomad,
-/obj/item/clothing/head/roguetown/roguehood/shalal,
-/obj/item/clothing/head/roguetown/turban/red,
-/obj/item/clothing/head/roguetown/turban/red,
-/obj/item/clothing/head/roguetown/turban/red,
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/banditcamp/desert)
+"gd" = (
+/obj/machinery/light/rogue/firebowl,
 /turf/open/floor/rogue/tile/brownbrick,
 /area/rogue/indoors/banditcamp/desert)
 "ge" = (
@@ -981,6 +979,13 @@
 /obj/structure/toilet,
 /turf/open/floor/rogue/sandbrick,
 /area/rogue/indoors/banditcamp/desert)
+"EV" = (
+/obj/structure/rack/rogue,
+/obj/item/clothing/head/roguetown/turban/red,
+/obj/item/clothing/head/roguetown/turban/red,
+/obj/item/clothing/head/roguetown/turban/red,
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/banditcamp/desert)
 "Fh" = (
 /obj/item/rogueweapon/shield/wood,
 /obj/structure/rack/rogue,
@@ -1425,7 +1430,7 @@
 /area/rogue/indoors/banditcamp/desert)
 "Sx" = (
 /obj/machinery/light/rogue/candle/r,
-/turf/open/floor/rogue/sandbrick,
+/turf/open/floor/rogue/darkpath,
 /area/rogue/indoors/banditcamp/desert)
 "SK" = (
 /obj/structure/roguewindow/harem3,
@@ -1489,6 +1494,14 @@
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/rogue/desert_grass,
 /area/rogue/outdoors/desertdeep/safe)
+"VZ" = (
+/obj/structure/rack/rogue,
+/obj/item/clothing/head/roguetown/roguehood/shalal,
+/obj/item/clothing/head/roguetown/roguehood/shalal/nomad,
+/obj/item/clothing/head/roguetown/roguehood/shalal/nomad,
+/obj/item/clothing/head/roguetown/roguehood/shalal,
+/turf/open/floor/rogue/tile/brownbrick,
+/area/rogue/indoors/banditcamp/desert)
 "Wk" = (
 /obj/item/cushion/desert2,
 /obj/effect/landmark/start/bandit{
@@ -7298,7 +7311,7 @@ eE
 zP
 qz
 zP
-zP
+Sx
 gk
 RX
 RX
@@ -7363,9 +7376,9 @@ eE
 zP
 dM
 mx
-oZ
+gk
 zP
-Sx
+gk
 gk
 rU
 RX
@@ -7433,7 +7446,7 @@ gk
 gk
 ka
 gk
-gk
+pl
 rU
 rU
 RX
@@ -7500,7 +7513,7 @@ Fh
 hT
 tN
 gk
-pl
+gk
 Te
 OI
 je
@@ -7566,8 +7579,8 @@ cI
 tN
 tN
 tN
+VZ
 gk
-pl
 DT
 he
 aI
@@ -7633,8 +7646,8 @@ eX
 py
 tN
 tN
+EV
 gk
-pl
 DT
 aI
 aI
@@ -7700,8 +7713,8 @@ eX
 Su
 vl
 fW
+gd
 gk
-pl
 DT
 oI
 Lw
@@ -7768,7 +7781,7 @@ gk
 gk
 gk
 gk
-pl
+gk
 pl
 iz
 pl
