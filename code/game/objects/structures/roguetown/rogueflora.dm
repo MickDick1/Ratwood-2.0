@@ -498,17 +498,7 @@
 	var/random_mush_zone = TRUE
 
 /obj/structure/flora/rogueshroom/attack_right(mob/user)
-	if(user.mind && isliving(user))
-		if(user.mind.special_items && user.mind.special_items.len)
-			var/item = input(user, "What will I take?", "STASH") as null|anything in user.mind.special_items
-			if(item)
-				if(user.Adjacent(src))
-					if(user.mind.special_items[item])
-						var/path2item = user.mind.special_items[item]
-						user.mind.special_items -= item
-						var/obj/item/I = new path2item(user.loc)
-						user.put_in_hands(I)
-			return
+	handle_special_items_retrieval(user, src)
 
 /obj/structure/flora/rogueshroom/Initialize()
 	. = ..()
