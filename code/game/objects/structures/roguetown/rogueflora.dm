@@ -782,10 +782,6 @@
 	var/mush_animate = TRUE
 	var/mush_scream = TRUE
 
-// /obj/structure/flora/rogueshroom/get_mechanics_examine(mob/user)
-// 	. = ..()
-// 	. += span_info("Most shroomtrees can be toppled by hitting them with the 'CUT', 'CHOP', or 'REND' intents on bladed weapons. Nothing chops trees and foliage better, or quicker, than a good old fashioned axe.")
-
 /obj/structure/flora/rogueshroom/unhappy/Initialize()
 	. = ..()
 	if(mush_animate)
@@ -854,7 +850,7 @@
 	mush_light_power = 3
 	mush_light_color = "#e2e2e2"
 	int_req = 10
-	special_examine = "This mushroom has an identical appearance to a highly murderous mushroom, called the weeping angel, but luckily that one isn't native to Azure."
+	special_examine = "This mushroom has an identical appearance to a highly murderous mushroom, called the weeping angel, but luckily that one isn't native to these lands."
 	static_debris = null
 	mush_animate = FALSE
 
@@ -958,8 +954,7 @@
 	icon = 'icons/obj/flora/pines.dmi'
 	pixel_w = -24
 	density = 0
-	max_integrity = 200
-	static_debris = list(/obj/item/grown/log/tree = 3)
+	static_debris = list(/obj/item/grown/log/tree = 2)
 	stump_type = null
 
 /obj/structure/flora/roguetree/pine/Initialize(mapload)
