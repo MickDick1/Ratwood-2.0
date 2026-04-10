@@ -544,6 +544,7 @@
 	name = "rusty grille"
 	desc = "A few good hits ought to smash it open."
 	max_integrity = 70
+	color = "#d9c8c1"
 
 /obj/structure/bars/pipe
 	name = "bronze pipe"
