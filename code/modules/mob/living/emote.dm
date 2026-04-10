@@ -2465,25 +2465,14 @@
 		return FALSE
 
 	var/mob/living/L = user
-
-
 	to_chat(L, span_danger("I pray to my patron for my death... and I am heard."))
-
-
 	var/lastmsg = params
 	if(!lastmsg)
 		lastmsg = input("Whisper your final words:", "Last Words") as text|null
 	if(!lastmsg)
 		return FALSE
-
 	L.whisper(lastmsg)
-
 	sleep(50)
-
-	if(iscarbon(L))
-		var/mob/living/carbon/C = L
-		L.death()
-	else
-		to_chat(L, span_warning("Nothing happens."))
+	L.death()
 
 	return TRUE
