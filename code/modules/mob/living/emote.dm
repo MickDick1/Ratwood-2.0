@@ -2482,8 +2482,6 @@
 
 	if(iscarbon(L))
 		var/mob/living/carbon/C = L
-		C.adjustOxyLoss(200)
-	else if(isliving(L))
 		L.death()
 	else
 		to_chat(L, span_warning("Nothing happens."))
