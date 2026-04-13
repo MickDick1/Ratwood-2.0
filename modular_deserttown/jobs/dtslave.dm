@@ -60,12 +60,10 @@
 
 /datum/outfit/job/roguetown/slave/servant/pre_equip(mob/living/carbon/human/H)
 	..()
-	
-	if(prob(50))
-		pants = /obj/item/clothing/under/roguetown/sirwal/plainrandom
+	if(should_wear_femme_clothes(H))
+		shirt = /obj/item/clothing/suit/roguetown/shirt/dress/thawb
 	else
 		pants = /obj/item/clothing/under/roguetown/sirwal/plainrandom
-		shirt = /obj/item/clothing/suit/roguetown/shirt/dress/thawb
 	neck = /obj/item/clothing/neck/roguetown/gorget/cursed_collar
 	backl = /obj/item/storage/backpack/rogue/satchel
 	belt = /obj/item/storage/belt/rogue/leather/rope
