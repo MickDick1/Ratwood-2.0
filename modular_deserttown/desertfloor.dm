@@ -149,14 +149,12 @@
 	icon_state = "dark-path[rand(1,8)]"
 
 
-
 /obj/effect/decal/desertgrassedge
 	name = ""
 	desc = ""
 	icon = 'modular_deserttown/icons/desertfloor.dmi'
 	icon_state = "desertgrassedge"
 	mouse_opacity = 0
-
 
 /turf/open/floor/rogue/desert_grass
 	name = "desert grass"
@@ -174,6 +172,10 @@
 	canSmoothWith = list(
 						/turf/open/floor/rogue/grass,
 						/turf/open/floor/rogue/dunes,
+						/turf/open/floor/rogue/dirt,
+						/turf/open/floor/rogue/dirt/road,
+						/turf/open/floor/rogue/dirt/desert,
+						/turf/open/floor/rogue/dirt/road/desert,
 						/turf/open/floor/rogue/citybrick,
 						/turf/open/floor/rogue/grassred,
 						/turf/open/floor/rogue/grassyel,
@@ -197,12 +199,47 @@
 
 /turf/open/floor/rogue/desert_grass/turf_destruction(damage_flag)
 	. = ..()
-	src.ChangeTurf(/turf/open/floor/rogue/dirt, flags = CHANGETURF_INHERIT_AIR)
+	src.ChangeTurf(/turf/open/floor/rogue/dirt/desert, flags = CHANGETURF_INHERIT_AIR)
 
 /turf/open/floor/rogue/dirt/desert
 	icon = 'modular_deserttown/icons/alt/roguefloor.dmi'
+	canSmoothWith = list(
+						/turf/open/floor/rogue/grass,
+						/turf/open/floor/rogue/dunes,
+						/turf/open/floor/rogue/desert_grass,
+						/turf/open/floor/rogue/dirt,
+						/turf/open/floor/rogue/dirt/road,
+						/turf/open/floor/rogue/dirt/desert,
+						/turf/open/floor/rogue/dirt/road/desert,
+						/turf/open/floor/rogue/citybrick,
+						/turf/open/floor/rogue/grassred,
+						/turf/open/floor/rogue/grassyel,
+						/turf/open/floor/rogue/grasscold,
+						/turf/open/floor/rogue/grassgrey,
+						/turf/open/floor/rogue/grasspurple,
+						/turf/open/floor/rogue/snowpatchy,
+						/turf/open/floor/rogue/snow,
+						/turf/open/floor/rogue/snowrough,)
+
 /turf/open/floor/rogue/dirt/road/desert
 	icon = 'modular_deserttown/icons/alt/roguefloor.dmi'
+	canSmoothWith = list(
+						/turf/open/floor/rogue/grass,
+						/turf/open/floor/rogue/dunes,
+						/turf/open/floor/rogue/desert_grass,
+						/turf/open/floor/rogue/dirt,
+						/turf/open/floor/rogue/dirt/road,
+						/turf/open/floor/rogue/dirt/desert,
+						/turf/open/floor/rogue/dirt/road/desert,
+						/turf/open/floor/rogue/citybrick,
+						/turf/open/floor/rogue/grassred,
+						/turf/open/floor/rogue/grassyel,
+						/turf/open/floor/rogue/grasscold,
+						/turf/open/floor/rogue/grassgrey,
+						/turf/open/floor/rogue/grasspurple,
+						/turf/open/floor/rogue/snowpatchy,
+						/turf/open/floor/rogue/snow,
+						/turf/open/floor/rogue/snowrough,)
 
 
 ///.
