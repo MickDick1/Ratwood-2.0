@@ -431,3 +431,15 @@
 	spookysounds = SPOOKY_CAVE
 	spookynight = SPOOKY_CAVE
 	droning_sound = 'sound/music/area/underdark2.ogg'
+
+/area/rogue/indoors/town/church/psy
+	name = "church"
+	icon_state = "church"
+	droning_sound = 'sound/music/area/church.ogg'
+	droning_sound_dusk = null
+	droning_sound_night = null
+	holy_area = TRUE
+	droning_sound_dawn = 'sound/music/area/churchdawn.ogg'
+	converted_type = /area/rogue/outdoors/exposed/church
+	deathsight_message = "a hallowed place, sworn to the One"
+	first_time_text = "THE HOUSE OF THE ONE"
