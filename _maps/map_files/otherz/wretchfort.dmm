@@ -1699,6 +1699,11 @@
 	},
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/under/cave/inhumen/wretch/camp)
+"sL" = (
+/obj/structure/fluff/railing/border,
+/obj/structure/bondage/torture_table/lever,
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/under/cave/inhumen/wretch/camp)
 "sM" = (
 /obj/structure/flora/roguegrass/swampweed,
 /turf/open/water/swamp,
@@ -3399,6 +3404,7 @@
 /area/rogue/under/cave/inhumen/wretch/gnollcavern)
 "Lv" = (
 /obj/machinery/light/rogue/candle/red,
+/obj/structure/bondage/x_pillory,
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/cave/inhumen/wretch/camp)
 "Ly" = (
@@ -9897,7 +9903,7 @@ xk
 Ky
 xk
 xk
-HG
+sL
 YF
 LJ
 LJ
