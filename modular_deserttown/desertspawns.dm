@@ -17,10 +17,10 @@
 /obj/effect/landmark/start/dt/slavemaster
 	name = "Slave master"
 
-/obj/effect/landmark/start/dt/sheikh
-	name = "Sheikh"
-/obj/effect/landmark/start/dt/vizier
-	name = "Vizier"
+// /obj/effect/landmark/start/dt/sheikh
+// 	name = "Sheikh"
+// /obj/effect/landmark/start/dt/vizier
+// 	name = "Vizier"
 // /obj/effect/landmark/start/dt/prince
 // 	name = "prince"
 // /obj/effect/landmark/start/dt/sultan
