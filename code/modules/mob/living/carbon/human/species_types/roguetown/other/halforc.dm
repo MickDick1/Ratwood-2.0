@@ -42,7 +42,7 @@
 	OFFSET_FACE_F = list(0,1), OFFSET_BELT_F = list(0,1), OFFSET_BACK_F = list(0,1), \
 	OFFSET_NECK_F = list(0,1), OFFSET_MOUTH_F = list(0,1), OFFSET_PANTS_F = list(0,1), \
 	OFFSET_SHIRT_F = list(0,1), OFFSET_ARMOR_F = list(0,1), OFFSET_UNDIES_F = list(0,1))
-	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_BIGGUY, TRAIT_DEATHBYSNUSNU)
+	inherent_traits = list(TRAIT_BIGGUY, TRAIT_DEATHBYSNUSNU)
 	race_bonus = list(STAT_STRENGTH = 1)
 	enflamed_icon = "widefire"
 	organs = list(
@@ -72,6 +72,12 @@
 		/datum/body_marking/flushed_cheeks,
 		/datum/body_marking/eyeliner,
 		/datum/body_marking/tonage,
+		/datum/body_marking/womb_tattoo,
+		/datum/body_marking/butterfly,
+		/datum/body_marking/waist,
+		/datum/body_marking/diagonal_eyes,
+		/datum/body_marking/wide_eyes,
+		/datum/body_marking/stripes,
 	)
 	customizers = list(
 		/datum/customizer/organ/eyes/humanoid,
@@ -92,6 +98,9 @@
 		/datum/language/common,
 		/datum/language/orcish
 	)
+
+/datum/species/halforc/check_roundstart_eligible()
+	return TRUE
 
 /datum/species/halforc/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()
@@ -118,7 +127,8 @@
 		"Crescent Fang" = SKIN_COLOR_CRESCENT_FANG,
 		"Murkwalker" = SKIN_COLOR_MURKWALKER,
 		"Shatterhorn" = SKIN_COLOR_SHATTERHORN,
-		"Spirit Crusher" = SKIN_COLOR_SPIRITCRUSHER
+		"Spirit Crusher" = SKIN_COLOR_SPIRITCRUSHER,
+		"Underdweller" = SKIN_COLOR_UNDERDWELLER
 	)
 
 /datum/species/halforc/get_hairc_list()

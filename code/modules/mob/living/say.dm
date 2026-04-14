@@ -101,7 +101,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	if(ic_blocked)
 		//The filter warning message shows the sanitized message though.
 		to_chat(src, span_warning("That message contained a word prohibited in IC chat! Consider reviewing the server rules.\n<span replaceRegex='show_filtered_ic_chat'>\"[message]\"</span>"))
-		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, lowertext(config.ic_filter_regex.match))
+		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, LOWER_TEXT(config.ic_filter_regex.match))
 		return
 
 	var/datum/saymode/saymode = SSradio.saymodes[talk_key]
@@ -221,6 +221,10 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 
 	spans |= speech_span
 
+	// Add comic sans span for characters with the annoying face trait
+	if(HAS_TRAIT(src, TRAIT_COMICSANS))
+		spans |= SPAN_SANS
+
 	if(language)
 		var/datum/language/L = GLOB.language_datum_instances[language]
 		var/list/chosen_spans
@@ -293,6 +297,13 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 			continue
 		listening |= M
 		the_dead[M] = TRUE
+	var/list/hidden_ghosts = null
+	if(has_ghost_protection(src))
+		hidden_ghosts = get_hidden_ghosts_for_target(src)
+		for(var/mob/dead/observer/ghost in hidden_ghosts)
+			if(ghost in listening)
+				listening -= ghost
+				the_dead -= ghost
 	log_seen(src, null, listening, original_message, SEEN_LOG_SAY)
 
 	var/eavesdropping
@@ -338,7 +349,10 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		var/mob/living/carbon/human/H = src
 		mob_color = H.voice_color
 	var/chatmsg = "<font color = #[mob_color]><b>[src]</b></font> " + sign_verb + "."
-	visible_message(chatmsg, runechat_message = sign_verb, log_seen = SEEN_LOG_EMOTE, ignored_mobs = understanders)
+	var/list/ignored_mobs = understanders.Copy()
+	if(length(hidden_ghosts))
+		ignored_mobs += hidden_ghosts
+	visible_message(chatmsg, runechat_message = sign_verb, log_seen = SEEN_LOG_EMOTE, ignored_mobs = ignored_mobs)
 
 	//speech bubble
 	var/list/speech_bubble_recipients = list()
@@ -443,6 +457,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	// AZURE EDIT END
 	var/list/listening = get_hearers_in_view(message_range+eavesdrop_range, source)
 	var/list/the_dead = list()
+	var/list/hidden_ghosts = null
 //	var/list/yellareas	//CIT CHANGE - adds the ability for yelling to penetrate walls and echo throughout areas
 	for(var/_M in GLOB.player_list)
 		var/mob/M = _M
@@ -477,6 +492,12 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 			continue
 		listening |= M
 		the_dead[M] = TRUE
+	if(has_ghost_protection(src))
+		hidden_ghosts = get_hidden_ghosts_for_target(src)
+		for(var/mob/dead/observer/ghost in hidden_ghosts)
+			if(ghost in listening)
+				listening -= ghost
+				the_dead -= ghost
 	log_seen(src, null, listening, original_message, SEEN_LOG_SAY)
 
 	var/eavesdropping
@@ -609,7 +630,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 /mob/living/proc/get_key(message)
 	var/key = copytext(message, 1, 2)
 	if(key in GLOB.department_radio_prefixes)
-		return lowertext(copytext(message, 2, 3))
+		return LOWER_TEXT(copytext(message, 2, 3))
 
 /mob/living/proc/get_message_language(message)
 	if(copytext(message, 1, 2) == ",")

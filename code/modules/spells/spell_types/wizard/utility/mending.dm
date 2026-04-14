@@ -13,8 +13,8 @@
 	sound = 'sound/magic/whiteflame.ogg'
 	cost = 2
 	spell_tier = 1 // Utility. For repair
-	glow_color = GLOW_COLOR_ARCANE
-	glow_intensity = GLOW_INTENSITY_LOW
+	glow_color = null
+	glow_intensity = 0
 
 	miracle = FALSE
 
@@ -27,6 +27,7 @@
 /obj/effect/proc_holder/spell/invoked/mending/cast(list/targets, mob/living/user)
 	if(!istype(targets[1], /obj/item))
 		to_chat(user, span_warning("There is no item here!"))
+		revert_cast()
 		return
 
 	var/obj/item/I = targets[1]
@@ -40,11 +41,18 @@
 		revert_cast()
 		return
 
-	int_bonus = (user.STAINT * 0.01)
-	repair_percent += int_bonus
-	repair_percent *= I.max_integrity
+	user.visible_message(
+			span_warning("[user] begins to concentrate on [I]!"),
+			span_notice("I begin to concentrate on [I]..")
+	)
+	if(!do_after(user, 4 SECONDS, TRUE, I, TRUE))
+		to_chat(user, span_warning("My concentration breaks! I could not repair [I]."))
+		revert_cast()
+		return
 
-	I.obj_integrity = min(I.obj_integrity + repair_percent, I.max_integrity)
+	var/repair_amount = (repair_percent + (user.STAINT * 0.01)) * I.max_integrity
+
+	I.obj_integrity = min(I.obj_integrity + repair_amount, I.max_integrity)
 	user.visible_message(span_info("[I] glows in a faint mending light."))
 	playsound(I, 'sound/foley/sewflesh.ogg', 50, TRUE, -2)
 
@@ -54,7 +62,6 @@
 		if(I.body_parts_covered_dynamic != I.body_parts_covered)
 			I.repair_coverage()
 			to_chat(user, span_info("[I]'s shorn layers mend together."))
-		revert_cast()
 
 
 /obj/effect/proc_holder/spell/invoked/mending/lesser

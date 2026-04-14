@@ -8,6 +8,12 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 		to_chat(usr, span_notice("Usable blood that yields Vitae and total blood is not the same thing. It takes some time for blood to become nourishing for us."))
 		return
 
+	if(href_list["task"] == "open_language_menu")
+		if(!ismob(usr))
+			return
+		var/datum/language_holder/H = get_language_holder()
+		H.open_language_menu(usr)
+
 	if(href_list["task"] == "view_headshot")
 		if(!ismob(usr))
 			return
@@ -15,6 +21,34 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 		mob_examine_panel.holder = src
 		mob_examine_panel.viewing = usr
 		mob_examine_panel.ui_interact(usr)
+		return
+
+	if(href_list["task"] == "show_custom_item_info")
+		if(!observer_privilege && !usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
+			return
+		var/obj/item/target_item = locate(href_list["item_ref"])
+		if(!istype(target_item))
+			return
+		if(!(target_item in held_items) && !(target_item in get_equipped_items(TRUE)) && \
+			target_item != chastity_device && \
+			!(chastity_device && target_item == chastity_device.attached_toy))
+			return
+		var/is_chastity_item = (target_item == chastity_device)
+		var/is_chastity_attached_toy = (chastity_device && target_item == chastity_device.attached_toy)
+		if(!observer_privilege && (is_chastity_item || is_chastity_attached_toy))
+			if(!get_location_accessible(src, BODY_ZONE_PRECISE_GROIN))
+				return
+			var/perception_level = 15
+			if(isliving(usr))
+				var/mob/living/L = usr
+				perception_level = L.STAPER
+			if(perception_level < 8)
+				return
+		if(!target_item.has_customized_identity() && !target_item.always_show_examine_link)
+			return
+		var/list/item_examine = target_item.examine(usr)
+		if(length(item_examine))
+			to_chat(usr, usr.client?.prefs?.no_examine_blocks ? item_examine.Join("\n") : examine_block(item_examine.Join("\n")))
 		return
 
 	if(href_list["inspect_limb"] && (observer_privilege || usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY)))
@@ -142,6 +176,19 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 				to_chat(usr, span_notice("This person social standing is equivalent to <EM>[rank_name]</EM>, they are my equal."))
 			if(social_rank < examiner_rank)
 				to_chat(usr, span_notice("This person social standing is equivalent to <EM>[rank_name]</EM>, they are my lesser."))
+			if(family_datum)
+				var/datum/family_member/FM = family_datum.GetMemberForPerson(src)
+				var/spousetext = ""
+				if(FM && FM.spouses.len)
+					var/list/spouse_list = list()
+					for(var/datum/family_member/S in FM.spouses)
+						if(S.person)
+							spouse_list += S.person.real_name
+					if(spouse_list.len)
+						spousetext = jointext(spouse_list, ", ")
+				to_chat(usr, span_notice("They are a member of house[family_datum.housename].[spousetext ? " Married to [spousetext]." : ""]"))
+
+
 
 	if(href_list["reveal_cosmetic"])
 		if(mind && mind.cosmetic_class_title)
@@ -150,7 +197,7 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 		return
 
 	if(href_list["undiesthing"]) //canUseTopic check for this is handled by mob/Topic()
-		if(!get_location_accessible(src, BODY_ZONE_PRECISE_GROIN, skipundies = TRUE))
+		if(!get_location_accessible(src, BODY_ZONE_PRECISE_GROIN, grabs = FALSE, skipundies = TRUE))
 			to_chat(usr, span_warning("I can't reach that! Something is covering it."))
 			return
 		if(!underwear)
@@ -166,7 +213,7 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 			underwear = null
 
 	if(href_list["legwearsthing"]) //canUseTopic check for this is handled by mob/Topic()
-		if(!get_location_accessible(src, BODY_ZONE_PRECISE_GROIN, skipundies = TRUE))
+		if(!get_location_accessible(src, BODY_ZONE_PRECISE_GROIN, grabs = FALSE, skipundies = TRUE))
 			to_chat(usr, span_warning("I can't reach that! Something is covering it."))
 			return
 		if(!legwear_socks)
@@ -175,11 +222,14 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 		if(do_after(usr, 50, needhand = 1, target = src))
 			var/obj/item/bodypart/chest = get_bodypart(BODY_ZONE_CHEST)
 			chest.remove_bodypart_feature(legwear_socks.legwears_feature)
-			underwear.forceMove(get_turf(src))
+			legwear_socks.forceMove(get_turf(src))
 			if(iscarbon(usr))
 				var/mob/living/carbon/C = usr
-				C.put_in_hands(underwear)
-			underwear = null
+				C.put_in_hands(legwear_socks)
+			legwear_socks = null
+	if(href_list["chastitything"])
+		modular_handle_chastitything(usr)
+		return
 
 	if(href_list["pockets"] && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY)) //TODO: Make it match (or intergrate it into) strippanel so you get 'item cannot fit here' warnings if mob_can_equip fails
 		var/pocket_side = href_list["pockets"]
@@ -602,7 +652,7 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 
 	return str*/
 
-/proc/skilldiff_report(var/input)
+/proc/skilldiff_report(input)
 	switch (input)
 		if(-6)
 			return "<font color = '#ff4ad2'>I know nothing. They -- everything</font>"

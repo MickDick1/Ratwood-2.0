@@ -3,6 +3,21 @@
 	stressadd = -2
 	desc = span_green("The Gods smile upon me.")
 
+/datum/stressevent/chastity_devout
+	timer = INFINITY
+	stressadd = -1
+	desc = span_green("This restraint steadies my spirit.")
+
+/datum/stressevent/chastity_masochist
+	timer = INFINITY
+	stressadd = -1
+	desc = span_green("The spikes keep me pleasantly focused.")
+
+/datum/stressevent/chastity_church
+	timer = INFINITY
+	stressadd = -1
+	desc = span_green("My vows feel stronger in this restraint.")
+
 /datum/stressevent/seeblessed
 	timer = 30 MINUTES
 	stressadd = -2
@@ -27,6 +42,11 @@
 	timer = 60 MINUTES
 	stressadd = -2
 	desc = span_green("I feel a soothing presence.")
+
+/datum/stressevent/gnoll_graggar
+	timer = 1 MINUTES
+	stressadd = -2
+	desc = span_green("A Gnoll! Graggar's blessing is upon me!")
 
 /datum/stressevent/triumph
 	timer = 10 MINUTES
@@ -287,14 +307,14 @@
 	desc = span_green("My meditations were rewarding.")
 
 /datum/stressevent/bathcleaned
-    timer = 20 MINUTES
-    stressadd = -3
-    desc = span_green("I feel immaculate!")
+	timer = 20 MINUTES
+	stressadd = -3
+	desc = span_green("I feel immaculate!")
 
 /datum/stressevent/bath
-    timer = 10 MINUTES
-    stressadd = -1
-    desc = span_green("I'm just a bit cleaner.")
+	timer = 10 MINUTES
+	stressadd = -1
+	desc = span_green("I'm just a bit cleaner.")
 
 
 /datum/stressevent/pacified
@@ -314,6 +334,14 @@
 
 /datum/stressevent/noble_bowed_to/can_apply(mob/living/user)
 	return HAS_TRAIT(user, TRAIT_NOBLE)
+
+/datum/stressevent/noble_bowed_at
+	timer = 10 MINUTES
+	stressadd = -5
+	desc = span_green("A noble bowed to me! I am truly respected!")
+
+/datum/stressevent/noble_bowed_at/can_apply(mob/living/user)
+	return !HAS_TRAIT(user, TRAIT_NOBLE)
 
 /datum/stressevent/perfume
 	stressadd = -1
@@ -348,7 +376,7 @@
 /datum/stressevent/gazeuponme
 	stressadd = -5
 	desc = span_green("I am a heretic under Ten's gaze... My patron is proud of me!")
-	timer = 999 MINUTES
+	timer = INFINITY
 
 /datum/stressevent/sermon
 	stressadd = -5
@@ -384,7 +412,7 @@
 
 /datum/stressevent/blessed_weapon
 	stressadd = -3
-	timer = 999 MINUTES
+	timer = INFINITY
 	desc = span_green("I'm wielding a BLESSED weapon!")
 
 /datum/stressevent/hand_fed_fruit
@@ -421,3 +449,13 @@
 	timer = 1 MINUTES
 	stressadd = -2
 	desc = list(span_blue("A covered stroll in the rain is quite pleasant."))
+
+/datum/stressevent/bloodrevel
+	timer = 1 MINUTES
+	stressadd = 4
+	desc = span_red("It's raining blood! Blessed be my Patron!")
+
+/datum/stressevent/fireflies
+	timer = 10 MINUTES
+	stressadd = -5
+	desc = span_boldgreen("What wonderious fireflies...")

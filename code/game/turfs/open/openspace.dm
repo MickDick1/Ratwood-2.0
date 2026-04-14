@@ -13,7 +13,7 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 	//I don't know why the others are aligned but I shall do the same.
 	vis_flags		= VIS_INHERIT_ID
 
-/atom/movable/openspace_backdrop/Initialize()
+/atom/movable/openspace_backdrop/Initialize(mapload)
 	. = ..()
 //	filters += filter(type = "blur", size = 3)
 
@@ -53,7 +53,7 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 /turf/open/transparent/openspace/show_bottom_level()
 	return FALSE
 
-/turf/open/transparent/openspace/Initialize() // handle plane and layer here so that they don't cover other obs/turfs in Dream Maker
+/turf/open/transparent/openspace/Initialize(mapload) // handle plane and layer here so that they don't cover other obs/turfs in Dream Maker
 	. = ..()
 	dynamic_lighting = 1
 	vis_contents += GLOB.openspace_backdrop_one_for_all //Special grey square for projecting backdrop darkness filter on it.
@@ -315,13 +315,8 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 		var/turf/target = get_step_multiz(src, DOWN)
 		if(target)
 			testing("canztrav")
-	//		if(can_zFall(P, 2, target))
-	//			testing("canztrue")
-	//			P.zfalling = TRUE
 			P.forceMove(target)
-	//			P.zfalling = FALSE
 			P.original = target
 			P.process_hit(target, P.select_target(target))
-			//bump
 			return BULLET_ACT_TURF
 	return ..()

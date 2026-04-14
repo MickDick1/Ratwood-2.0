@@ -77,7 +77,6 @@
 	on any battlefield."
 	outfit = /datum/outfit/job/roguetown/captain/infantry
 	category_tags = list(CTAG_CAPTAIN)
-	horse = /mob/living/simple_animal/hostile/retaliate/rogue/saiga/saigabuck/tame/saddled
 	subclass_stats = list(
 		STATKEY_STR = 2,
 		STATKEY_CON = 2,
@@ -102,6 +101,10 @@
 		/datum/skill/combat/bows = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/swimming = SKILL_LEVEL_APPRENTICE,
 	)
+
+	virtue_restrictions = list(
+		/datum/virtue/utility/riding
+	)
 	extra_context = "This class gains Master skill in their weapon of choice."
 
 /datum/outfit/job/roguetown/captain/infantry/pre_equip(mob/living/carbon/human/H)
@@ -123,7 +126,8 @@
 	H.verbs |= list(
 		/mob/living/carbon/human/proc/request_outlaw,
 		/mob/proc/haltyell,
-		/mob/living/carbon/human/mind/proc/setorders
+		/mob/living/carbon/human/mind/proc/setorders,
+		/mob/living/carbon/human/proc/take_squire
 	)
 	H.adjust_blindness(-3)
 	if(H.mind)
@@ -143,8 +147,8 @@
 				H.adjust_skillrank_up_to(/datum/skill/combat/polearms, 5, TRUE)
 				r_hand = /obj/item/rogueweapon/halberd/capglaive
 				backl = /obj/item/rogueweapon/scabbard/gwstrap
-
-
+	if(H.mind && !H.mind.has_spell(/obj/effect/proc_holder/spell/self/choose_riding_virtue_mount))
+		H.AddSpell(new /obj/effect/proc_holder/spell/self/choose_riding_virtue_mount)
 
 /obj/effect/proc_holder/spell/self/convertrole
 	name = "Recruit Beggar"

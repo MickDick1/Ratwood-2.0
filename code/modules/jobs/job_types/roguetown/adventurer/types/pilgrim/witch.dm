@@ -7,7 +7,7 @@
 	subclass_social_rank = SOCIAL_RANK_PEASANT
 	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
 	traits_applied = list(TRAIT_DEATHSIGHT, TRAIT_WITCH, TRAIT_ARCYNE_T1, TRAIT_ALCHEMY_EXPERT)
-	maximum_possible_slots = 20 // Should never fill, for the purpose of players to know what types towners are in round at the menu
+	maximum_possible_slots = 5 // really I want to say 3 but 5 is PRETTY roomy
 	subclass_stats = list(
 		STATKEY_INT = 3,
 		STATKEY_SPD = 2,
@@ -27,7 +27,6 @@
 
 /datum/outfit/job/roguetown/adventurer/witch/pre_equip(mob/living/carbon/human/H)
 	..()
-	head = /obj/item/clothing/head/roguetown/witchhat
 	mask = /obj/item/clothing/head/roguetown/roguehood/black
 	armor = /obj/item/clothing/suit/roguetown/shirt/robe/phys
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/priest
@@ -43,15 +42,27 @@
 						/obj/item/pestle = 1,
 						/obj/item/candle/yellow = 2,
 						/obj/item/recipe_book/alchemy = 1,
-						/obj/item/recipe_book/survival = 1,
 						/obj/item/recipe_book/magic = 1,
 						/obj/item/chalk = 1
 						)
+	if(H.age == AGE_MIDDLEAGED)
+		H.adjust_skillrank_up_to(/datum/skill/craft/alchemy, 5, TRUE)
+	if(H.age == AGE_OLD)
+		H.adjust_skillrank_up_to(/datum/skill/craft/alchemy, 6, TRUE)
+
+	var/hats = list(
+		"Witch Hat" 		= /obj/item/clothing/head/roguetown/witchhat,
+		"Witch Hat (Old)"	= /obj/item/clothing/head/roguetown/witchhat/old,
+		"None"
+	)
+	var/hatchoice = input(H, "Choose your hat.", "WITCH ATTIRE") as anything in hats
+	if(hatchoice != "None")
+		head = hats[hatchoice]
 
 	var/classes = list("Old Magick", "Godsblood", "Mystagogue")
 	var/classchoice = input("How do your powers manifest?", "THE OLD WAYS") as anything in classes
 
-	var/shapeshifts = list("Zad", "Cat", "Cat (Black)", "Bat", "Lesser Volf")
+	var/shapeshifts = list("Zad", "Cat", "Cat (Black)", "Bat", "Cabbit", "Small Rous", "Lesser Venard", "Lesser Volf", "Frog")
 	var/shapeshiftchoice = input("What form does your second skin take?", "THE OLD WAYS") as anything in shapeshifts
 
 	switch (classchoice)
@@ -90,6 +101,14 @@
 				H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/shapeshift/witch/bat)
 			if("Lesser Volf")
 				H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/shapeshift/witch/lesser_wolf)
+			if("Lesser Venard")
+				H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/shapeshift/witch/lesser_vernard)
+			if("Small Rous")
+				H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/shapeshift/witch/rous)
+			if("Cabbit")
+				H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/shapeshift/witch/cabbit)
+			if("Frog")
+				H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/shapeshift/witch/frog)
 
 		switch (classchoice)
 			if("Old Magick")
@@ -221,6 +240,59 @@
 	name = "scratch"
 	attack_verb = list("scratches", "claws")
 
+/obj/effect/proc_holder/spell/targeted/shapeshift/witch/lesser_vernard
+	name = "Lesser Vernard Form"
+	desc = ""
+	overlay_state = "vernard_transform"
+	shapeshift_type = /mob/living/simple_animal/hostile/retaliate/rogue/fox/witch_shifted
+
+/obj/effect/proc_holder/spell/targeted/shapeshift/witch/rous
+	name = "Small Rous Form"
+	desc = ""
+	overlay_state = "rous_transform"
+	shapeshift_type = /mob/living/simple_animal/hostile/retaliate/smallrat/witch_shifted
+
+/obj/effect/proc_holder/spell/targeted/shapeshift/witch/cabbit
+	name = "Cabbit Form"
+	desc = ""
+	overlay_state = "cabbit_transform"
+	shapeshift_type = /mob/living/simple_animal/hostile/retaliate/rogue/mudcrab/cabbit/witch_shifted
+
+
+/mob/living/simple_animal/hostile/retaliate/rogue/fox/witch_shifted
+	name = "lesser vernard"
+	desc = "A smaller, runtier variant of the sneaky vernards that skulk the woods nearby. Rarely seen around these parts, and doesn't look nearly as dangerous as its larger counterparts. This one has a peculiar intelligence in its yellow eyes..."
+	defprob = 90
+	STASPD = 18
+	STASTR = 2
+	STACON = 4
+	melee_damage_lower = 8
+	melee_damage_upper = 12
+	del_on_deaggro = null
+	defprob = 70
+
+/mob/living/simple_animal/hostile/retaliate/smallrat/witch_shifted
+	name = "small rous"
+	desc = "Supposedly sacred to Pestra, these small and occasionally pestilent creachurs are commonly found in pantries and ships. This one seems to be a bit more smarter than the others..."
+	defprob = 90
+	STASPD = 18
+	STASTR = 1
+	STACON = 1
+	base_intents = list(/datum/intent/simple/claw/witch_cat)
+	melee_damage_lower = 1
+	melee_damage_upper = 2
+
+/mob/living/simple_animal/hostile/retaliate/rogue/mudcrab/cabbit/witch_shifted
+	name = "lesser cabbit"
+	desc = "Seeing one of these quick beasts is said to bring Xylix's fortune, along with their feet. It looks weak and innocent, and incredibly adorable."
+	defprob = 90
+	STASPD = 20
+	STASTR = 1
+	STACON = 2
+	base_intents = list(/datum/intent/simple/claw/witch_cat)
+	melee_damage_lower = 1
+	melee_damage_upper = 2
+
 /obj/effect/proc_holder/spell/targeted/shapeshift/witch/bat
 	name = "Bat Form"
 	desc = ""
@@ -249,3 +321,21 @@
 	show_true_name = FALSE
 	shapeshift_type = /mob/living/simple_animal/hostile/retaliate/bat/crow
 	sound = 'sound/vo/mobs/bird/birdfly.ogg'
+
+/mob/living/simple_animal/hostile/retaliate/rogue/mudcrab/frog
+	name = "frog"
+	desc = "Slimy creature of the bogs."
+	icon_state = "frog"
+	icon_living = "frog"
+	icon_dead = "frog_dead"
+	speak = list("ribbit", "croak")
+	speak_emote = list("ribbit", "croak")
+	emote_hear = list("ribbits.", "croaks.")
+	emote_see = list("hops in a circle.", "shakes.")
+
+/obj/effect/proc_holder/spell/targeted/shapeshift/witch/frog
+	name = "Frog Form"
+	desc = ""
+	overlay_state = "blindness"
+	shapeshift_type = /mob/living/simple_animal/hostile/retaliate/rogue/mudcrab/frog
+	do_gib = FALSE

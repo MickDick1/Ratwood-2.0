@@ -1,9 +1,9 @@
 //supposedly the fastest way to do this according to https://gist.github.com/Giacom/be635398926bb463b42a
 #define RANGE_TURFS(RADIUS, CENTER) \
-  block( \
-    locate(max(CENTER.x-(RADIUS),1),          max(CENTER.y-(RADIUS),1),          CENTER.z), \
-    locate(min(CENTER.x+(RADIUS),world.maxx), min(CENTER.y+(RADIUS),world.maxy), CENTER.z) \
-  )
+	block( \
+		locate(max(CENTER.x-(RADIUS),1),          max(CENTER.y-(RADIUS),1),          CENTER.z), \
+		locate(min(CENTER.x+(RADIUS),world.maxx), min(CENTER.y+(RADIUS),world.maxy), CENTER.z) \
+	)
 
 #define Z_TURFS(ZLEVEL) block(locate(1,1,ZLEVEL), locate(world.maxx, world.maxy, ZLEVEL))
 #define CULT_POLL_WAIT 2400
@@ -155,12 +155,12 @@
 		processing_list += A.contents
 
 /** recursive_organ_check
-  * inputs: O (object to start with)
-  * outputs:
-  * description: A pseudo-recursive loop based off of the recursive mob check, this check looks for any organs held
-  *				 within 'O', toggling their frozen flag. This check excludes items held within other safe organ
-  *				 storage units, so that only the lowest level of container dictates whether we do or don't decompose
-  */
+ * inputs: O (object to start with)
+ * outputs:
+ * description: A pseudo-recursive loop based off of the recursive mob check, this check looks for any organs held
+ *				 within 'O', toggling their frozen flag. This check excludes items held within other safe organ
+ *				 storage units, so that only the lowest level of container dictates whether we do or don't decompose
+ */
 /proc/recursive_organ_check(atom/O)
 
 	var/list/processing_list = list(O)
@@ -361,13 +361,35 @@
 	return O
 
 /proc/remove_images_from_clients(image/I, list/show_to)
-	for(var/client/C in show_to)
+	for(var/client/C as anything in show_to)
 		C.images -= I
 
 /proc/flick_overlay(image/I, list/show_to, duration)
-	for(var/client/C in show_to)
+	if(!show_to || !length(show_to))
+		return
+
+	var/expire_time = world.time + duration
+
+	var/list/client_schedule = SSiconupdates.image_removal_schedule[I]
+	if(!client_schedule)
+		client_schedule = list()
+		SSiconupdates.image_removal_schedule[I] = client_schedule
+
+	for(var/client/C as anything in show_to)
+		if(!C || QDELETED(C))
+			continue
+
+		if(client_schedule[C])
+			if(expire_time > client_schedule[C])
+				client_schedule[C] = expire_time
+			continue
+
 		C.images += I
-	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(remove_images_from_clients), I, show_to), duration, TIMER_CLIENT_TIME)
+
+		client_schedule[C] = expire_time
+
+	if(!length(client_schedule))
+		SSiconupdates.image_removal_schedule -= I
 
 /proc/flick_overlay_view(image/I, atom/target, duration) //wrapper for the above, flicks to everyone who can see the target atom
 	var/list/viewing = list()
@@ -587,3 +609,25 @@
 	if(!ckey || !istext(ckey))
 		return "some invalid"
 	return ckey
+
+/// Shows a sensory effect (IE: footstep, attack) to all mobs in range who are unconscious or blind.
+/proc/show_sensory_effect(atom/source, duration = 5, icon_state = "footstep", dir = null, ignore_self = FALSE)
+	var/turf/T = get_turf(source)
+	if (!isturf(T))
+		return FALSE
+
+	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(display_sensory_effect), source, T, duration, icon_state, dir, ignore_self), 0.5 SECONDS)
+
+/proc/display_sensory_effect(atom/source, turf/T, duration, icon_state, dir, ignore_self)
+	for(var/mob/M in range(7, T))
+		if(!M || (ignore_self && (M == source)))
+			continue
+
+		if(!M.stat && !is_blind(M)) // If the mob is not unconscious and not blind, we don't show the effect.
+			continue
+
+		var/image/I = image('icons/effects/fov/fov_effects.dmi', T, icon_state, SENSORY_LAYER)
+		I.plane = SENSORY_PLANE
+		if(dir)
+			I.dir = dir
+		flick_overlay(I, list(M.client), duration)

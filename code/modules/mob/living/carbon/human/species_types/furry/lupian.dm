@@ -12,7 +12,7 @@
 	but form deep connections with those they do. In recent years they have been driven from the forests by unrest and the \
 	inevitable spread of the rot and pressed into cohabitation with races they'd deem lesser.<br>\
 	(+1 Constitution, +1 Intelligence, Sleuth Trait)"
-	
+
 	expanded_desc = "Lupians live under elective monarchies, forms of feudalism where the king of a pack is chosen from, and by, the military council. \
 	The leader of the pack is a philosopher king, a paragon of virtue and one who should inspire awe and loyalty among the population \
 	while the real power is held by the military leadership. Should a king fail his people it is not uncommon for the entire kingdom \
@@ -128,6 +128,12 @@
 		/datum/body_marking/bangs,
 		/datum/body_marking/bun,
 		/datum/body_marking/gradient,
+		/datum/body_marking/womb_tattoo,
+		/datum/body_marking/butterfly,
+		/datum/body_marking/waist,
+		/datum/body_marking/diagonal_eyes,
+		/datum/body_marking/wide_eyes,
+		/datum/body_marking/stripes,
 	)
 	descriptor_choices = list(
 		/datum/descriptor_choice/trait,
@@ -175,7 +181,8 @@
 		"Langqan" = "271f2d",
 		"a tangled lineage" = "271f2e",
 		"disputed" = "271f2f",
-		"bastardized" = "271f3a"
+		"bastardized" = "271f3a",
+		"Czwarteki" =  "271f3b",
 	) // This is a dirty hack that stops me using mob defines, the colors do not do anything, it just a var that relates to their pack name on examine
 
 /datum/species/lupian/get_random_features()

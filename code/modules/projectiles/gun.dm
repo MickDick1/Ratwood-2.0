@@ -68,6 +68,7 @@
 		shake_camera(user, recoil + 1, recoil)
 
 	playsound(user, fire_sound, fire_sound_volume, vary_fire_sound)
+	show_sensory_effect(user, 5, "gunfire", user.dir)
 	if(message)
 		user.visible_message("<span class='danger'>[user] shoots [src]!</span>", \
 						"<span class='danger'>I shoot [src]!</span>", \
@@ -100,11 +101,10 @@
 		var/mob/living/L = user
 		if(!can_trigger_gun(L))
 			return
-
-//	if(flag)
-//		if(user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
-//			handle_suicide(user, target, params)
-//			return
+		if(L.used_intent && L.used_intent.get_chargetime())
+			if(L.client.charge_was_blocked_by_cooldown)
+				L.client.charge_was_blocked_by_cooldown = FALSE
+				return
 
 	if(!can_shoot()) //Just because you can pull the trigger doesn't mean it can shoot.
 		shoot_with_empty_chamber(user)

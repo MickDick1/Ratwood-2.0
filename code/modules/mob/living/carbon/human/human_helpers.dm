@@ -60,6 +60,8 @@
 		return if_no_face		//Likewise for hats
 	if( wear_neck && (wear_neck.flags_inv&HIDEFACE) )
 		return if_no_face		//Likewise for hats
+	if( istype(buckled, /obj/structure/bondage/gloryhole) ) // gloryhole buckled mobs should always remain masked/anonymous
+		return if_no_face
 	if( istype(src, /mob/living/carbon/human/species/skeleton)) //SPOOKY BONES
 		return real_name
 	var/obj/item/bodypart/O = get_bodypart(BODY_ZONE_HEAD)
@@ -94,7 +96,7 @@
 /mob/living/carbon/human/can_use_guns(obj/item/G)
 	. = ..()
 	if(G.trigger_guard == TRIGGER_GUARD_NORMAL)
-		if(HAS_TRAIT(src, TRAIT_CHUNKYFINGERS))
+		if(HAS_TRAIT(src, TRAIT_CHUNKYFINGERS) || HAS_TRAIT(src, TRAIT_GNARLYDIGITS))
 			to_chat(src, span_warning("My meaty finger is much too large for the trigger guard!"))
 			return FALSE
 	if(HAS_TRAIT(src, TRAIT_NOGUNS))
@@ -169,6 +171,51 @@
 		return TRUE
 
 
+/mob/living/carbon/human/proc/MarryTo(mob/living/carbon/human/spouse)
+	if(!ishuman(spouse))
+		return null
+
+	// Set basic spouse relationship
+	spouse_mob = spouse
+	spouse.spouse_mob = src
+
+	// Handle family integration
+	var/datum/heritage/primary_family = null
+	//var/datum/heritage/secondary_family = null
+	var/datum/family_member/primary_member = null
+	var/datum/family_member/secondary_member = null
+
+	// Determine which family takes precedence
+	if(family_datum && !spouse.family_datum)
+		// Spouse joins our family
+		primary_family = family_datum
+		primary_member = family_member_datum
+		secondary_member = primary_family.CreateFamilyMember(spouse)
+
+	else if(!family_datum && spouse.family_datum)
+		// We join spouse's family
+		primary_family = spouse.family_datum
+		primary_member = spouse.family_member_datum
+		secondary_member = primary_family.CreateFamilyMember(src)
+
+	else if(family_datum && spouse.family_datum)
+		// Both have families - keep separate but mark as married
+		primary_family = family_datum
+		primary_member = family_member_datum
+		secondary_member = spouse.family_member_datum
+
+	else
+		// Neither has family - create new one
+		primary_family = new /datum/heritage(src)
+		primary_member = primary_family.founder
+		secondary_member = primary_family.CreateFamilyMember(spouse)
+
+	// Add spouse relationship in family system
+	if(primary_member && secondary_member && primary_family)
+		primary_family.MarryMembers(primary_member, secondary_member)
+
+	return primary_family
+
 /mob/living/carbon/human/proc/do_invisibility(timeinvis)
 	animate(src, alpha = 0, time = 0 SECONDS, easing = EASE_IN)
 	src.mob_timers[MT_INVISIBILITY] = world.time + timeinvis
@@ -229,3 +276,6 @@
 	walk_to_last_pos = null
 	walk_to_cached_path = null
 
+
+/mob/living/carbon/human/proc/ReturnRelation(mob/living/carbon/human/stranger)
+	return family_datum.ReturnRelation(src, stranger)
