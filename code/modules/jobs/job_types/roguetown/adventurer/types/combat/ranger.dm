@@ -160,12 +160,12 @@
 		)
 	H.set_blindness(0)
 
-/datum/advclass/ranger/bwanderer
-	name = "Biome Wanderer"
+/datum/advclass/ranger/pathfinder
+	name = "Pathfinder"
 	tutorial = "The dangers of the wilds vary upon the plains they rest upon, You happen to be experienced in many."
-	outfit = /datum/outfit/job/roguetown/adventurer/bwanderer
+	outfit = /datum/outfit/job/roguetown/adventurer/pathfinder
 	cmode_music = 'sound/music/cmode/adventurer/combat_outlander4.ogg'
-	traits_applied = list(TRAIT_OUTDOORSMAN)
+	traits_applied = list(TRAIT_OUTDOORSMAN, TRAIT_SURVIVAL_EXPERT, TRAIT_WOODWALKER, TRAIT_WILDERNESSGUIDE)
 	subclass_stats = list(
 		STATKEY_PER = 2,
 		STATKEY_WIL = 2,
@@ -185,11 +185,12 @@
 		/datum/skill/craft/tanning = SKILL_LEVEL_NOVICE, // Still a ranger, nerfed. Want more? Go do it yourself, buddy.
 		/datum/skill/labor/butchering = SKILL_LEVEL_NOVICE,
 		/datum/skill/craft/cooking = SKILL_LEVEL_NOVICE, // Won't really equate to much.
+		/datum/skillcraft/crafting = SKILL_LEVEL_APPRENTICE // What kind of survival expert can't put together a campfire?
 		/datum/skill/misc/tracking = SKILL_LEVEL_JOURNEYMAN,
 	)
 	extra_context = "Selecting Light Armor grants +1 SPD. Selecting Medium Armor grants +1 STR along with the corresponding traits."
 
-/datum/outfit/job/roguetown/adventurer/bwanderer/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/job/roguetown/adventurer/pathfinder/pre_equip(mob/living/carbon/human/H)
 	..()
 	to_chat(H, span_warning("The dangers of the wilds vary upon the plains they rest upon, You happen to be experienced in many."))
 	head = /obj/item/clothing/head/roguetown/helmet/leather/volfhelm
