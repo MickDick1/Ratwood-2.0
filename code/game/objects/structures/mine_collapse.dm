@@ -144,8 +144,6 @@ GLOBAL_VAR_INIT(mine_collapse_active, 0)
 
 	if(GLOB.mine_collapse_active > 7)
 		return
-	if(!triggered_by_neighbor && prob(25)) // 25% of not cascading
-		return
 	var/trigger_sfx = TRUE
 	for(var/obj/structure/mine_collapse/other_mineshafts in range(1, src))
 		if(src == other_mineshafts)
@@ -160,7 +158,7 @@ GLOBAL_VAR_INIT(mine_collapse_active, 0)
 			continue
 		if(other_mineshafts.trigger_collapse(TRUE, trigger_sfx))
 			trigger_sfx = FALSE
-		if(prob(75))
+		if(prob(66))
 			break
 
 /obj/effect/temp_visual/trap/mine_collapse
