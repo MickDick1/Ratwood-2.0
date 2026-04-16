@@ -1,6 +1,10 @@
-#define SALT_CHANCE_MAX 200
-#define SALT_CHANCE_PERCENT (100/SALT_CHANCE_MAX)
+#define SALT_CHANCE_MAX 300
+#define SALT_CHANCE_DEFAULT_TOTAL 200
+#define SALT_CHANCE_PERCENT(max_salt) (100/max_salt)
+#define SALT_CHANCE_INTEREST_RATE (60 MINUTES) // time to reach max interest
+#define SALT_CHANCE_INTEREST_MAX (5) // max interest mul factor
 
+GLOBAL_LIST_EMPTY(saltminestockpilemachines)
 GLOBAL_LIST_EMPTY(saltmineticketmachines)
 
 /obj/structure/roguemachine/stockpile_saltcamp
@@ -14,11 +18,20 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 	obj_flags = INDESTRUCTIBLE
 
 	var/list/salt_accounts = list()
+	var/list/salt_accounts_timestamp = list()
+	var/list/salt_accounts_max = list()
 	var/salt_spent_on_gambling = 0
 	var/gambling_active = FALSE
 
+/obj/structure/roguemachine/stockpile_saltcamp/Initialize(mapload)
+	. = ..()
+	GLOB.saltminestockpilemachines += src
+
 /obj/structure/roguemachine/stockpile_saltcamp/Destroy()
+	GLOB.saltminestockpilemachines -= src
 	salt_accounts = null
+	salt_accounts_timestamp = null
+	salt_accounts_max = null
 	return ..()
 
 /obj/structure/roguemachine/stockpile_saltcamp/examine(mob/user)
@@ -28,6 +41,25 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 	else
 		. += span_info("Right click to deposit all the salt in front of the machine.")
 
+/obj/structure/roguemachine/stockpile_saltcamp/proc/get_salt_interest(mob/user)
+	if(!user || !ishuman(user))
+		return 0
+	var/mob/living/carbon/human/H = user
+
+	var/target_name = H.real_name
+	for(var/X in salt_accounts) // already got an account
+		if(X == target_name)
+			return CLAMP(world.time - salt_accounts_timestamp[X], 1, SALT_CHANCE_INTEREST_RATE) / SALT_CHANCE_INTEREST_RATE * SALT_CHANCE_INTEREST_MAX
+
+	salt_accounts += target_name // make account
+	salt_accounts[target_name] = 0
+	salt_accounts_timestamp += target_name
+	salt_accounts_timestamp[target_name] = world.time
+	salt_accounts_max += target_name
+	salt_accounts_max[target_name] = SALT_CHANCE_DEFAULT_TOTAL
+
+	return 0
+
 /obj/structure/roguemachine/stockpile_saltcamp/proc/get_salt_balance(mob/user)
 	if(!user || !ishuman(user))
 		return 0
@@ -36,12 +68,37 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 	var/target_name = H.real_name
 	for(var/X in salt_accounts) // already got an account
 		if(X == target_name)
-			return salt_accounts[X]
+			var/balance = salt_accounts[X]
+			var/interest = CLAMP(world.time - salt_accounts_timestamp[X], 0, SALT_CHANCE_INTEREST_RATE) / SALT_CHANCE_INTEREST_RATE * SALT_CHANCE_INTEREST_MAX
+			return balance * (1 + interest)
 
 	salt_accounts += target_name // make account
 	salt_accounts[target_name] = 0
+	salt_accounts_timestamp += target_name
+	salt_accounts_timestamp[target_name] = world.time
+	salt_accounts_max += target_name
+	salt_accounts_max[target_name] = SALT_CHANCE_DEFAULT_TOTAL
 
 	return salt_accounts[target_name]
+
+/obj/structure/roguemachine/stockpile_saltcamp/proc/get_salt_max(mob/user)
+	if(!user || !ishuman(user))
+		return 0
+	var/mob/living/carbon/human/H = user
+
+	var/target_name = H.real_name
+	for(var/X in salt_accounts) // already got an account
+		if(X == target_name)
+			return salt_accounts_max[target_name]
+
+	salt_accounts += target_name // make account
+	salt_accounts[target_name] = 0
+	salt_accounts_timestamp += target_name
+	salt_accounts_timestamp[target_name] = world.time
+	salt_accounts_max += target_name
+	salt_accounts_max[target_name] = SALT_CHANCE_DEFAULT_TOTAL
+
+	return salt_accounts_max[target_name]
 
 /obj/structure/roguemachine/stockpile_saltcamp/proc/add_salt_balance(mob/user, amt = 0)
 	if(!user || !ishuman(user))
@@ -58,6 +115,10 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 
 	salt_accounts += target_name // make account
 	salt_accounts[target_name] = amt
+	salt_accounts_timestamp += target_name
+	salt_accounts_timestamp[target_name] = world.time
+	salt_accounts_max += target_name
+	salt_accounts_max[target_name] = SALT_CHANCE_DEFAULT_TOTAL
 
 /obj/structure/roguemachine/stockpile_saltcamp/proc/set_salt_balance(mob/user, amt = 0)
 	if(!user || !ishuman(user))
@@ -72,13 +133,42 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 
 	salt_accounts += target_name // make account
 	salt_accounts[target_name] = amt
+	salt_accounts_timestamp += target_name
+	salt_accounts_timestamp[target_name] = world.time
+	salt_accounts_max += target_name
+	salt_accounts_max[target_name] = SALT_CHANCE_DEFAULT_TOTAL
 
 /obj/structure/roguemachine/stockpile_saltcamp/proc/get_odds_of_winning(mob/user)
 	var/balance = get_salt_balance(user)
-	if(balance >= SALT_CHANCE_MAX)
+	var/max_salt = get_salt_max(user)
+	if(balance >= max_salt)
 		return 100
-	balance *= SALT_CHANCE_PERCENT
+	
+	balance *= SALT_CHANCE_PERCENT(max_salt)
 	return balance
+
+/obj/structure/roguemachine/stockpile_saltcamp/proc/get_interest_string(mob/user)
+	var/interest = get_salt_interest(user)
+	if(interest <= 0)
+		return "<font color='#f54646'>0%</font>"
+	interest = round(interest/1,0.01)*100
+	var/string
+	if(interest < 10)
+		string = "<font color='#f54646'>"
+	else if(interest < 20)
+		string = "<font color='#f36c6c'>"	
+	else if(interest < 40)
+		string = "<font color='#f5b546'>"
+	else if(interest < 60)
+		string = "<font color='#cff546'>"
+	else if(interest < 80)
+		string = "<font color='#acf546'>"
+	else if(interest < 100)
+		string = "<font color='#4ff546'>"
+	else
+		string = "<font color='#4ff546'>"
+	string += "[interest]%</font>"
+	return string
 
 /obj/structure/roguemachine/stockpile_saltcamp/proc/get_odds_of_winning_string(mob/user)
 	var/balance = get_odds_of_winning(user)
@@ -99,7 +189,7 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 		string = "<font color='#4ff546'>"
 	else
 		return "<font color='#4ff546'>[pick("WHY ARE YOU STILL HERE?!", "YOU ARE A SHAMEFUL FOOL!", "ARE YOU COMPENSATING?", "PLEASE, GO OUTSIDE!", "DID THEY FORGET YOU!?")]</font>"
-	string += "[balance]%</font>"
+	string += "[round(balance,0.5)]%</font>"
 	return string
 
 /obj/structure/roguemachine/stockpile_saltcamp/proc/roll_for_ticket(mob/user)
@@ -111,7 +201,7 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 	animate(pixel_x = oldx, time = 1)
 	sleep(50)
 	var/prob_of_winning = get_odds_of_winning(user)
-	if(prob_of_winning == 100 || prob(prob_of_winning)) // we won!
+	if(prob_of_winning >= 100 || prob(prob_of_winning)) // we won!
 		playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
 		gambling_active = FALSE
 		return TRUE
@@ -160,6 +250,7 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 	var/contents = "<center>FEED THE MACHINE - WIN YOUR <font color='#ab8000'>FREEDOM</font><BR>"
 	contents += "----------<BR>"
 	contents += "DEPOSIT SALT TO INCREASE LUCK<BR>"
+	contents += "CURRENT INTEREST RATE: [get_interest_string(user)]<BR>"
 	contents += "CURRENT ODDS: [get_odds_of_winning_string(user)]<BR>"
 	contents += "----------<BR>"
 	contents += "<a href='?src=[REF(src)];task=roll'>(ROLL FOR FREEDOM)</a><BR>"
@@ -177,7 +268,7 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 	if(sound == TRUE)
 		playsound(loc, 'sound/misc/hiss.ogg', 100, FALSE, -1)
 	if(message == TRUE)
-		say("Salt has been deposited. Your chances are now [get_odds_of_winning(H)]% of winning.")
+		say("Salt has been deposited. Your chances are now [round(get_odds_of_winning(H),0.5)]% of winning.")
 	return TRUE
 
 /obj/structure/roguemachine/stockpile_saltcamp/attackby(obj/item/P, mob/user, params)
@@ -197,9 +288,103 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 		for(var/obj/I in get_turf(src))
 			found_salt |= attemptsell(I, user, FALSE, FALSE)
 		if(found_salt)
-			say("Salt has been deposited. Your chances are now [get_odds_of_winning(user)]% of winnings.")
+			say("Salt has been deposited. Your chances are now [round(get_odds_of_winning(user),0.5)]% of winnings.")
 		playsound(loc, 'sound/misc/hiss.ogg', 100, FALSE, -1)
 		playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
+
+/obj/structure/roguemachine/ticket_manager
+	name = "Ticket Manager Deluxe"
+	desc = "This machine controls the punishment for victims of the salt mines."
+	icon = 'icons/roguetown/misc/machines.dmi'
+	icon_state = "submit"
+	density = FALSE
+	blade_dulling = DULLING_BASH
+	pixel_y = 32
+	obj_flags = INDESTRUCTIBLE
+	var/out_of_service = FALSE
+	var/datum/weakref/stockpile_ref = null
+
+/obj/structure/roguemachine/ticket_manager/Topic(href, href_list)
+	if(!usr.canUseTopic(src, BE_CLOSE))
+		return
+	var/obj/structure/roguemachine/stockpile_saltcamp/stockpile = null
+	if(!out_of_service)
+		if(stockpile_ref)
+			stockpile = stockpile_ref.resolve()
+			if(QDELETED(stockpile) || !istype(stockpile)) // machine doesn't exist
+				out_of_service = TRUE
+		else
+			stockpile = locate(/obj/structure/roguemachine/stockpile_saltcamp) in GLOB.saltminestockpilemachines // we're assuming there is only ever one of these machines in the world
+			if(stockpile)
+				stockpile_ref = WEAKREF(stockpile)
+			else
+				out_of_service = TRUE
+	if(out_of_service || !stockpile) // aka there isn't any other machine in this world
+		say("Sorry, machine out of service!")
+		return
+	switch(href_list["task"])
+		if("withdraw")
+			var/amount = round(stockpile.salt_spent_on_gambling, 1)
+			if(amount > 0)
+				budget2change(amount, usr)
+				stockpile.salt_spent_on_gambling = 0
+		if("set_max")
+			var/name = href_list["name"]
+			var/new_max = input(usr, "Set the maximum salt needed to assure a 100% win", src, stockpile.salt_accounts_max[name]) as null|num
+			new_max = round(new_max, 1)
+			if(new_max < 10)
+				to_chat(usr, span_danger("You cannot set to a value lower than 10!"))
+				return
+			if(new_max > SALT_CHANCE_MAX)
+				to_chat(usr, span_danger("You cannot set to a value higher than [SALT_CHANCE_MAX]!"))
+				return
+			for(var/X in stockpile.salt_accounts)
+				if(X == name)
+					stockpile.salt_accounts_max[name] = new_max
+					break
+	return attack_hand(usr)
+
+/obj/structure/roguemachine/ticket_manager/attack_hand(mob/living/user, menu_name)
+	. = ..()
+	if(.)
+		return
+	var/obj/structure/roguemachine/stockpile_saltcamp/stockpile = null
+	if(!out_of_service)
+		if(stockpile_ref)
+			stockpile = stockpile_ref.resolve()
+			if(QDELETED(stockpile) || !istype(stockpile)) // machine doesn't exist
+				out_of_service = TRUE
+		else
+			stockpile = locate(/obj/structure/roguemachine/stockpile_saltcamp) in GLOB.saltminestockpilemachines // we're assuming there is only ever one of these machines in the world
+			if(stockpile)
+				stockpile_ref = WEAKREF(stockpile)
+			else
+				out_of_service = TRUE
+	if(out_of_service) // aka there isn't any other machine in this world
+		say("Sorry, machine out of service!")
+		return
+	user.changeNext_move(CLICK_CD_INTENTCAP)
+	playsound(loc, 'sound/misc/keyboard_enter.ogg', 100, FALSE, -1)
+
+	var/gambled_salt = round(stockpile.salt_spent_on_gambling, 1)
+	var/total_accounts = length(stockpile.salt_accounts)
+	var/contents = "<center>SALT MANAGER DELUXE<BR>"
+	contents += "Where tears become fears<BR>"
+	contents += "----------<BR>"
+	contents += "SALT GAMBLED AWAY: [gambled_salt]<BR>"
+	if(gambled_salt > 0)
+		contents += "<a href='?src=[REF(src)];task=withdraw'>(WITHDRAW GAMBLED SALT AS COINS)</a><BR>"
+	contents += "</center>"
+	if(total_accounts > 0)
+		contents += "----------<BR>"
+		contents += "NAME  -   COLLECTED SALT<BR>"
+		for(var/i = 1; i <= total_accounts; i++)
+			var/name = stockpile.salt_accounts[i]
+			contents += "[name]: Mined [stockpile.salt_accounts[name]] salt / <a href='?src=[REF(src)];task=set_max;name=[name]'>[stockpile.salt_accounts_max[name]] maximum</a><BR>"
+
+	var/datum/browser/popup = new(user, "saltmanager", "", 500, 500)
+	popup.set_content(contents)
+	popup.open()
 
 /obj/structure/roguemachine/ticket_master
 	name = "Ticket Slide"
@@ -274,4 +459,7 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 	. = ..()
 
 #undef SALT_CHANCE_MAX
+#undef SALT_CHANCE_DEFAULT_TOTAL
 #undef SALT_CHANCE_PERCENT
+#undef SALT_CHANCE_INTEREST_RATE
+#undef SALT_CHANCE_INTEREST_MAX
