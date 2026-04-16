@@ -339,6 +339,13 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 	var/out_of_service = FALSE
 	var/datum/weakref/stockpile_ref = null
 
+/obj/structure/roguemachine/ticket_manager/proc/does_name_exist(obj/structure/roguemachine/stockpile_saltcamp/stockpile, name_to_check)
+	var/total_accounts = length(stockpile.salt_accounts)
+	for(var/i = 1; i <= total_accounts; i++)
+		if(stockpile.salt_accounts[i] == name_to_check)
+			return TRUE
+	return FALSE
+
 /obj/structure/roguemachine/ticket_manager/Topic(href, href_list)
 	if(!usr.canUseTopic(src, BE_CLOSE))
 		return
@@ -365,6 +372,8 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 				stockpile.salt_spent_on_gambling = 0
 		if("set_salt")
 			var/name = href_list["name"]
+			if(!does_name_exist(stockpile, name)) // sanity check name argument
+				return
 			var/new_max = input(usr, "Set the maximum salt needed to assure a 100% win", src, stockpile.salt_accounts_max[name]) as null
 			if(!isnum(new_max))
 				return
@@ -378,6 +387,8 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 			stockpile.salt_accounts_max[name] = new_max
 		if("set_interest")
 			var/name = href_list["name"]
+			if(!does_name_exist(stockpile, name)) // sanity check name argument
+				return
 			var/new_max = input(usr, "Set the maximum interest rate percentage (1 hour for max interest)", src, stockpile.salt_accounts_interest_max[name] * 100) as null
 			if(!isnum(new_max))
 				return
@@ -391,6 +402,8 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 			stockpile.salt_accounts_interest_max[name] = new_max / 100
 		if("reset_interest")
 			var/name = href_list["name"]
+			if(!does_name_exist(stockpile, name)) // sanity check name argument
+				return
 			var/answer = tgui_alert(usr, "Reset [name]'s interest progression to 0%?", "Please answer in [DisplayTimeText(100)]", list("Yes", "Cancel"), 100)
 			if(!answer || answer != "Yes")
 				return
