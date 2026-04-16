@@ -86,26 +86,6 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 	salt_accounts_max += target_name
 	salt_accounts_max[target_name] = SALT_CHANCE_DEFAULT_TOTAL
 
-/obj/structure/roguemachine/stockpile_saltcamp/proc/set_salt_interest(mob/user, amt = 0)
-	if(!user || !ishuman(user))
-		return 0
-	var/mob/living/carbon/human/H = user
-
-	var/target_name = H.real_name
-	for(var/X in salt_accounts) // already got an account
-		if(X == target_name)
-			salt_accounts_interest_max[target_name] = amt
-			return
-
-	salt_accounts += target_name // make account
-	salt_accounts[target_name] = 0
-	salt_accounts_timestamp += target_name
-	salt_accounts_timestamp[target_name] = world.time
-	salt_accounts_interest_max += target_name
-	salt_accounts_interest_max[target_name] = amt
-	salt_accounts_max += target_name
-	salt_accounts_max[target_name] = SALT_CHANCE_DEFAULT_TOTAL
-
 /obj/structure/roguemachine/stockpile_saltcamp/proc/get_salt_balance(mob/user)
 	if(!user || !ishuman(user))
 		return 0
@@ -395,10 +375,7 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 			if(new_max > SALT_CHANCE_MAX)
 				to_chat(usr, span_danger("You cannot set to a value higher than [SALT_CHANCE_MAX]!"))
 				return
-			for(var/X in stockpile.salt_accounts)
-				if(X == name)
-					stockpile.salt_accounts_max[name] = new_max
-					break
+			stockpile.salt_accounts_max[name] = new_max
 		if("set_interest")
 			var/name = href_list["name"]
 			var/new_max = input(usr, "Set the maximum interest rate percentage (1 hour for max interest)", src, stockpile.salt_accounts_interest_max[name] * 100) as null
@@ -411,19 +388,13 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 			if(new_max > SALT_CHANCE_INTEREST_MAX * 100)
 				to_chat(usr, span_danger("You cannot set to a value higher than [SALT_CHANCE_INTEREST_MAX * 100]%!"))
 				return
-			for(var/X in stockpile.salt_accounts)
-				if(X == name)
-					stockpile.salt_accounts_interest_max[name] = new_max / 100
-					break
+			stockpile.salt_accounts_interest_max[name] = new_max / 100
 		if("reset_interest")
 			var/name = href_list["name"]
 			var/answer = tgui_alert(usr, "Reset [name]'s interest progression to 0%?", "Please answer in [DisplayTimeText(100)]", list("Yes", "Cancel"), 100)
 			if(!answer || answer != "Yes")
 				return
-			for(var/X in stockpile.salt_accounts)
-				if(X == name)
-					stockpile.salt_accounts_timestamp[name] = world.time
-					break
+			stockpile.salt_accounts_timestamp[name] = world.time
 	return attack_hand(usr)
 
 /obj/structure/roguemachine/ticket_manager/attack_hand(mob/living/user, menu_name)
@@ -459,10 +430,16 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 	contents += "</center>"
 	if(total_accounts > 0)
 		contents += "----------<BR>"
-		contents += "NAME  -   COLLECTED SALT<BR>"
+		contents += "NAME   -   COLLECTED SALT<BR>"
 		for(var/i = 1; i <= total_accounts; i++)
 			var/name = stockpile.salt_accounts[i]
-			contents += "[name]: [stockpile.salt_accounts[name]] salt / <a href='?src=[REF(src)];task=set_salt;name=[name]'>[stockpile.salt_accounts_max[name]] maximum</a> (interest rate: <a href='?src=[REF(src)];task=set_interest;name=[name]'>[stockpile.salt_accounts_interest_max[name] * 100]%</a> - <a href='?src=[REF(src)];task=reset_interest;name=[name]'>reset progress</a>)<BR>"
+			var/salt = stockpile.salt_accounts[name]
+			var/salt_max = stockpile.salt_accounts_max[name]
+			var/interest = stockpile.salt_accounts_interest_max[name] * 100
+			contents += "[name]: "
+			contents += "[salt] salt / <a href='?src=[REF(src)];task=set_salt;name=[name]'>[salt_max] max</a> "
+			contents += "(interest rate: <a href='?src=[REF(src)];task=set_interest;name=[name]'>[interest]%</a> "
+			contents += "- <a href='?src=[REF(src)];task=reset_interest;name=[name]'>reset progress</a>)<BR>"
 
 	var/datum/browser/popup = new(user, "saltmanager", "", 800, 500)
 	popup.set_content(contents)
