@@ -60,6 +60,24 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 
 	return 0
 
+/obj/structure/roguemachine/stockpile_saltcamp/proc/reset_salt_interest(mob/user)
+	if(!user || !ishuman(user))
+		return 0
+	var/mob/living/carbon/human/H = user
+
+	var/target_name = H.real_name
+	for(var/X in salt_accounts) // already got an account
+		if(X == target_name)
+			salt_accounts_timestamp[target_name] = world.time
+			return
+
+	salt_accounts += target_name // make account
+	salt_accounts[target_name] = 0
+	salt_accounts_timestamp += target_name
+	salt_accounts_timestamp[target_name] = world.time
+	salt_accounts_max += target_name
+	salt_accounts_max[target_name] = SALT_CHANCE_DEFAULT_TOTAL
+
 /obj/structure/roguemachine/stockpile_saltcamp/proc/get_salt_balance(mob/user)
 	if(!user || !ishuman(user))
 		return 0
@@ -69,7 +87,7 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 	for(var/X in salt_accounts) // already got an account
 		if(X == target_name)
 			var/balance = salt_accounts[X]
-			var/interest = CLAMP(world.time - salt_accounts_timestamp[X], 0, SALT_CHANCE_INTEREST_RATE) / SALT_CHANCE_INTEREST_RATE * SALT_CHANCE_INTEREST_MAX
+			var/interest = CLAMP(world.time - salt_accounts_timestamp[X], 1, SALT_CHANCE_INTEREST_RATE) / SALT_CHANCE_INTEREST_RATE * SALT_CHANCE_INTEREST_MAX
 			return balance * (1 + interest)
 
 	salt_accounts += target_name // make account
@@ -227,6 +245,7 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 				src.say(pick("Better luck next tyme, criminal.", "You've lost! May your tears aid your rock culling.", "Such folly, better luck next tyme!", "Ha-ha! You salt drinker, never had a chance to win!"))
 				return
 			set_salt_balance(usr, 0)
+			reset_salt_interest(usr)
 			src.say("Oh lookie here, we have ourselves a winner!!")
 			playsound(src, 'sound/misc/triumph_win_twnn.ogg', 100, FALSE, -1)
 			var/obj/item/detroyt_toll/ive_got_a_golden_ticket = new /obj/item/detroyt_toll(get_turf(src))
