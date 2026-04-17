@@ -442,17 +442,18 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 		contents += "<a href='?src=[REF(src)];task=withdraw'>(WITHDRAW GAMBLED SALT AS COINS)</a><BR>"
 	contents += "</center>"
 	if(total_accounts > 0)
-		contents += "----------<BR>"
-		contents += "NAME   -   COLLECTED SALT<BR>"
+		contents += "<hr><BR>"
+		contents += "<table><tr><th>Prisoner Name</th><th>Salt Mined</th><th>Interest Rate</th></tr>"
 		for(var/i = 1; i <= total_accounts; i++)
 			var/name = stockpile.salt_accounts[i]
 			var/salt = stockpile.salt_accounts[name]
 			var/salt_max = stockpile.salt_accounts_max[name]
 			var/interest = stockpile.salt_accounts_interest_max[name] * 100
-			contents += "[name]: "
-			contents += "[salt] salt / <a href='?src=[REF(src)];task=set_salt;name=[name]'>[salt_max] max</a> "
-			contents += "(interest rate: <a href='?src=[REF(src)];task=set_interest;name=[name]'>[interest]%</a> "
-			contents += "- <a href='?src=[REF(src)];task=reset_interest;name=[name]'>reset progress</a>)<BR>"
+			contents += "<tr><td>[name]</td>"
+			contents += "<td>[salt] salt / <a href='?src=[REF(src)];task=set_salt;name=[name]'>[salt_max] max</a></td>"
+			contents += "<td><a href='?src=[REF(src)];task=set_interest;name=[name]'>[interest]%</a> "
+			contents += "(<a href='?src=[REF(src)];task=reset_interest;name=[name]'>reset progress</a>)</td></tr>"
+		contents += "</table>"
 
 	var/datum/browser/popup = new(user, "saltmanager", "", 800, 500)
 	popup.set_content(contents)
