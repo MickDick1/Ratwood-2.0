@@ -250,13 +250,14 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 		return
 	switch(href_list["task"])
 		if("roll")
-			if(!get_salt_balance(usr))
+			var/current_balance = get_salt_balance(usr)
+			if(current_balance <= 0)
 				src.say(pick("Eager fool; you need salt to gamble for freedom.", "You are missing your salt.", "A criminal without salt is no criminal at all.", "To play the game, you must first salt the ground."))
 				return
 			close_ui(usr)
 			src.say("Bow to Xylix and shall luck bless you.")
 			if(!roll_for_ticket(usr)) // if we lost the game (like you just did lol), add to spent counter and reset account back to zero
-				salt_spent_on_gambling += get_salt_balance(usr)
+				salt_spent_on_gambling += current_balance
 				set_salt_balance(usr, 0)
 				src.say(pick("Better luck next tyme, criminal.", "You've lost! May your tears aid your rock culling.", "Such folly, better luck next tyme!", "Ha-ha! You salt drinker, never had a chance to win!"))
 				return
@@ -265,6 +266,10 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 			src.say("Oh lookie here, we have ourselves a winner!!")
 			playsound(src, 'sound/misc/triumph_win_twnn.ogg', 100, FALSE, -1)
 			var/obj/item/detroyt_toll/ive_got_a_golden_ticket = new /obj/item/detroyt_toll(get_turf(src))
+			if(!ive_got_a_golden_ticket) // something something went very very wrong... refund player
+				set_salt_balance(usr, current_balance)
+				return
+			ive_got_a_golden_ticket.sellprice = round(rand(current_balance, current_balance*3), 1) // set the value between salt spent on gambling for ticket, and three times
 			if(!usr.put_in_hands(ive_got_a_golden_ticket))
 				ive_got_a_golden_ticket.forceMove(get_turf(src))
 
