@@ -1131,7 +1131,8 @@
 		/obj/item/reagent_containers/glass/bowl/carved,
 		/obj/item/reagent_containers/glass/bucket/pot/carved,
 		/obj/item/clothing/mask/rogue/facemask/carved,
-		/obj/item/cooking/platter/carved
+		/obj/item/cooking/platter/carved,
+		/obj/item/detroyt_toll
 	)
 
 /obj/structure/fluff/statue/evil/attackby(obj/item/W, mob/user, params)
