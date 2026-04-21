@@ -22,9 +22,13 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 	var/list/salt_accounts_timestamp = list()
 	var/list/salt_accounts_interest_max = list()
 	var/list/salt_accounts_max = list()
+	var/list/salt_ticket_win = list()
 
 	var/salt_spent_on_gambling = 0
 	var/gambling_active = FALSE
+
+	var/salt_chance_default = SALT_CHANCE_DEFAULT_TOTAL
+	var/interest_rate_default = SALT_CHANCE_INTEREST_DEFAULT
 
 /obj/structure/roguemachine/stockpile_saltcamp/Initialize(mapload)
 	. = ..()
@@ -36,6 +40,7 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 	salt_accounts_timestamp = null
 	salt_accounts_interest_max = null
 	salt_accounts_max = null
+	salt_ticket_win = null
 	return ..()
 
 /obj/structure/roguemachine/stockpile_saltcamp/examine(mob/user)
@@ -60,13 +65,15 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 	salt_accounts_timestamp += target_name
 	salt_accounts_timestamp[target_name] = world.time
 	salt_accounts_interest_max += target_name
-	salt_accounts_interest_max[target_name] = SALT_CHANCE_INTEREST_DEFAULT
+	salt_accounts_interest_max[target_name] = interest_rate_default
 	salt_accounts_max += target_name
-	salt_accounts_max[target_name] = SALT_CHANCE_DEFAULT_TOTAL
+	salt_accounts_max[target_name] = salt_chance_default
+	salt_ticket_win += target_name
+	salt_ticket_win[target_name] = 0
 
 	return 0
 
-/obj/structure/roguemachine/stockpile_saltcamp/proc/reset_salt_timestamp(mob/user)
+/obj/structure/roguemachine/stockpile_saltcamp/proc/reset_salt_timestamp(mob/user, didwewinaticket = FALSE)
 	if(!user || !ishuman(user))
 		return 0
 	var/mob/living/carbon/human/H = user
@@ -75,6 +82,8 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 	for(var/X in salt_accounts) // already got an account
 		if(X == target_name)
 			salt_accounts_timestamp[target_name] = world.time
+			if(didwewinaticket)
+				salt_ticket_win[target_name] += 1
 			return
 
 	salt_accounts += target_name // make account
@@ -85,6 +94,8 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 	salt_accounts_interest_max[target_name] = SALT_CHANCE_INTEREST_DEFAULT
 	salt_accounts_max += target_name
 	salt_accounts_max[target_name] = SALT_CHANCE_DEFAULT_TOTAL
+	salt_ticket_win += target_name
+	salt_ticket_win[target_name] = 0
 
 /obj/structure/roguemachine/stockpile_saltcamp/proc/get_salt_balance(mob/user)
 	if(!user || !ishuman(user))
@@ -103,9 +114,11 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 	salt_accounts_timestamp += target_name
 	salt_accounts_timestamp[target_name] = world.time
 	salt_accounts_interest_max += target_name
-	salt_accounts_interest_max[target_name] = SALT_CHANCE_INTEREST_DEFAULT
+	salt_accounts_interest_max[target_name] = interest_rate_default
 	salt_accounts_max += target_name
-	salt_accounts_max[target_name] = SALT_CHANCE_DEFAULT_TOTAL
+	salt_accounts_max[target_name] = salt_chance_default
+	salt_ticket_win += target_name
+	salt_ticket_win[target_name] = 0
 
 	return salt_accounts[target_name]
 
@@ -124,9 +137,11 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 	salt_accounts_timestamp += target_name
 	salt_accounts_timestamp[target_name] = world.time
 	salt_accounts_interest_max += target_name
-	salt_accounts_interest_max[target_name] = SALT_CHANCE_INTEREST_DEFAULT
+	salt_accounts_interest_max[target_name] = interest_rate_default
 	salt_accounts_max += target_name
-	salt_accounts_max[target_name] = SALT_CHANCE_DEFAULT_TOTAL
+	salt_accounts_max[target_name] = salt_chance_default
+	salt_ticket_win += target_name
+	salt_ticket_win[target_name] = 0
 
 	return salt_accounts_max[target_name]
 
@@ -148,9 +163,11 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 	salt_accounts_timestamp += target_name
 	salt_accounts_timestamp[target_name] = world.time
 	salt_accounts_interest_max += target_name
-	salt_accounts_interest_max[target_name] = SALT_CHANCE_INTEREST_DEFAULT
+	salt_accounts_interest_max[target_name] = interest_rate_default
 	salt_accounts_max += target_name
-	salt_accounts_max[target_name] = SALT_CHANCE_DEFAULT_TOTAL
+	salt_accounts_max[target_name] = salt_chance_default
+	salt_ticket_win += target_name
+	salt_ticket_win[target_name] = 0
 
 /obj/structure/roguemachine/stockpile_saltcamp/proc/set_salt_balance(mob/user, amt = 0)
 	if(!user || !ishuman(user))
@@ -168,9 +185,11 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 	salt_accounts_timestamp += target_name
 	salt_accounts_timestamp[target_name] = world.time
 	salt_accounts_interest_max += target_name
-	salt_accounts_interest_max[target_name] = SALT_CHANCE_INTEREST_DEFAULT
+	salt_accounts_interest_max[target_name] = interest_rate_default
 	salt_accounts_max += target_name
-	salt_accounts_max[target_name] = SALT_CHANCE_DEFAULT_TOTAL
+	salt_accounts_max[target_name] = salt_chance_default
+	salt_ticket_win += target_name
+	salt_ticket_win[target_name] = 0
 
 /obj/structure/roguemachine/stockpile_saltcamp/proc/get_odds_of_winning(mob/user)
 	var/balance = get_salt_balance(user)
@@ -262,13 +281,13 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 				src.say(pick("Better luck next tyme, criminal.", "You've lost! May your tears aid your rock culling.", "Such folly, better luck next tyme!", "Ha-ha! You salt drinker, never had a chance to win!"))
 				return
 			set_salt_balance(usr, 0)
-			reset_salt_timestamp(usr)
 			src.say("Oh lookie here, we have ourselves a winner!!")
 			playsound(src, 'sound/misc/triumph_win_twnn.ogg', 100, FALSE, -1)
 			var/obj/item/detroyt_toll/ive_got_a_golden_ticket = new /obj/item/detroyt_toll(get_turf(src))
 			if(!ive_got_a_golden_ticket) // something something went very very wrong... refund player
 				set_salt_balance(usr, current_balance)
 				return
+			reset_salt_timestamp(usr, TRUE) // reset their interest progress
 			ive_got_a_golden_ticket.sellprice = round(rand(current_balance, current_balance*3), 1) // set the value between salt spent on gambling for ticket, and three times
 			if(!usr.put_in_hands(ive_got_a_golden_ticket))
 				ive_got_a_golden_ticket.forceMove(get_turf(src))
@@ -390,6 +409,18 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 				to_chat(usr, span_danger("You cannot set to a value higher than [SALT_CHANCE_MAX]!"))
 				return
 			stockpile.salt_accounts_max[name] = new_max
+		if("set_salt_default")
+			var/new_max = input(usr, "Set the maximum salt needed to assure a 100% win", src, stockpile.salt_chance_default) as null
+			if(!isnum(new_max))
+				return
+			new_max = round(new_max, 1)
+			if(new_max < 10)
+				to_chat(usr, span_danger("You cannot set to a value lower than 10!"))
+				return
+			if(new_max > SALT_CHANCE_MAX)
+				to_chat(usr, span_danger("You cannot set to a value higher than [SALT_CHANCE_MAX]!"))
+				return
+			stockpile.salt_chance_default = new_max
 		if("set_interest")
 			var/name = href_list["name"]
 			if(!does_name_exist(stockpile, name)) // sanity check name argument
@@ -405,6 +436,18 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 				to_chat(usr, span_danger("You cannot set to a value higher than [SALT_CHANCE_INTEREST_MAX * 100]%!"))
 				return
 			stockpile.salt_accounts_interest_max[name] = new_max / 100
+		if("set_interest_default")
+			var/new_max = input(usr, "Set the maximum interest rate percentage (1 hour for max interest)", src, stockpile.interest_rate_default * 100) as null
+			if(!isnum(new_max))
+				return
+			new_max = round(new_max, 1)
+			if(new_max < 0)
+				to_chat(usr, span_danger("You cannot set to a value lower than 0%!"))
+				return
+			if(new_max > SALT_CHANCE_INTEREST_MAX * 100)
+				to_chat(usr, span_danger("You cannot set to a value higher than [SALT_CHANCE_INTEREST_MAX * 100]%!"))
+				return
+			stockpile.interest_rate_default = new_max / 100
 		if("reset_interest")
 			var/name = href_list["name"]
 			if(!does_name_exist(stockpile, name)) // sanity check name argument
@@ -445,6 +488,7 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 	contents += "SALT GAMBLED AWAY: [gambled_salt]<BR>"
 	if(gambled_salt > 0)
 		contents += "<a href='?src=[REF(src)];task=withdraw'>(WITHDRAW GAMBLED SALT AS COINS)</a><BR>"
+	contents += "Salt Mined Max Default: <a href='?src=[REF(src)];task=set_salt_default;'>[stockpile.salt_chance_default]</a> | Interest Rate Default: <a href='?src=[REF(src)];task=set_interest_default;'>[stockpile.interest_rate_default * 100]%</a><BR>"
 	contents += "</center>"
 	if(total_accounts > 0)
 		contents += "<hr><BR>"
@@ -454,6 +498,8 @@ GLOBAL_LIST_EMPTY(saltmineticketmachines)
 			var/salt = stockpile.salt_accounts[name]
 			var/salt_max = stockpile.salt_accounts_max[name]
 			var/interest = stockpile.salt_accounts_interest_max[name] * 100
+			if(salt == 0 && stockpile.salt_ticket_win[name] > 0) // don't show ticket winners who have left the mines
+				continue
 			contents += "<tr><td>[name]</td>"
 			contents += "<td>[salt] salt / <a href='?src=[REF(src)];task=set_salt;name=[name]'>[salt_max] max</a></td>"
 			contents += "<td><a href='?src=[REF(src)];task=set_interest;name=[name]'>[interest]%</a> "
