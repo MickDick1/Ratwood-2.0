@@ -144,6 +144,8 @@ GLOBAL_VAR_INIT(mine_collapse_active, 0)
 
 	if(GLOB.mine_collapse_active > 7)
 		return
+	if(!triggered_by_neighbor && prob(10)) // 10% of not cascading
+		return
 	var/trigger_sfx = TRUE
 	for(var/obj/structure/mine_collapse/other_mineshafts in range(1, src))
 		if(src == other_mineshafts)
